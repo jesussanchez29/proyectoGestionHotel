@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Route Controlador Cliente
+Route::controller(ClienteController::class)->group(function () {
+    // Route para mostrar todos los clientes
+    Route::get('clientes', 'indexEmpleado')->name('clientes');
+    // Route para crear un cliente
+    Route::post('cliente/crear', 'create')->name('crearCliente');
+    // Route para editar un cliente
+    Route::post('cliente/editar/{id}', 'update')->name('editarCliente');
+    // Route para eliminar un cliente
+    Route::post('cliente/eliminar/{id}', 'destroy')->name('eliminarCliente');
+});
