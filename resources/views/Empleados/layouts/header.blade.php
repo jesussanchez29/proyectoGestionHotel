@@ -28,7 +28,7 @@
             <span>Departamentos</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('empleados') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Empleados</span></a>
     </li>
