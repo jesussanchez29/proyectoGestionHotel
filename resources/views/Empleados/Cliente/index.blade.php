@@ -1,7 +1,6 @@
 @extends('Empleados.layouts.template')
 @section('title', 'Clientes')
 @section('content')
-<div class="container">
     @if (session('success'))
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -22,12 +21,10 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            <div style="float: right">
+                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalCreate">Registrar Cliente</button>
+            </div>
             <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes</h6>
-        </div>
-        <br>
-        <div class="col-lg-12">
-            <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#myModalCreate">Registrar Cliente</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -72,7 +69,6 @@
                 </table>
             </div>
         </div>
-    </div>
 </div>
     <!-- Modal crear cliente -->
     @include('Empleados.Cliente.modals.create')
