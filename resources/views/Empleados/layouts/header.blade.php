@@ -18,12 +18,12 @@
             <span>Inicio</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('clientes') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Clientes</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('departamentos') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Departamentos</span></a>
     </li>

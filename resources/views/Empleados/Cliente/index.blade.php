@@ -4,7 +4,6 @@
     @if (session('success'))
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-
             {{ session('success') }}
         </div>
     @endif
@@ -22,7 +21,8 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div style="float: right">
-                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalCreate">Registrar Cliente</button>
+                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#myModalCreate">Registrar Cliente</button>
             </div>
             <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes</h6>
         </div>
@@ -69,7 +69,7 @@
                 </table>
             </div>
         </div>
-</div>
+    </div>
     <!-- Modal crear cliente -->
     @include('Empleados.Cliente.modals.create')
 @endsection

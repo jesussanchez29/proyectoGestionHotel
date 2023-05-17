@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DepartamentoController;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -13,4 +14,16 @@ Route::controller(ClienteController::class)->group(function () {
     Route::post('cliente/editar/{id}', 'update')->name('editarCliente');
     // Route para eliminar un cliente
     Route::post('cliente/eliminar/{id}', 'destroy')->name('eliminarCliente');
+});
+
+// Route Controlador Departamento
+Route::controller(DepartamentoController::class)->group(function () {
+    // Route para mostrar todos los departamentos
+    Route::get('departamentos', 'indexEmpleado')->name('departamentos');
+    // Route para crear un departamento
+    Route::post('departamento/crear', 'create')->name('crearDepartamento');
+    // Route para editar un departamento
+    Route::post('departamento/editar/{id}', 'update')->name('editarDepartamento');
+    // Route para eliminar un departamento
+    Route::post('departamento/eliminar/{id}', 'destroy')->name('eliminarDepartamento');
 });
