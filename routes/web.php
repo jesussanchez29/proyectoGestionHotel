@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -39,4 +40,13 @@ Route::controller(EmpleadoController::class)->group(function () {
     Route::post('empleado/editar/{id}', 'update')->name('editarEmpleado');
     // Route para eliminar un departamento
     Route::post('empleado/eliminar/{id}', 'destroy')->name('eliminarEmpleado');
+});
+
+// Route Controlador Empleado
+Route::controller(HotelController::class)->group(function () {
+    Route::get('/', 'indexCliente')->name('index');
+    // Route para mostrar todos los empleados
+    Route::get('configuracion', 'indexEmpleado')->name('configuracion');
+    // Route para crear un empleado
+    Route::post('configuracion/Createupdate/', 'updateOrCreate')->name('updateOrCreaterConfiguracion');
 });

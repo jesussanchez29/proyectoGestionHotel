@@ -55,7 +55,7 @@
     <!-- SERVICES LIST & BOOKING FORM END -->
 
     <!-- ROOMS LIST -->
-    @include('Clientes.layouts.habitaciones')
+    {{-- @include('Clientes.layouts.habitaciones') --}}
     <!-- ROOMS LIST END -->
 
     <!-- WHY CHOOSE US? -->
