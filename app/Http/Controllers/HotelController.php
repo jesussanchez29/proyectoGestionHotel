@@ -14,7 +14,8 @@ class HotelController extends Controller
     public function indexCliente()
     {
         $hotel = Hotel::first();
-        return view('Clientes.index', compact('hotel'));
+        $servicios = Servicio::all();
+        return view('Clientes.index', compact('hotel', 'servicios'));
     }
 
     public function indexEmpleado()
