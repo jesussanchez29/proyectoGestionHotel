@@ -48,7 +48,7 @@
             <span>Caracteristicas Tipo Habitaciones</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('servicios') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Servicios</span></a>
     </li>

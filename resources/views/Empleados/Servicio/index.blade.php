@@ -33,34 +33,31 @@
                     @foreach ($servicios as $servicio)
                         <div class="col-md-3">
                             <div class="card">
-                                <img class="card-img-top" src="{{ $departamento->icono }}" alt="Imagen Departamento">
+                                <img class="card-img-top" src="{{ $servicio->imagen }}" alt="Imagen Departamento">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-3">{{ $departamento->nombre }}</h4>
-                                    <p class="card-text">{{ $departamento->descripcion }}</p>
+                                    <h4 class="card-title mb-3">{{ $servicio->nombre }}</h4>
+                                    <p class="card-text">{{ $servicio->descripcion }}</p>
                                     <div style="text-align: center">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="">Ver Empleados</button>
-                                        <br>
-                                        <br>
-                                        <button class="btn btn-warning" style="margin-right:20px" data-toggle="modal" data-target="#myModalEdit{{ $departamento->id }}">Editar</button>
+                                        <button class="btn btn-warning" style="margin-right:20px" data-toggle="modal" data-target="#myModalEdit{{ $servicio->id }}">Editar</button>
                                         <button  class="btn btn-danger" data-toggle="modal"
-                                            data-target="#myModalDelete{{ $departamento->id }}">Borrar</button>
+                                            data-target="#myModalDelete{{ $servicio->id }}">Borrar</button>
                                     </div>
                                 </div>
                             </div>
                             <br><br>
                         </div>
                         <!-- Modal modificar departamento -->
-                        @include('Empleados.Departamento.modals.edit')
+                        @include('Empleados.Servicio.modals.edit')
                         <!-- Modal borrar departamento -->
-                        @include('Empleados.Departamento.modals.delete')
+                        @include('Empleados.Servicio.modals.delete')
                     @endforeach
                 @else
                     <div class="col-md-12">
-                        <div colspan="7" style="color: red"">No hay departamentos registrados</div>
+                        <div colspan="7" style="color: red">No hay departamentos registrados</div>
                     </div>
                 @endif
             </div>
         </div>
     </div>
-    @include('Empleados.Departamento.modals.create')
+    @include('Empleados.Servicio.modals.create')
 @endsection

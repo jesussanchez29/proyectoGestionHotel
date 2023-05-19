@@ -1,5 +1,5 @@
 <!-- Modal para Confirmar Borrado -->
-<div class="modal fade" id="myModalDelete{{ $departamento->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="myModalDelete{{ $servicio->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                         aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="miFormulario" method="POST" action="{{ route('eliminarDepartamento', $departamento->id) }}">
+            <form id="miFormulario" method="POST" action="{{ route('eliminarServicio', $servicio->id) }}">
                 @csrf
                 <div class="modal-body">
                     Si eliminas el departamento, los empleados que pertenecen quedaran sin asignacion de departamento ¿Estás seguro?
