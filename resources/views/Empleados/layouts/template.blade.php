@@ -17,6 +17,8 @@
     <!-- Tablas de datos CSS -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href={{ asset('css/cards.css') }}>
+    <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
+
     <title>@yield('title')</title>
 </head>
 

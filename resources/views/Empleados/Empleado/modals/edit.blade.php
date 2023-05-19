@@ -75,8 +75,8 @@
                             <div class="col-md-6">
                                 <label for="estado" class="col-form-label">Estado:</label>
                                 <select name="estado" id="" class="form-control">
-                                    <option value="0" {{ $departamento->estado == 0 ? 'selected' : ''  }}>Inactivo</option>
-                                    <option value="1" {{ $departamento->estado == 1 ? 'selected' : ''  }}>Activo</option>
+                                    <option value="0" {{ $empleado->estado == 0 ? 'selected' : ''  }}>Inactivo</option>
+                                    <option value="1" {{ $empleado->estado == 1 ? 'selected' : ''  }}>Activo</option>
                                 </select>
                             </div>
                         </div>

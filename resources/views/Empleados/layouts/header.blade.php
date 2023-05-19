@@ -18,34 +18,9 @@
             <span>Inicio</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('clientes') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Clientes</span></a>
-    </li>
-    <li class="nav-item active">
         <a class="nav-link" href="{{ route('departamentos') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Departamentos</span></a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('empleados') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Empleados</span></a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Tipo Habitaciones</span></a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Habitaciones</span></a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Caracteristicas Tipo Habitaciones</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('servicios') }}">
@@ -55,29 +30,21 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('configuracion') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Configuracion</span></a>
+            <span>Configuracion Hotel</span></a>
     </li>
 
-    <!--  Linea divisoria -->
-    <hr class="sidebar-divider">
-
-    <!-- Cabecera  -->
-    <div class="sidebar-heading">
-        Interface
-    </div>
-
     <!-- Menu Item -->
-    <li class="nav-item">
+    <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+            <span>Usuarios</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.php">Buttons</a>
-                <a class="collapse-item" href="cards.php">Cards</a>
+                <h6 class="collapse-header">Gestión Usuarios:</h6>
+                <a class="collapse-item" href="{{ route('clientes') }}">Clientes</a>
+                <a class="collapse-item" href="{{ route('empleados') }}">Empleados</a>
             </div>
         </div>
     </li>

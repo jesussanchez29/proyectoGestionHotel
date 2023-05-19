@@ -62,7 +62,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" style="color: red"">No hay clientes registrados</td>
+                                <td colspan="6" class="vacio">No hay clientes registrados</td>
                             </tr>
                         @endif
                     </tbody>

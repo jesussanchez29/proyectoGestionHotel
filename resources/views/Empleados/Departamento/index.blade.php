@@ -56,7 +56,7 @@
                     @endforeach
                 @else
                     <div class="col-md-12">
-                        <div colspan="7" style="color: red"">No hay departamentos registrados</div>
+                        <div colspan="7" class="vacio">No hay departamentos registrados</div>
                     </div>
                 @endif
             </div>
