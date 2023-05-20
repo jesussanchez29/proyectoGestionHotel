@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TipoHabitacionRequest;
+use App\Models\CaracteristicaTipoHabitacion;
+use App\Models\Hotel;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +15,17 @@ class TipoHabitacionController extends Controller
     public function indexEmpleado()
     {
         $tipoHabitaciones = TipoHabitacion::all();
-        return view('Empleados.TipoHabitacion.index', compact('tipoHabitaciones'));
+        return view('Empleados.layouts.index', compact('tipoHabitaciones'));
     }
+
+       // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
+       public function indexCliente()
+       {
+           $tipoHabitaciones = TipoHabitacion::paginate(4);
+           $hotel = Hotel::first();
+           return view('Clientes.TipoHabitacion.index', compact('tipoHabitaciones', 'hotel'));
+       }
+   
 
     //Funcion para crear un tipo de habitacion
     public function create(TipoHabitacionRequest $request)
@@ -72,5 +83,14 @@ class TipoHabitacionController extends Controller
         $tipoHabitacion->delete();
         // Nos redirige a tipoHabitaciones con un mensaje
         return redirect()->route('tipoHabitaciones')->with('success', 'Tipo de Habitacion eliminado correctamente');
+    }
+
+    public function view($id)
+    {
+        $tipoHabitaciones = TipoHabitacion::whereNotIn('id', [$id])->take(3)->get();;
+        $tipoHabitacionEncontrada = TipoHabitacion::findOrFail($id);
+        $caracteristicas = CaracteristicaTipoHabitacion::where('tipoHabitacion_id', $id)->get();
+        $hotel = Hotel::first();
+        return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas'));
     }
 }

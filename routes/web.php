@@ -68,8 +68,10 @@ Route::controller(ServicioController::class)->group(function () {
 // Route Controlador Empleado
 Route::controller(TipoHabitacionController::class)->group(function () {
     // Route para mostrar todos los empleados
-    Route::get('tipoHabitacion', 'indexEmpleado')->name('tipoHabitaciones');
+    Route::get('tipoHabitaciones', 'indexEmpleado')->name('tipoHabitaciones');
+    Route::get('tipoHabitacionesCliente', 'indexCliente')->name('tipoHabitacionesClientes');
     Route::post('tipoHabitacion/crear', 'create')->name('crearTipoHabitacion');
     Route::post('tipoHabitacion/editar/{id}', 'update')->name('editarTipoHabitacion');
     Route::post('tipoHabitacion/eliminar/{id}', 'destroy')->name('eliminarTipoHabitacion');
+    Route::get('tipoHabitacion/ver/{id}', 'view')->name('verTipoHabitacion');
 });

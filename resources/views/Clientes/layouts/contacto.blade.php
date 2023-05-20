@@ -15,13 +15,13 @@
                 <div class="uk-light uk-width-1-4@xl uk-width-1-4@l uk-width-1-4@m uk-width-1-1@s">
                     <!-- Phone -->
                     <h5 class="uk-heading-line uk-margin-bottom impx-text-white"><span>Telefono</span></h5>
-                    <p class="impx-text-large uk-margin-remove impx-text-light">@yield('telefono')
+                    <p class="impx-text-large uk-margin-remove impx-text-light">+34 @yield('telefono')
                     </p>
                 </div><!-- Phone End -->
                 <div class="uk-light uk-width-1-4@xl uk-width-1-4@l uk-width-1-4@m uk-width-1-1@s">
                     <!-- Email -->
                     <h5 class="uk-heading-line uk-margin-bottom  impx-text-white"><span>Email</span></h5>
-                    <a href="mailt:#" class="impx-text-large impx-text-light">@yield('email')</a><br />
+                    <a class="impx-text-large impx-text-light">@yield('email')</a><br />
                 </div><!-- Email End -->
             </div>
             <br>

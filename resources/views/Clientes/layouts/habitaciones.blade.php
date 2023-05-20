@@ -41,7 +41,7 @@
                                         </ul>
                                         <div
                                             class="uk-card-footer uk-padding-remove-horizontal uk-padding-remove-bottom">
-                                            <a href="room-detail.html"
+                                            <a href="{{ route('verTipoHabitacion', '$tipoHabitacion->id') }}"
                                                 class="uk-button uk-button-text impx-text-aqua">Read more &raquo;</a>
                                         </div>
                                     </div>

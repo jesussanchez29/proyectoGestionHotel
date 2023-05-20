@@ -23,3 +23,8 @@
 
     position: absolute;
 }
+
+.pagination .page-link {
+    font-size: 14px; /* Tamaño de fuente personalizado */
+    padding: 6px 10px; /* Ajuste el relleno según sea necesario */
+  }

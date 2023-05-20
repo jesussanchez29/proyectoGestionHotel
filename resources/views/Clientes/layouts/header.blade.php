@@ -1,8 +1,7 @@
 <!-- HEADER -->
 <header id="impx-header">
     <div>
-        <div class="impx-menu-wrapper style2"
-            data-uk-sticky="top: .impx-slide-container; animation: uk-animation-slide-top">
+        <div class="impx-menu-wrapper style2" data-uk-sticky="top: .impx-slide-container; animation: uk-animation-slide-top">
 
             <a href="#mobile-nav" class="uk-hidden@xl uk-hidden@l uk-hidden@m mobile-nav"
                 data-uk-toggle="target: #mobile-nav"><i class="fa fa-bars"></i>Menu</a>
@@ -44,10 +43,7 @@
 
             <!-- Promo Ribbon -->
             <div class="uk-width-auto uk-position-relative">
-                <div class="">
-                    <button>Acceder</button>
-                    <button>Registrame</button>
-                </div>
+      
             </div>
             <!-- Promo Ribbon End -->
 

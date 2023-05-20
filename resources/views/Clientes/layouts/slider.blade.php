@@ -35,12 +35,6 @@
                         </li>
                     </ul>
 
-                    <!-- Slideshow Nav -->
-                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#"
-                        data-uk-slidenav-previous data-uk-slideshow-item="previous"></a>
-                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#"
-                        data-uk-slidenav-next data-uk-slideshow-item="next"></a>
-                    <!-- Slideshow Nav End -->
                 </div>
             </div>
 
