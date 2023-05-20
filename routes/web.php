@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\TipoHabitacionController;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -62,4 +63,13 @@ Route::controller(ServicioController::class)->group(function () {
     Route::post('servicio/editar/{id}', 'update')->name('editarServicio');
     // Route para eliminar un departamento
     Route::post('servicio/eliminar/{id}', 'destroy')->name('eliminarServicio');
+});
+
+// Route Controlador Empleado
+Route::controller(TipoHabitacionController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('tipoHabitacion', 'indexEmpleado')->name('tipoHabitaciones');
+    Route::post('tipoHabitacion/crear', 'create')->name('crearTipoHabitacion');
+    Route::post('tipoHabitacion/editar/{id}', 'update')->name('editarTipoHabitacion');
+    Route::post('tipoHabitacion/eliminar/{id}', 'destroy')->name('eliminarTipoHabitacion');
 });

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/tiny-date-picker.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}" />
+    <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
 </head>
 
 <body class="impx-body" id="top">
@@ -55,7 +56,7 @@
     <!-- SERVICES LIST & BOOKING FORM END -->
 
     <!-- ROOMS LIST -->
-    {{-- @include('Clientes.layouts.habitaciones') --}}
+    @include('Clientes.layouts.habitaciones')
     <!-- ROOMS LIST END -->
 
     <!-- WHY CHOOSE US? -->

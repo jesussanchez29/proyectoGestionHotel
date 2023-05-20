@@ -49,6 +49,21 @@
         </div>
     </li>
 
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Habitaciones</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gestión Habitaciones:</h6>
+                <a class="collapse-item" href="">Habitaciones</a>
+                <a class="collapse-item" href="{{ route('tipoHabitaciones') }}">Tipo de Habitaciones</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Linea divisora -->
     <hr class="sidebar-divider d-none d-md-block">
 

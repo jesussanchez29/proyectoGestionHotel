@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EmpleadoSeeder::class);
         $this->call(HotelSeeder::class);
         $this->call(ServicioSeeder::class);
-
+        $this->call(TipoHabitacionSeeder::class);
     }
 }
