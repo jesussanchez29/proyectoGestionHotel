@@ -46,7 +46,7 @@ Route::controller(EmpleadoController::class)->group(function () {
 
 // Route Controlador Empleado
 Route::controller(HotelController::class)->group(function () {
-    Route::get('/', 'indexCliente')->name('index');
+    Route::get('/', 'indexCliente')->name('indexCliente');
     // Route para mostrar todos los empleados
     Route::get('configuracion', 'indexEmpleado')->name('configuracion');
     // Route para crear un empleado

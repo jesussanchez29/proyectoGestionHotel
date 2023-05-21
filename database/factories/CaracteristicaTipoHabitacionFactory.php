@@ -23,7 +23,7 @@ class CaracteristicaTipoHabitacionFactory extends Factory
             'nombre' => $this->faker->word,
             'descripcion' => $this->faker->sentence,
             'icono' => $this->faker->randomElement(['icono1.png', 'icono2.png', 'icono3.png']),
-            'tipo_habitacion_id' => $tipoHabitacion
+            'tipoHabitacion_id' => $tipoHabitacion
         ];
     }
 }

@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServicioSeeder::class);
         $this->call(TipoHabitacionSeeder::class);
         $this->call(CaracteristicaTipoHabitacionSeeder::class);
+        $this->call(EstadoHabitacionSeeder::class);
+        $this->call(PisoSeeder::class);
     }
 }

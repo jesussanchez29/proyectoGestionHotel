@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CaracteristicaTipoHabitacion extends Model
+class EstadoHabitacion extends Model
 {
     use HasFactory;
-    use HasFactory;
-    protected $table = 'caracteristicaTipoHabitacion';
+    protected $table = 'estadoHabitacion';
     protected $primaryKey="id";
-    protected $fillable=['nombre', 'descripcion', 'icono', 'tipoHabitacion_id'];
+    protected $fillable=['nombre'];
     protected $hidden=['id'];
 }

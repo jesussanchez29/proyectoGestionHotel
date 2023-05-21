@@ -35,9 +35,9 @@
     </header>
     <!-- HEADER END -->
 
-    @yield('content')
+    <!-- SLIDESHOW -->
 
-    @yield('contacto')
+    @yield('content')
 
     @include('Clientes.layouts.footer')
 
