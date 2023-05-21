@@ -13,6 +13,8 @@ class EstadoHabitacionSeeder extends Seeder
      */
     public function run(): void
     {
-        EstadoHabitacion::factory()->count(6)->create();
+        EstadoHabitacion::create(['nombre' => 'Disponible']);
+        EstadoHabitacion::create(['nombre' => 'Ocupada']);
+        EstadoHabitacion::create(['nombre' => 'Mantenimiento']);
     }
 }

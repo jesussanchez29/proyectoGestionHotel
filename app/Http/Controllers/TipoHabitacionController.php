@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TipoHabitacionRequest;
 use App\Models\CaracteristicaTipoHabitacion;
+use App\Models\Habitacion;
 use App\Models\Hotel;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
@@ -93,4 +94,20 @@ class TipoHabitacionController extends Controller
         $hotel = Hotel::first();
         return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas'));
     }
+
+    public function getPisosDisponibles(Request $request)
+{
+    $tipoHabitacionId = $request->input('habitacion');
+
+    $pisosDisponibles = Habitacion::select('pisos.id', 'pisos.numero')
+        ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
+        ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
+        ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
+        ->where('tipoHabitacion.id', $tipoHabitacionId)
+        ->where('estadohabitacion.nombre', 'Disponible')
+        ->pluck('pisos.numero')
+        ->unique();
+
+    return response()->json($pisosDisponibles);
+}
 }

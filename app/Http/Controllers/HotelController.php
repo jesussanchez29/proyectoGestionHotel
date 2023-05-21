@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Habitacion;
 use App\Models\Hotel;
 use App\Models\Servicio;
 use App\Models\TipoHabitacion;
@@ -16,7 +17,14 @@ class HotelController extends Controller
         $hotel = Hotel::first();
         $servicios = Servicio::all();
         $tipoHabitaciones = TipoHabitacion::all();
-        return view('Clientes.index', compact('hotel', 'servicios', 'tipoHabitaciones'));
+        $pisos =  Habitacion::select('pisos.id', 'pisos.numero')
+        ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
+        ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
+        ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
+        ->where('estadohabitacion.nombre', 'Disponible')
+        ->groupBy('pisos.numero' , 'pisos.id')
+        ->get();
+        return view('Clientes.index', compact('hotel', 'servicios', 'tipoHabitaciones', 'pisos'));
     }
 
     public function indexEmpleado()

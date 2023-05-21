@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
 use Illuminate\Support\Facades\Route;
@@ -74,4 +75,13 @@ Route::controller(TipoHabitacionController::class)->group(function () {
     Route::post('tipoHabitacion/editar/{id}', 'update')->name('editarTipoHabitacion');
     Route::post('tipoHabitacion/eliminar/{id}', 'destroy')->name('eliminarTipoHabitacion');
     Route::get('tipoHabitacion/ver/{id}', 'view')->name('verTipoHabitacion');
+    Route::get('/get-pisos-disponibles', 'getPisosDisponibles')->name('getPisosDisponibles');
+
+});
+
+// Route Controlador Empleado
+Route::controller(ReservaController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::post('reserva/crear', 'createCliente')->name('crearReservaCliente');
+
 });
