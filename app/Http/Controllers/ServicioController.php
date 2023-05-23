@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServicioRequest;
+use App\Models\Hotel;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,14 @@ class ServicioController extends Controller
     {
         $servicios = Servicio::all();
         return view('Empleados.Servicio.index', compact('servicios'));
+    }
+
+    // Funcion para enviar los departamentos a la vista departamentos
+    public function indexCliente()
+    {
+        $servicios = Servicio::paginate(4);
+        $hotel = Hotel::first();
+        return view('Clientes.Servicio.index', compact('servicios', 'hotel'));
     }
 
     // Funcion para crear un departamento

@@ -29,13 +29,9 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="restaurant.html">
+                        <li><a href="{{ route('serviciosCliente') }}">
                                 <div>Servicios<div class="uk-navbar-subtitle">Disfruta de nuestros servicios
                                     </div>
-                                </div>
-                            </a></li>
-                        <li><a href="spa.html">
-                                <div>Reservar Habitación<div class="uk-navbar-subtitle">Reserva rápido y fácil</div>
                                 </div>
                             </a></li>
                         <li><a href="activities.html" class="uk-navbar-nav-subtitle">
@@ -46,6 +42,24 @@
                     <!-- Navigation Items End -->
                 </div>
             </nav>
+        </div>
+        <div class="uk-width-auto uk-position-relative">
+            <br>
+            <div>
+                @auth
+                    <a class="uk-button impx-button small red uk-margin-small-bottom" href="{{ route('logout') }}">Cerrar
+                        Sesión</a>
+                @endauth
+
+                @guest
+                    <a class="uk-button impx-button small blue-sky uk-margin-small-bottom"
+                        href="{{ route('login') }}">Acceder</a>
+                    <br>
+                    <a class="uk-button impx-button small red uk-margin-small-bottom"
+                        href="{{ route('registro') }}">Registrase</a>
+                @endguest
+
+            </div>
         </div>
     </div>
 </div>

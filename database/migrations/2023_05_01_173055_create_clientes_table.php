@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('apellidos');
             $table->date('fechaNacimiento');
             $table->string('tipoIdentificacion');
-            $table->string('identificacion')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('identificacion');
             $table->string('telefono');
             $table->string('direccion');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

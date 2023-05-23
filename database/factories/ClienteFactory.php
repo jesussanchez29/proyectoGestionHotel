@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,7 @@ class ClienteFactory extends Factory
     public function definition(): array
     {
         $tipoIdentificacion = $this->faker->randomElement(['DNI', 'Pasaporte', 'Carnet Conducir']);
+        $usuario = Usuario::factory()->create()->id;
 
         $identificacion = '';
         if ($tipoIdentificacion === 'DNI') {
@@ -34,10 +36,9 @@ class ClienteFactory extends Factory
             'fechaNacimiento' => $this->faker->date,
             'tipoIdentificacion' => $tipoIdentificacion,
             'identificacion' => $identificacion,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make($this->faker->password), // Puedes ajustar la contraseña aquí o generarla aleatoriamente
             'telefono' => $this->faker->phoneNumber,
             'direccion' => $this->faker->address,
+            'usuario_id' => $usuario
         ];
     }
 }

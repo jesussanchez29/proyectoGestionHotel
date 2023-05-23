@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Departamento;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,18 +20,17 @@ class EmpleadoFactory extends Factory
     public function definition(): array
     {
         $departamento = Departamento::inRandomOrder()->first();
+        $usuario = Usuario::factory()->create()->id;
 
         return [
             'nombre' => $this->faker->firstName,
             'apellidos' => $this->faker->lastName,
             'fechaNacimiento' => $this->faker->date,
             'dni' => $this->faker->unique()->numerify('########'),
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make($this->faker->password), // Puedes ajustar la contraseña aquí o generarla aleatoriamente
             'telefono' => $this->faker->phoneNumber,
             'direccion' => $this->faker->address,
-            'estado' => $this->faker->randomElement([true, false]),
             'departamento_id' => $departamento->id,
+            'usuario_id' => $usuario
         ];
     }
 }

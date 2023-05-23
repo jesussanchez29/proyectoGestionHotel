@@ -16,14 +16,13 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellidos');
             $table->date('fechaNacimiento');
-            $table->string('dni')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('dni');
             $table->string('telefono');
             $table->string('direccion');
-            $table->boolean('estado');
             $table->unsignedBigInteger('departamento_id')->nullable();
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('set null');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

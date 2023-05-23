@@ -34,9 +34,3 @@
 
 <!-- Barra de navegacion-->
 @include('Clientes.partials.navegation')
-
-<!-- Promo Ribbon -->
-<div class="uk-width-auto uk-position-relative">
-
-</div>
-<!-- Promo Ribbon End -->

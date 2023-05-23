@@ -98,4 +98,9 @@ class HotelController extends Controller
         // Nos redirige a habitaciones con un mensaje
         return redirect()->route('configuracion')->with('success', 'Cambios actualizado correctamente');
     }
+
+    public function contacto() {
+        $hotel = Hotel::first();
+        return view('Clientes.contacto', compact('hotel'));
+    }
 }

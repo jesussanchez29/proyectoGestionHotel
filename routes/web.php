@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CambiarContrasenaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
@@ -52,12 +55,15 @@ Route::controller(HotelController::class)->group(function () {
     Route::get('configuracion', 'indexEmpleado')->name('configuracion');
     // Route para crear un empleado
     Route::post('configuracion/Createupdate/', 'updateOrCreate')->name('updateOrCreaterConfiguracion');
+    Route::get('/contacto', 'contacto')->name('contacto');
+
 });
 
 // Route Controlador Empleado
 Route::controller(ServicioController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('servicios', 'indexEmpleado')->name('servicios');
+    Route::get('servicios', 'indexCliente')->name('serviciosCliente');
     // Route para crear un empleado
     Route::post('servicio/crear', 'create')->name('crearServicio');
     // Route para editar un departamento
@@ -83,5 +89,29 @@ Route::controller(TipoHabitacionController::class)->group(function () {
 Route::controller(ReservaController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::post('reserva/crear', 'createCliente')->name('crearReservaCliente');
+});
 
+// Route Controlador Registro
+Route::controller(RegistroController::class)->group(function () {
+    // Route para ir a la ruta registro
+    Route::get('registro', 'index')->name('registro');
+    // Route para crear registro base de datos
+    Route::post('registro', 'createCliente');
+});
+
+// Route Controlador Login
+Route::controller(LoginController::class)->group(function () {
+    // Route para ir a la ruta login
+    Route::get('login', 'index')->name('login');
+    // Route para validar las credenciales
+    Route::post('login', 'login');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+// Route Controlador Login
+Route::controller(CambiarContrasenaController::class)->group(function () {
+    // Route para ir a la ruta login
+    Route::get('cambiarContrasena', 'index')->name('cambiarContrasena');
+    // Route para validar las credenciales
+    Route::post('cambiarContrasena/{id}', 'cambiarContrasena');
 });
