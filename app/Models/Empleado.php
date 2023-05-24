@@ -21,4 +21,5 @@ class Empleado extends Model
     {
         return $this->belongsTo(Usuario::class);
     }
+    
 }

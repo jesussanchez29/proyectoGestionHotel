@@ -9,7 +9,7 @@
                         aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="miFormulario" method="POST" action="{{ route('eliminarCliente', $cliente->id) }}">
+            <form id="miFormulario" method="POST" action="{{ route('eliminarCliente', $cliente->usuario->id) }}">
                 @csrf
                 <div class="modal-body">
                     Si eliminas al cliente, también eliminará todo a lo que estaba asignado ¿Estás seguro?

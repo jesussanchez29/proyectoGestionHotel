@@ -28,35 +28,34 @@ class ClienteController extends Controller
         DB::beginTransaction();
 
         try {
-        $password = Str::random(12);
-        //Creamos al usuario
-        $usuario = new Usuario();
-        $usuario->email = $request->email;
-        $usuario->password = Hash::make($password);
-        $usuario->estado = true;
-        $usuario->primerInicioSesion = true;
-        $usuario->save();
+            $password = Str::random(12);
+            //Creamos al usuario
+            $usuario = new Usuario();
+            $usuario->email = $request->email;
+            $usuario->password = Hash::make($password);
+            $usuario->estado = true;
+            $usuario->primerInicioSesion = true;
+            $usuario->save();
 
-        $cliente = new Cliente();
-        // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
-        $cliente->nombre = $request->input('nombre');
-        $cliente->apellidos = $request->input('apellidos');
-        $cliente->fechaNacimiento = $request->input('fechaNacimiento');
-        $cliente->tipoIdentificacion = $request->input('tipoIdentificacion');
-        $cliente->identificacion = $request->input('identificacion');
-        $cliente->telefono = $request->input('telefono');
-        $cliente->direccion = $request->input('direccion');
-        $cliente->usuario_id = $usuario->id;
-        $cliente->save();
-        
-        DB::commit();
+            $cliente = new Cliente();
+            // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+            $cliente->nombre = $request->input('nombre');
+            $cliente->apellidos = $request->input('apellidos');
+            $cliente->fechaNacimiento = $request->input('fechaNacimiento');
+            $cliente->tipoIdentificacion = $request->input('tipoIdentificacion');
+            $cliente->identificacion = $request->input('identificacion');
+            $cliente->telefono = $request->input('telefono');
+            $cliente->direccion = $request->input('direccion');
+            $cliente->usuario_id = $usuario->id;
+            $cliente->save();
 
-    } catch (\Exception $e) {
-        DB::rollback();
-    }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
 
-        Mail::to($request->email)->send(new Registro($request->email,$password));
-    
+        Mail::to($request->email)->send(new Registro($request->email, $password));
+
         // Nos redirige a clientes con un mensaje
         return redirect()->route('clientes')->with('success', 'Cliente registrado correctamente');
     }

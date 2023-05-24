@@ -11,4 +11,9 @@ class Departamento extends Model
     protected $primaryKey="id";
     protected $fillable=['icono', 'nombre', 'descripcion'];
     protected $hidden=['id'];
+
+    public function empleados()
+    {
+        return $this->hasMany(Empleado::class);
+    }
 }

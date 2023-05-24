@@ -21,7 +21,7 @@ class EmpleadoRequest extends FormRequest
             'apellidos' => 'required',
             'fechaNacimiento' => 'required',
             'dni' => ['required', new TipoIdentificacion('DNI'), 'unique:empleados,dni'],
-            'email' => 'required|unique:empleados,email|regex:/^.+@.+$/i',
+            'email' => 'required|unique:usuarios,email|regex:/^.+@.+$/i',
             'telefono' => 'required|regex:"[0-9]{9}"',
             'direccion' => 'required'
         ];

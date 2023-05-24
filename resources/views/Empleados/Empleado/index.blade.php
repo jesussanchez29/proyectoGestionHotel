@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $empleado->nombre . ' ' . $empleado->apellidos }}</td>
                                     <td>{{ $empleado->dni }}</td>
-                                    <td>{{ $empleado->email }}</td>
+                                    <td>{{ $empleado->usuario->email }}</td>
                                     <td>{{ $empleado->telefono }}</td>
                                     <td>{{ $empleado->direccion }}</td>
                                     @if ($empleado->estado == 0)
@@ -55,8 +55,8 @@
                                     @else
                                         <td style="color: #00FF00">Activo</td>
                                     @endif
-                                    @if (isset($empleado->nombreDepartamento))
-                                        <td>{{ $empleado->nombreDepartamento }}</td>
+                                    @if (isset($empleado->departamento->nombre))
+                                        <td>{{ $empleado->departamento->nombre }}</td>
                                     @else
                                         <td style="color: red">Sin asignar</td>
                                     @endif
@@ -64,7 +64,7 @@
                                         <input type='image' data-toggle="modal" src="{{ asset('images/editar.png') }}"
                                             data-target="#myModalEdit{{ $empleado->id }}">
                                         <input type='image' data-toggle="modal" src="{{ asset('images/eliminar.png') }}"
-                                            data-target="#myModalDelete{{ $empleado->id }}">
+                                            data-target="#myModalDelete{{ $empleado->usuario->id }}">
                                     </td>
                                 </tr>
                                 <!-- Modal modificar empleado -->

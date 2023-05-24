@@ -1,5 +1,5 @@
 <!-- Modal para Confirmar Borrado -->
-<div class="modal fade" id="myModalDelete{{ $empleado->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="myModalDelete{{ $empleado->usuario->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                         aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="miFormulario" method="POST" action="{{ route('eliminarEmpleado', $empleado->id) }}">
+            <form id="miFormulario" method="POST" action="{{ route('eliminarEmpleado', $empleado->usuario->id) }}">
                 @csrf
                 <div class="modal-body">
                     Si eliminas al empleado, también eliminarás todo a lo que estaba asignado ¿Estás seguro?
