@@ -63,7 +63,7 @@ Route::controller(HotelController::class)->group(function () {
 Route::controller(ServicioController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('servicios', 'indexEmpleado')->name('servicios');
-    Route::get('servicios', 'indexCliente')->name('serviciosCliente');
+    Route::get('serviciosCliente', 'indexCliente')->name('serviciosCliente');
     // Route para crear un empleado
     Route::post('servicio/crear', 'create')->name('crearServicio');
     // Route para editar un departamento

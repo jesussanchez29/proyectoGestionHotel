@@ -1,5 +1,5 @@
 <!-- Modal para Confirmar Borrado -->
-<div class="modal fade" id="myModalDelete{{ $cliente->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="myModalDelete{{ $cliente->usuario->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

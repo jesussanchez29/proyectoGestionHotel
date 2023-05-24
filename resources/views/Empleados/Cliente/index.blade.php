@@ -36,6 +36,7 @@
                             <th>Email</th>
                             <th>Telefono</th>
                             <th>Dirección</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -45,14 +46,19 @@
                                 <tr>
                                     <td>{{ $cliente->nombre . ' ' . $cliente->apellidos }}</td>
                                     <td>{{ $cliente->tipoIdentificacion }} - {{ $cliente->identificacion }}</td>
-                                    <td>{{ $cliente->email }}</td>
+                                    <td>{{ $cliente->usuario->email }}</td>
                                     <td>{{ $cliente->telefono }}</td>
                                     <td>{{ $cliente->direccion }}</td>
+                                    @if ($cliente->usuario->estado == 0)
+                                        <td style="color: red">Inactivo</td>
+                                    @else
+                                        <td style="color: #00FF00">Activo</td>
+                                    @endif
                                     <td>
                                         <input type='image' data-toggle="modal" src="{{ asset('images/editar.png') }}"
                                             data-target="#myModalEdit{{ $cliente->id }}">
                                         <input type='image' data-toggle="modal" src="{{ asset('images/eliminar.png') }}"
-                                            data-target="#myModalDelete{{ $cliente->id }}">
+                                            data-target="#myModalDelete{{ $cliente->usuario->id }}">
                                     </td>
                                 </tr>
                                 <!-- Modal modificar cliente -->

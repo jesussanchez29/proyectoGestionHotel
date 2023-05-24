@@ -22,7 +22,7 @@ class ClienteRequest extends FormRequest
             'fechaNacimiento' => 'required',
             'tipoIdentificacion' => 'required',
             'identificacion' => ['required', new TipoIdentificacion($this->input('tipoIdentificacion')), 'unique:clientes,identificacion'],
-            'email' => 'required|unique:clientes,email|regex:/^.+@.+$/i',
+            'email' => 'required|unique:usuarios,email|regex:/^.+@.+$/i',
             'telefono' => 'required|regex:"[0-9]{9}"',
             'direccion' => 'required'
         ];
