@@ -9,7 +9,12 @@ class TipoHabitacion extends Model
 {
     use HasFactory;
     protected $table = 'Tipohabitacion';
-    protected $primaryKey="id";
-    protected $fillable=['imagen', 'nombre', 'capacidad', 'descripcion', 'precio'];
-    protected $hidden=['id'];
+    protected $primaryKey = "id";
+    protected $fillable = ['imagen', 'nombre', 'capacidad', 'descripcion', 'precio'];
+    protected $hidden = ['id'];
+
+    public function resena()
+    {
+        return $this->hasMany(Resena::class, 'tipoHabitacion_id');
+    }
 }

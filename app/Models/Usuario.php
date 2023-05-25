@@ -8,9 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Usuario extends Authenticatable
 {
     use HasFactory;
-    protected $primaryKey="id";
-    protected $fillable=['email', 'password','primer_inicio_sesion', 'estado'];
-    protected $hidden=['id'];
+    protected $primaryKey = "id";
+    protected $fillable = ['email', 'password', 'primer_inicio_sesion', 'estado'];
+    protected $hidden = ['id'];
 
     public function empleado()
     {
@@ -20,5 +20,10 @@ class Usuario extends Authenticatable
     public function cliente()
     {
         return $this->hasOne(Cliente::class);
+    }
+
+    public function resena()
+    {
+        return $this->hasMany(Resena::class);
     }
 }

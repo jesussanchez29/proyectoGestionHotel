@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                             </a></li>
-                        <li><a href="activities.html" class="uk-navbar-nav-subtitle">
+                        <li><a href="{{ route('contacto') }}" class="uk-navbar-nav-subtitle">
                                 <div>Contacto<div class="uk-navbar-subtitle">Contacta con nosotros</div>
                                 </div>
                             </a></li>

@@ -16,7 +16,7 @@ class TipoHabitacionController extends Controller
     public function indexEmpleado()
     {
         $tipoHabitaciones = TipoHabitacion::all();
-        return view('Empleados.layouts.index', compact('tipoHabitaciones'));
+        return view('Empleados.TipoHabitacion.index', compact('tipoHabitaciones'));
     }
 
        // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
@@ -88,11 +88,12 @@ class TipoHabitacionController extends Controller
 
     public function view($id)
     {
-        $tipoHabitaciones = TipoHabitacion::whereNotIn('id', [$id])->take(3)->get();;
+        $tipoHabitaciones = TipoHabitacion::whereNotIn('id', [$id])->take(3)->get();
         $tipoHabitacionEncontrada = TipoHabitacion::findOrFail($id);
         $caracteristicas = CaracteristicaTipoHabitacion::where('tipoHabitacion_id', $id)->get();
+        $resenas = $tipoHabitacionEncontrada->resena;
         $hotel = Hotel::first();
-        return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas'));
+        return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas', 'resenas'));
     }
 
     public function getPisosDisponibles(Request $request)

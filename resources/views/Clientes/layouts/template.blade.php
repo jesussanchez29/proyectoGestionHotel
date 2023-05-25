@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tiny-date-picker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
 
@@ -53,7 +53,9 @@
     <script src="{{ asset('js/jquery.parallax.min.js') }}"></script>
     <script src="{{ asset('js/tiny-date-picker.min.js') }}"></script>
     <script src="{{ asset('js/date-config.js') }}"></script>
+    <script src="{{ asset('js/rating-config.js') }}"></script>
     <script src="{{ asset('js/template-config.js') }}"></script>
+    <script src="{{ asset('js/jquery.barrating.js') }}"></script>
 
 </body>
 

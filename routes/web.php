@@ -7,6 +7,7 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
@@ -114,4 +115,11 @@ Route::controller(CambiarContrasenaController::class)->group(function () {
     Route::get('cambiarContrasena', 'index')->name('cambiarContrasena');
     // Route para validar las credenciales
     Route::post('cambiarContrasena/{id}', 'cambiarContrasena');
+});
+
+// Route Controlador Login
+Route::controller(ResenaController::class)->group(function () {
+    // Route para ir a la ruta login
+    Route::post('resena/crear/{tipoHabitacion}', 'create')->name('crearResena');
+    // Route para validar las credenciales
 });
