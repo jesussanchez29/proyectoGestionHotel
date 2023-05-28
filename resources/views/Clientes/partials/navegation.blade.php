@@ -4,9 +4,7 @@
         <!-- Logo -->
         <div class="uk-width-auto imagen">
             <div class="impx-logo">
-                <a href="">
-                    @yield('logo')
-                </a>
+                <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
             </div>
         </div>
         <!-- Logo fin -->
@@ -37,7 +35,8 @@
                         <li><a href="{{ route('contacto') }}" class="uk-navbar-nav-subtitle">
                                 <div>Contacto<div class="uk-navbar-subtitle">Contacta con nosotros</div>
                                 </div>
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                     <!-- Navigation Items End -->
                 </div>

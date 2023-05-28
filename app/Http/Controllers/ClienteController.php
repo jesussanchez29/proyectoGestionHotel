@@ -31,6 +31,7 @@ class ClienteController extends Controller
             $password = Str::random(12);
             //Creamos al usuario
             $usuario = new Usuario();
+            $usuario->imagenPerfil = "images/perfilDefecto.png";
             $usuario->email = $request->email;
             $usuario->password = Hash::make($password);
             $usuario->estado = true;

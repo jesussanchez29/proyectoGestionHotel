@@ -20,6 +20,7 @@ class RegistroController extends Controller
     {
         //Creamos al usuario
         $usuario = new Usuario();
+        $usuario->imagenPerfil = "images/perfilDefecto.png";
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
         $usuario->estado = true;

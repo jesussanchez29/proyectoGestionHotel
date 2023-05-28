@@ -12,4 +12,9 @@ class EstadoHabitacion extends Model
     protected $primaryKey="id";
     protected $fillable=['nombre'];
     protected $hidden=['id'];
+    
+    public function habitaciones()
+    {
+        return $this->hasMany(Habitacion::class, 'estadoHabitacion_id');
+    }
 }

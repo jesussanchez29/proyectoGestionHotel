@@ -16,13 +16,14 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
     <!-- CSS -->
+    <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
+    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tiny-date-picker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/media-query.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href="{{ asset('css/media-query.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/icons/material-design-icons/mdi.min.css') }}" />
 
 </head>
 
@@ -31,11 +32,11 @@
     <header id="impx-header">
         <div>
             @yield('header')
-            @include('Clientes.layouts.header')
-            </div>
         </div>
     </header>
     <!-- HEADER END -->
+
+    @yield('slider')
 
     @yield('content')
 
@@ -58,5 +59,4 @@
     <script src="{{ asset('js/jquery.barrating.js') }}"></script>
 
 </body>
-
 </html>

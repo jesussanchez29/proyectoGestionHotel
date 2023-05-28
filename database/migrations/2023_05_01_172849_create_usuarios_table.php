@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
+            $table->string('imagenPerfil');
             $table->string('email');
             $table->string('password');
             $table->boolean('primerInicioSesion')->default(true);

@@ -11,4 +11,9 @@ class Piso extends Model
     protected $primaryKey="id";
     protected $fillable=['numero'];
     protected $hidden=['id'];
+
+    public function habitaciones()
+    {
+        return $this->hasMany(Habitacion::class, 'piso_id');
+    }
 }

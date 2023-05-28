@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactoRequest;
+use App\Mail\ContactoMailable;
 use App\Models\Habitacion;
 use App\Models\Hotel;
+use App\Models\Resena;
 use App\Models\Servicio;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
@@ -18,13 +22,14 @@ class HotelController extends Controller
         $servicios = Servicio::all();
         $tipoHabitaciones = TipoHabitacion::all();
         $pisos =  Habitacion::select('pisos.id', 'pisos.numero')
-        ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
-        ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
-        ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
-        ->where('estadohabitacion.nombre', 'Disponible')
-        ->groupBy('pisos.numero' , 'pisos.id')
-        ->get();
-        return view('Clientes.index', compact('hotel', 'servicios', 'tipoHabitaciones', 'pisos'));
+            ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
+            ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
+            ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
+            ->where('estadohabitacion.nombre', 'Disponible')
+            ->groupBy('pisos.numero', 'pisos.id')
+            ->get();
+        $resenas = Resena::all();
+        return view('Clientes.index', compact('hotel', 'servicios', 'tipoHabitaciones', 'pisos', 'resenas'));
     }
 
     public function indexEmpleado()
@@ -78,7 +83,7 @@ class HotelController extends Controller
                 'direccion' => 'required',
                 'ciudad' => 'required',
             ]);
-            
+
             $hotel = new Hotel();
             // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
             $file = $request->file('imagen')->store('public/hotel');
@@ -99,8 +104,25 @@ class HotelController extends Controller
         return redirect()->route('configuracion')->with('success', 'Cambios actualizado correctamente');
     }
 
-    public function contacto() {
+    public function contacto()
+    {
         $hotel = Hotel::first();
         return view('Clientes.contacto', compact('hotel'));
+    }
+
+
+    public function enviarMensajeContacto(ContactoRequest $request)
+    {
+        $nombre = $request->input('nombre');
+        $email = $request->input('email');
+        $mensaje = $request->input('mensaje');
+
+        // Envía el correo utilizando la plantilla de correo electrónico        Mail::to($request->email)->send(new Registro($request->email, $password));
+
+        Mail::to('infoestelahorizonte@gmail.com')->send(new ContactoMailable($nombre, $email, $mensaje));
+
+
+        // Redirecciona o muestra un mensaje de éxito
+        return redirect()->back()->with('success', '¡El formulario se ha enviado con éxito!');
     }
 }

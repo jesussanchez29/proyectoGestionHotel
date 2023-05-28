@@ -18,7 +18,7 @@ class TipoHabitacionFactory extends Factory
     {
         return [
             'imagen' => $this->faker->imageUrl(),
-            'nombre' => $this->faker->word,
+            'nombre' => $this->faker->unique()->word,
             'descripcion' => $this->faker->sentence,
             'capacidad' => $this->faker->numberBetween(1, 10),
             'precio' => $this->faker->randomFloat(2, 0, 1000),

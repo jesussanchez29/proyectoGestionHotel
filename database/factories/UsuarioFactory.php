@@ -18,6 +18,7 @@ class UsuarioFactory extends Factory
     public function definition(): array
     {
         return [
+            'imagenPerfil' => 'images/perfilDefecto.png',
             'email' => $this->faker->unique()->safeEmail,
             'password' => Hash::make($this->faker->password), // Puedes ajustar la contraseña aquí o generarla aleatoriamente
             'estado' => $this->faker->randomElement([true, false]),

@@ -24,7 +24,7 @@ class HabitacionFactory extends Factory
         $tipoHabitacion = TipoHabitacion::inRandomOrder()->first();
 
             return [
-                'numero' => $this->faker->randomNumber(3),
+                'numero' => $this->faker->unique()->randomNumber(3),
                 'estadoHabitacion_id' => $estado,
                 'piso_id' => $piso,
                 'tipoHabitacion_id' => $tipoHabitacion,

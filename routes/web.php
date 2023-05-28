@@ -4,8 +4,10 @@ use App\Http\Controllers\CambiarContrasenaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PisoController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\ReservaController;
@@ -57,9 +59,9 @@ Route::controller(HotelController::class)->group(function () {
     // Route para crear un empleado
     Route::post('configuracion/Createupdate/', 'updateOrCreate')->name('updateOrCreaterConfiguracion');
     Route::get('/contacto', 'contacto')->name('contacto');
+    Route::post('/enviarMensajeContacto', 'enviarMensajeContacto')->name('enviarMensajeContacto');
 
 });
-
 // Route Controlador Empleado
 Route::controller(ServicioController::class)->group(function () {
     // Route para mostrar todos los empleados
@@ -122,4 +124,22 @@ Route::controller(ResenaController::class)->group(function () {
     // Route para ir a la ruta login
     Route::post('resena/crear/{tipoHabitacion}', 'create')->name('crearResena');
     // Route para validar las credenciales
+});
+
+// Route Controlador Empleado
+Route::controller(PisoController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('pisos', 'indexEmpleado')->name('pisos');
+    Route::post('piso/crear', 'create')->name('crearPiso');
+    Route::post('piso/editar/{id}', 'update')->name('editarPiso');
+    Route::post('piso/eliminar/{id}', 'destroy')->name('eliminarPiso');
+});
+
+// Route Controlador Empleado
+Route::controller(HabitacionController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('habitaciones', 'indexEmpleado')->name('habitaciones');
+    Route::post('habitacion/crear', 'create')->name('crearHabitacion');
+    Route::post('habitacion/editar/{id}', 'update')->name('editarHabitacion');
+    Route::post('habitacion/eliminar/{id}', 'destroy')->name('eliminarHabitacion');
 });

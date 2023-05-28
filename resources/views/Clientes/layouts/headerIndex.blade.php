@@ -1,10 +1,7 @@
-<div class="impx-menu-wrapper style2" data-uk-sticky="top: .impx-page-heading; animation: uk-animation-slide-top">
-
+<div class="impx-menu-wrapper style2" data-uk-sticky="top: .impx-slide-container; animation: uk-animation-slide-top">
     <!-- Barra de navegacion Mobil -->
     @include('Clientes.partials.navegationMobile')
-    <a href="#mobile-nav" class="uk-hidden@xl uk-hidden@l uk-hidden@m mobile-nav" data-uk-toggle="target: #mobile-nav"><i
-            class="fa fa-bars"></i>Menu</a>
-
+    
     <!-- Header Arriba -->
     <div class="impx-top-header style2">
         <div class="uk-container uk-container-expand">

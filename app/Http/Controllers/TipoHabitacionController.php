@@ -19,14 +19,14 @@ class TipoHabitacionController extends Controller
         return view('Empleados.TipoHabitacion.index', compact('tipoHabitaciones'));
     }
 
-       // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
-       public function indexCliente()
-       {
-           $tipoHabitaciones = TipoHabitacion::paginate(4);
-           $hotel = Hotel::first();
-           return view('Clientes.TipoHabitacion.index', compact('tipoHabitaciones', 'hotel'));
-       }
-   
+    // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
+    public function indexCliente()
+    {
+        $tipoHabitaciones = TipoHabitacion::paginate(4);
+        $hotel = Hotel::first();
+        return view('Clientes.TipoHabitacion.index', compact('tipoHabitaciones', 'hotel'));
+    }
+
 
     //Funcion para crear un tipo de habitacion
     public function create(TipoHabitacionRequest $request)
@@ -66,8 +66,8 @@ class TipoHabitacionController extends Controller
             $url = Storage::url($file);
             $tipoHabitacion->imagen = substr($url, 1);
         }
-        $tipoHabitacion->nombre = $request->input('nombre');     
-        $tipoHabitacion->descripcion = $request->input('descripcion');   
+        $tipoHabitacion->nombre = $request->input('nombre');
+        $tipoHabitacion->descripcion = $request->input('descripcion');
         $tipoHabitacion->capacidad = $request->input('capacidad');
         $tipoHabitacion->precio = $request->input('precio');
         $tipoHabitacion->save();
@@ -97,18 +97,19 @@ class TipoHabitacionController extends Controller
     }
 
     public function getPisosDisponibles(Request $request)
-{
-    $tipoHabitacionId = $request->input('habitacion');
+    {
+        $tipoHabitacionId = $request->input('habitacion');
 
-    $pisosDisponibles = Habitacion::select('pisos.id', 'pisos.numero')
-        ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
-        ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
-        ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
-        ->where('tipoHabitacion.id', $tipoHabitacionId)
-        ->where('estadohabitacion.nombre', 'Disponible')
-        ->pluck('pisos.numero')
-        ->unique();
+        $pisosDisponibles = Habitacion::select('pisos.id as pisoId', 'pisos.numero')
+            ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
+            ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
+            ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
+            ->where('tipoHabitacion.id', $tipoHabitacionId)
+            ->where('estadohabitacion.nombre', 'Disponible')
+            ->distinct()
+            ->get(['pisos.id', 'pisos.numero']);
 
-    return response()->json($pisosDisponibles);
-}
+
+        return response()->json($pisosDisponibles);
+    }
 }

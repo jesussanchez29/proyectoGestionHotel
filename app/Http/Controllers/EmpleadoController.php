@@ -34,6 +34,7 @@ class EmpleadoController extends Controller
 
             //Creamos al usuario
             $usuario = new Usuario();
+            $usuario->imagenPerfil = "images/perfilDefecto.png";
             $usuario->email = $request->email;
             $usuario->password = Hash::make($password);
             $usuario->estado = true;

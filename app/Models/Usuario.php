@@ -9,7 +9,7 @@ class Usuario extends Authenticatable
 {
     use HasFactory;
     protected $primaryKey = "id";
-    protected $fillable = ['email', 'password', 'primer_inicio_sesion', 'estado'];
+    protected $fillable = ['imagenPerfil', 'email', 'password', 'primer_inicio_sesion', 'estado'];
     protected $hidden = ['id'];
 
     public function empleado()
