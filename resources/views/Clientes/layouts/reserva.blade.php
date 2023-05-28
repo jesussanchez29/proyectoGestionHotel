@@ -55,7 +55,7 @@
             <div class="uk-form-controls uk-position-relative">
                 <label class="uk-form-label impx-text-white" for="form-guest-select">Acompañantes</label>
                 <span class="uk-form-icon select-icon" data-uk-icon="icon: users"></span>
-                <select class="uk-select uk-border-rounded" id="form-guest-select">
+                <select class="uk-select uk-border-rounded" id="form-guest-select" disabled>
                     <option value="">Selecciona habitación</option>
                 </select>
             </div>
@@ -63,7 +63,7 @@
                 <div class="uk-inline">
                     <label class="uk-form-label  impx-text-white">Piso</label>
                     <span class="uk-form-icon" data-uk-icon="icon: home"></span>
-                    <select class="uk-select uk-border-rounded" id="piso" name="piso_id">
+                    <select class="uk-select uk-border-rounded" id="piso" name="piso_id" disabled>
                         <option value="">Selecciona habitación</option>
                     </select>
                 </div>

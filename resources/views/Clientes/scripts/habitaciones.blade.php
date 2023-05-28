@@ -8,17 +8,21 @@
 
         function generateGuestOptions(capacity) {
             var guestSelect = $('#form-guest-select');
+            var pisoSelect = $('#piso');
             guestSelect.empty();
 
             if (capacity === 1) {
-                guestSelect.append('<option value="0" selected>Sin acompañante</option>');
+                guestSelect.append('<option value="0" selected>0</option>');
                 guestSelect.prop('disabled', true);
             } else {
-                guestSelect.append('<option value="" selected>Selecciona acompañante</option>');
-                for (var i = 1; i <= capacity; i++) {
+                for (var i = 0; i < capacity; i++) {
                     guestSelect.append('<option value="' + i + '">' + i + '</option>');
                 }
                 guestSelect.prop('disabled', false);
+            }
+            if (pisoSelect.find('option').length === 0) {
+                pisoSelect.append('<option value="">No hay pisos disponibles</option>').prop('disabled', true);
+                guestSelect.empty().prop('disabled', true);
             }
         }
     });
@@ -36,6 +40,7 @@
                         habitacion: tipoHabitacionId
                     },
                     success: function(response) {
+                        $('#form-guest-select').prop('disabled', false);
                         $('#piso').empty().prop('disabled', false);
                         if (response.length > 0) {
                             $.each(response, function(key, value) {
@@ -45,6 +50,8 @@
                         } else {
                             $('#piso').append(
                                     '<option value="">No hay pisos disponibles</option>')
+                                .prop('disabled', true);
+                                $('#form-guest-select').append('<option value="">0</option>')
                                 .prop('disabled', true);
                         }
                     },
