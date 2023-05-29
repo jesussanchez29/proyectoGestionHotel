@@ -16,8 +16,8 @@ return new class extends Migration
             $table->date('fechaLLegada');
             $table->date('fechaSalida');
             $table->decimal('abonado');
-            $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
             $table->unsignedBigInteger('habitacion_id');
             $table->foreign('habitacion_id')->references('id')->on('habitaciones')->onDelete('cascade');
             $table->unsignedBigInteger('empleado_id')->nullable();

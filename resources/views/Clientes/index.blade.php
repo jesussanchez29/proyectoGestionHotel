@@ -105,9 +105,9 @@
                     <div class="uk-light uk-width-2-3@xl uk-width-2-3@l uk-width-1-1@s">
                         <!-- Location -->
                         <h4 class="impx-text-white">Nuestra Ubicación</h4>
-                        <p class="impx-text-large impx-text-light">Oculorum, inquit Plato, est in nobis sensus acerrimus,
-                            quibus sapientiam non cernimus non semper inquam At enim sequor utilitatem praetermissum in
-                            Stoicis?</p>
+                        <p class="impx-text-large impx-text-light">Descubre nuestro hotel en nuestra ubicación, el lugar
+                            perfecto para una estadía inolvidable. Con una ubicación privilegiada y servicios de calidad te
+                            garantizan una experiencia excepcional.</p>
                         <!-- Location End -->
                         <div class="map-responsive">
                             <iframe
@@ -123,6 +123,8 @@
                         <p class="impx-text-large impx-text-light">Email: {{ $hotel->email }}</p>
                         <p class="impx-text-large impx-text-light">Direccion: {{ $hotel->direccion }}, {{ $hotel->ciudad }}
                         </p>
+                        <p>Si tienes alguna pregunta o duda sobre nuestro hotel, no dudes en contactarnos:</p>
+                        <p><a href="{{ route('contacto') }}" class="btn btn-primary">Contactar</a></p>
                         <!-- Location End -->
                     </div>
 
@@ -132,25 +134,25 @@
     </div>
     <!-- CONTACT SECTION END -->
     <style>
-       .map-responsive {
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 30%;
-    /* Proporción de aspecto 16:9 (dividir altura entre ancho y multiplicar por 100) */
-    height: 0;
-}
+        .map-responsive {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 30%;
+            /* Proporción de aspecto 16:9 (dividir altura entre ancho y multiplicar por 100) */
+            height: 0;
+        }
 
-.map-responsive iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .map-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-.impx-contact {
-    height: 450px;
-    position: relative;
-}
+        .impx-contact {
+            height: 450px;
+            position: relative;
+        }
     </style>
 @endsection

@@ -33,13 +33,13 @@
                                                 <ul class="uk-list room-fac">
                                                     <li><span class="impx-text-aqua"
                                                             data-uk-icon="icon: check; ratio: 1;"></span>
-                                                        Beatus in maximarum timore</li>
+                                                            Vistas impresionantes</li>
                                                     <li><span class="impx-text-aqua"
                                                             data-uk-icon="icon: check; ratio: 1;"></span>
-                                                        Oculis Compensabatur</li>
+                                                            Tranquilidad y privacidad</li>
                                                     <li><span class="impx-text-aqua"
                                                             data-uk-icon="icon: check; ratio: 1;"></span>
-                                                        Dolorisnos veriusque nihil</li>
+                                                            Comodidad excepcional</li>
                                                 </ul>
                                                 <div
                                                     class="uk-card-footer uk-padding-remove-horizontal uk-padding-remove-bottom">
@@ -60,14 +60,14 @@
                                                     {{ $tipoHabitaciones[$i]->precio }}€/noche</span>
                                                 <ul class="uk-list room-fac">
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Beatus in
-                                                        maximarum timore</li>
-                                                    <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Oculis
-                                                        Compensabatur</li>
-                                                    <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Dolorisnos
-                                                        veriusque nihil</li>
+                                                        data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Vistas impresionantes</li>
+                                                <li><span class="impx-text-aqua"
+                                                        data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Tranquilidad y privacidad</li>
+                                                <li><span class="impx-text-aqua"
+                                                        data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Comodidad excepcional</li>
                                                 </ul>
                                                 <div
                                                     class="uk-card-footer uk-padding-remove-horizontal uk-padding-remove-bottom">

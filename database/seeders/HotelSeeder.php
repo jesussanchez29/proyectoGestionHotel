@@ -12,7 +12,7 @@ class HotelSeeder extends Seeder
     public function run(): void
     {
         $hotel = new Hotel();
-        $hotel->imagen = 'images/slideshow/full-slide-1.jpg';
+        $hotel->imagen = 'images/hotel.jpg';
         $hotel->nombre = 'Estela Del Horizonte';
         $hotel->cadena = 'Cadena Serenia';
         $hotel->logo = 'images/logo.png';

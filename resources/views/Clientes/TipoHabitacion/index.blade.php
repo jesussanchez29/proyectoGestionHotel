@@ -26,6 +26,23 @@
 @section('content')
     <div class="uk-padding uk-padding-remove-horizontal">
         <div class="uk-container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <ul>
+                        @foreach ($errors->all() as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div data-uk-grid>
                 <!-- main content -->
                 <div class="uk-width-2-3@xl uk-width-2-3@l uk-width-2-3@m uk-width-1-1@s uk-margin-small-top">
@@ -86,8 +103,8 @@ uk-margin-small-top">
                     <!-- booking form -->
                     <div class="bg-color-aqua uk-padding impx-padding-medium">
                         <div class="impx-hp-booking-form side-form uk-margin-bottom uk-margin-remove-top">
-                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase"><span>Booking
-                                    Form</span></h6>
+                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase"><span>Formulario
+                                    Reserva</span></h6>
                             <form method="POST" action="{{ route('crearReservaCliente') }}">
                                 @csrf
                                 <div class="uk-margin">

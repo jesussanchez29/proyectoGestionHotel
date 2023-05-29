@@ -88,12 +88,13 @@ class TipoHabitacionController extends Controller
 
     public function view($id)
     {
-        $tipoHabitaciones = TipoHabitacion::whereNotIn('id', [$id])->take(3)->get();
+        $tipoHabitaciones = TipoHabitacion::all();
+        $tipoHabitacionesOtras = TipoHabitacion::whereNotIn('id', [$id])->take(3)->get();
         $tipoHabitacionEncontrada = TipoHabitacion::findOrFail($id);
         $caracteristicas = CaracteristicaTipoHabitacion::where('tipoHabitacion_id', $id)->get();
         $resenas = $tipoHabitacionEncontrada->resena;
         $hotel = Hotel::first();
-        return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas', 'resenas'));
+        return view('Clientes.TipoHabitacion.ver', compact('tipoHabitacionEncontrada', 'hotel', 'tipoHabitaciones', 'caracteristicas', 'resenas', 'tipoHabitacionesOtras'));
     }
 
     public function getPisosDisponibles(Request $request)
