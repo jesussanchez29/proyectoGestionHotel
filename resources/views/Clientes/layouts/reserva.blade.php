@@ -28,14 +28,14 @@
                     <label class="uk-form-label impx-text-white">Fecha Llegada</label>
                     <span class="uk-form-icon" data-uk-icon=""></span>
                     <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy"
-                        name="fechaLlegada">
+                        name="fechaLlegada" id="fechaLlegada">
                 </div>
             </div>
             <div class="uk-form-controls">
                 <div class="uk-inline">
                     <label class="uk-form-label impx-text-white">Fecha Salida</label>
                     <span class="uk-form-icon" data-uk-icon=""></span>
-                    <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy" name="fechaSalida">
+                    <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy" name="fechaSalida" id="fechaSalida">
                 </div>
             </div>
             <div class="uk-form-controls uk-position-relative">
@@ -76,3 +76,58 @@
     </div>
 </div>
 @include('Clientes.scripts.habitaciones')
+
+<script>
+    // Obtener referencia a los elementos select utilizando jQuery
+const fechaLlegadaSelect = $('#fechaLlegada');
+const fechaSalidaSelect = $('#fechaSalida');
+const tipoHabitacionSelect = $('#form-rooms-select');
+const pisoSelect = $('#piso');
+
+// Manejar evento de cambio en fecha de llegada, fecha de salida y tipo de habitación
+fechaLlegadaSelect.on('change', checkDisponibilidad);
+fechaSalidaSelect.on('change', checkDisponibilidad);
+tipoHabitacionSelect.on('change', checkDisponibilidad);
+
+// Función para verificar la disponibilidad de pisos
+function checkDisponibilidad() {
+    const fechaLlegada = fechaLlegadaSelect.val();
+    const fechaSalida = fechaSalidaSelect.val();
+    const tipoHabitacion = tipoHabitacionSelect.val();
+
+    // Realizar la llamada AJAX al servidor utilizando jQuery
+       // Realizar la llamada AJAX al servidor utilizando jQuery
+       $.ajax({
+        url: '/verificar-disponibilidad',
+        method: 'POST',
+        data: {
+            fechaLlegada: fechaLlegada,
+            fechaSalida: fechaSalida,
+            tipoHabitacion: tipoHabitacion
+        },
+        success: function (response) {
+            // Manejar la respuesta del servidor
+
+            // Actualizar el select de pisos con las opciones disponibles
+            const pisosDisponibles = response.pisosDisponibles;
+
+            // Limpiar las opciones existentes
+            pisoSelect.empty();
+
+            // Agregar las nuevas opciones
+            pisosDisponibles.forEach(function (piso) {
+                const option = $('<option></option>');
+                option.val(piso.id);
+                option.text(piso.nombre);
+                pisoSelect.append(option);
+            });
+
+            // Habilitar el select de pisos
+            pisoSelect.prop('disabled', false);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+</script>

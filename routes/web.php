@@ -73,6 +73,7 @@ Route::controller(ServicioController::class)->group(function () {
     Route::post('servicio/editar/{id}', 'update')->name('editarServicio');
     // Route para eliminar un departamento
     Route::post('servicio/eliminar/{id}', 'destroy')->name('eliminarServicio');
+    Route::post('/obtener-horas-disponibles', 'obtenerHorasDisponibles')->name('horas.disponibles');
 });
 
 // Route Controlador Empleado
@@ -85,6 +86,7 @@ Route::controller(TipoHabitacionController::class)->group(function () {
     Route::post('tipoHabitacion/eliminar/{id}', 'destroy')->name('eliminarTipoHabitacion');
     Route::get('tipoHabitacion/ver/{id}', 'view')->name('verTipoHabitacion');
     Route::get('/get-pisos-disponibles', 'getPisosDisponibles')->name('getPisosDisponibles');
+    Route::post('/verificar-disponibilidad', 'ReservaController@verificarDisponibilidad')->name('verificarDisponibilidad');
 
 });
 

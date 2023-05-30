@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('imagen');
             $table->string('horaInicio');
             $table->string('horaFin');
+            $table->string('duracion');
             $table->decimal('precio');
             $table->boolean('disponibilidad');
             $table->timestamps();
