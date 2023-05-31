@@ -90,68 +90,43 @@
                                     de servicio</span></h6>
                             @auth
 
-                                <form class="">
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls">
-                                            <div class="uk-inline">
-                                                <label class="uk-form-label">Email</label>
-                                                <span class="uk-form-icon" data-uk-icon="icon: mail"></span>
-                                                <input class="uk-input booking-email uk-border-rounded" type="text"
-                                                    placeholder="your e-mail">
-                                            </div>
+                                <form class="hora-disponible-form" method="POST">
+                                    @csrf
+                                <div class="uk-margin">
+                                    <div class="uk-form-controls">
+                                        <div class="uk-inline">
+                                            <label class="uk-form-label impx-text-white">Fecha</label>
+                                            <span class="uk-form-icon" data-uk-icon=""></span>
+                                            <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy" name="fecha" id="fecha">
                                         </div>
                                     </div>
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls">
-                                            <div class="uk-inline">
-                                                <label class="uk-form-label">Arrival</label>
-                                                <span class="uk-form-icon" data-uk-icon="icon: calendar"></span>
-                                                <input class="uk-input booking-arrival uk-border-rounded" type="text"
-                                                    placeholder="m/dd/yyyy">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls">
-                                            <div class="uk-inline">
-                                                <label class="uk-form-label">Departure</label>
-                                                <span class="uk-form-icon" data-uk-icon="icon: calendar"></span>
-                                                <input class="uk-input booking-departure uk-border-rounded" type="text"
-                                                    placeholder="m/dd/yyyy">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls uk-position-relative">
-                                            <label class="uk-form-label" for="form-guest-select">Guest</label>
-                                            <span class="uk-form-icon select-icon" data-uk-icon="icon: users"></span>
-                                            <select class="uk-select uk-border-rounded" id="form-guest-select">
-                                                <option value="">Please select...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
+                                </div>
+                                <div class="uk-margin">
+                                    <div class="uk-form-controls uk-position-relative">
+                                        <label class="uk-form-label impx-text-white" for="form-servicios-select">Tipo Servicio</label>
+                                        <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
+                                        @if (count($servicios) > 0)
+                                            <select class="uk-select uk-border-rounded" id="form-servicios-select" name="servicio">
+                                                @foreach ($servicios as $servicio)
+                                                    <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                                @endforeach
                                             </select>
-                                        </div>
+                                        @else
+                                            <p class="vacio">Sin Servicios disponibles</p>
+                                        @endif
                                     </div>
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls uk-position-relative">
-                                            <label class="uk-form-label" for="form-rooms-select">Rooms</label>
-                                            <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
-                                            <select class="uk-select uk-border-rounded" id="form-rooms-select">
-                                                <option value="">Please select...</option>
-                                                <option value="room_1">Single</option>
-                                                <option value="room_2">Double</option>
-                                                <option value="room_3">Primier</option>
-                                                <option value="room_4">Deluxe</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label class="uk-form-label empty-label">&nbsp;</label>
-                                        <button class="uk-button uk-width-1-1">¡Reservar!</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <div>
+                                    <label class="uk-form-label empty-label">&nbsp;</label>
+                                    <select class="uk-select uk-border-rounded" id="form-horas-select" >
+                                        <option value="">Selecciona una hora</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="uk-form-label empty-label">&nbsp;</label>
+                                    <button class="uk-button uk-width-1-1">¡Reservar!</button>
+                                </div>
+                            </form>
                             @endauth
                             @guest
                                 <p>Obten una reserva para poder obtener un servicio</p>
@@ -257,3 +232,41 @@
         </div>
     </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Manejar el evento de cambio en el campo de fecha
+        $('#fecha').change(function() {
+            obtenerHorasDisponibles();
+        });
+
+        // Manejar el evento de cambio en el campo de tipo de servicio
+        $('#form-servicios-select').change(function() {
+            obtenerHorasDisponibles();
+        });
+
+        function obtenerHorasDisponibles() {
+            var fecha = $('#fecha').val();
+            var servicio = $('#form-servicios-select').val();
+
+            // Realizar una solicitud AJAX para obtener las horas disponibles
+            $.ajax({
+                url: "{{ route('horas.disponibles') }}",
+                method: "POST",
+                data: {
+                    fecha: fecha,
+                    servicio: servicio
+                },
+                success: function(response) {
+                    // Actualizar el select de horas con las opciones disponibles
+                    $('#form-horas-select').html(response);
+                    $('#form-horas-select').prop('disabled', false);
+                },
+                error: function() {
+                    // Manejar el error de la solicitud AJAX
+                    console.log('Error al obtener las horas disponibles');
+                }
+            });
+        }
+    });
+</script>

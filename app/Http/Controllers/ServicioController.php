@@ -86,4 +86,19 @@ class ServicioController extends Controller
         // Nos redirige a departamento con un mensaje
         return redirect()->route('servicios')->with('success', 'Servicio eliminado correctamente');
     }
+
+    public function obtenerHorasDisponibles(Request $request)
+    {
+        dd($request->all());
+        $fecha = $request->input('fecha');
+        $tipoServicioId = $request->input('tipoServicio');
+
+        $servicio = Servicio::findOrFail($tipoServicioId);
+
+        $horasDisponibles = $servicio->obtenerHorasDisponibles($fecha);
+
+        return response()->json([
+            'horasDisponibles' => $horasDisponibles
+        ]);
+    }
 }
