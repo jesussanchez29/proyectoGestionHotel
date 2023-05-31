@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ResenaController extends Controller
 {
+
+    public function indexEmpleado()
+    {
+        $resenas = Resena::all();
+        return view('Empleados.Resena.index', compact('resenas'));
+    }
+
     // Funcion para crear un departamento
     public function create(ResenaRequest $request, $tipoHabitacion)
     {
@@ -22,5 +29,29 @@ class ResenaController extends Controller
         $resena->save();
         // Nos redirige a departamento con un mensaje
         return redirect()->route('verTipoHabitacion', $tipoHabitacion.'#resena')->with('success', 'Reseña registrada corectamente, espera a que el administrador lo valide');
+    }
+
+    public function cambiarEstado($id)
+    {
+        $resena = Resena::findOrFail($id);
+        if ($resena->estado == 0) {
+            $resena->estado = 1; // Actualizar el estado a 1
+        } else {
+            $resena->estado = 0; // Actualizar el estado a 0
+        }
+        $resena->save(); // Guardar los cambios en la base de datos
+        return redirect()->route('resenas')->with('success', 'Estado Reseña modificado correctamente');
+
+    }
+    
+
+    public function destroy($id)
+    {
+        //Obtiene el tipo de habitacion a partir del id
+        $resena = Resena::find($id);
+        //Elimina al tipo de habitacion
+        $resena->delete();
+        // Nos piso a tipoHabitaciones con un mensaje
+        return redirect()->route('resenas')->with('success', 'Piso eliminado correctamente');
     }
 }

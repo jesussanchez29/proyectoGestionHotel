@@ -19,6 +19,6 @@ class Resena extends Model
 
     public function tipoHabitacion()
     {
-        return $this->belongsTo(TipoHabitacion::class);
+        return $this->belongsTo(TipoHabitacion::class, 'tipoHabitacion_id');
     }
 }

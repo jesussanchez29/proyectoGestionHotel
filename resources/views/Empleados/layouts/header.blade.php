@@ -28,6 +28,11 @@
             <span>Servicios</span></a>
     </li>
     <li class="nav-item active">
+        <a class="nav-link" href="{{ route('resenas') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Reseñas</span></a>
+    </li>
+    <li class="nav-item active">
         <a class="nav-link" href="{{ route('configuracion') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Configuracion Hotel</span></a>

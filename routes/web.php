@@ -15,7 +15,6 @@ use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
-use App\Models\CaracteristicaTipoHabitacion;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -127,7 +126,10 @@ Route::controller(CambiarContrasenaController::class)->group(function () {
 // Route Controlador Login
 Route::controller(ResenaController::class)->group(function () {
     // Route para ir a la ruta login
+    Route::get('resenas', 'indexEmpleado')->name('resenas');
     Route::post('resena/crear/{tipoHabitacion}', 'create')->name('crearResena');
+    Route::post('resena/cambiarEstado/{id}', 'cambiarEstado')->name('cambiarEstadoResena');
+    Route::post('resena/eliminar/{id}', 'destroy')->name('eliminarResena');
     // Route para validar las credenciales
 });
 
