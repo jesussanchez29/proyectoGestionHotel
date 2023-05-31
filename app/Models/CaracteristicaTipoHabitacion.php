@@ -10,7 +10,12 @@ class CaracteristicaTipoHabitacion extends Model
     use HasFactory;
     use HasFactory;
     protected $table = 'caracteristicaTipoHabitacion';
-    protected $primaryKey="id";
-    protected $fillable=['nombre', 'descripcion', 'icono', 'tipoHabitacion_id'];
-    protected $hidden=['id'];
+    protected $primaryKey = "id";
+    protected $fillable = ['nombre', 'descripcion', 'tipoHabitacion_id'];
+    protected $hidden = ['id'];
+
+    public function tipoHabitacion()
+    {
+        return $this->belongsTo(TipoHabitacion::class, 'tipoHabitacion_id');
+    }
 }

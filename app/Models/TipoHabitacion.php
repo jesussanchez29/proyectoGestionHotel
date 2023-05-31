@@ -22,4 +22,9 @@ class TipoHabitacion extends Model
     {
         return $this->hasMany(Habitacion::class, 'tipoHabitacion_id');
     }
+
+    public function caracteristicas()
+    {
+        return $this->hasMany(CaracteristicaTipoHabitacion::class);
+    }
 }

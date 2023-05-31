@@ -61,7 +61,8 @@
                 <a class="collapse-item" href="{{ route('habitaciones') }}">Habitaciones</a>
                 <a class="collapse-item" href="{{ route('tipoHabitaciones') }}">Tipo de Habitaciones</a>
                 <a class="collapse-item" href="{{ route('pisos') }}">Pisos</a>
-
+                <a class="collapse-item" href="{{ route('estadoHabitaciones') }}">Estado</a>
+                <a class="collapse-item" href="{{ route('caracteristicasHabitacion') }}">Caracteristicas</a>
             </div>
         </div>
     </li>

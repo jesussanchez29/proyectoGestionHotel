@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CambiarContrasenaController;
+use App\Http\Controllers\CaracteristicaHabitacionController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\EstadoHabitacionController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LoginController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
+use App\Models\CaracteristicaTipoHabitacion;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -142,4 +145,22 @@ Route::controller(HabitacionController::class)->group(function () {
     Route::post('habitacion/crear', 'create')->name('crearHabitacion');
     Route::post('habitacion/editar/{id}', 'update')->name('editarHabitacion');
     Route::post('habitacion/eliminar/{id}', 'destroy')->name('eliminarHabitacion');
+});
+
+// Route Controlador Empleado
+Route::controller(EstadoHabitacionController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('estadoHabitaciones', 'indexEmpleado')->name('estadoHabitaciones');
+    Route::post('estadoHabitacion/crear', 'create')->name('crearEstadoHabitacion');
+    Route::post('estadoHabitacion/editar/{id}', 'update')->name('editarEstadoHabitacion');
+    Route::post('estadoHabitacion/eliminar/{id}', 'destroy')->name('eliminarEstadoHabitacion');
+});
+
+// Route Controlador Empleado
+Route::controller(CaracteristicaHabitacionController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('caracteristicasHabitacion', 'indexEmpleado')->name('caracteristicasHabitacion');
+    Route::post('caracteristicaHabitacion/crear', 'create')->name('crearCaracteristicaHabitacion');
+    Route::post('caracteristicaHabitacion/editar/{id}', 'update')->name('editarCaracteristicaHabitacion');
+    Route::post('caracteristicaHabitacion/eliminar/{id}', 'destroy')->name('eliminarCaracteristicaHabitacion');
 });

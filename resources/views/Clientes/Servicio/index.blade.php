@@ -48,14 +48,11 @@
                                                     {{ $servicio->precio }}/NOCHE</span>
                                                 <ul class="uk-list room-fac">
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Beatus in
-                                                        maximarum timore</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Puntualidad ante todo</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Oculis
-                                                        Compensabatur</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Servicio de calidad</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Dolorisnos
-                                                        veriusque nihil</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Quedarás totalmente sastifecho</li>
                                                 </ul>
 
                                                 <div

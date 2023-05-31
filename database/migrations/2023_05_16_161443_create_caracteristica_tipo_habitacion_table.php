@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('icono');
             $table->unsignedBigInteger('tipoHabitacion_id');
-            $table->foreign('tipoHabitacion_id')->references('id')->on('tipoHabitacion')->onDelete('cascade');
+            $table->foreign('tipoHabitacion_id')->references('id')->on('tipohabitacion')->onDelete('cascade');
             $table->timestamps();
         });
     }
