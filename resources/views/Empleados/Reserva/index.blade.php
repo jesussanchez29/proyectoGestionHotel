@@ -54,7 +54,7 @@
                                 <div
                                     class="card-footer d-flex bg-{{ $habitacion->estado->clase }} align-items-center justify-content-between rounded-0">
                                     <a class="small text-white stretched-link text-uppercase font-weight-bold select-habitacion"
-                                        href="">
+                                        href="{{ route('obtenerFactura') }}">
                                         {{ $habitacion->estado->nombre }}
                                     </a>
                                     <div class="small text-white">

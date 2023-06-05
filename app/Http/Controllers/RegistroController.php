@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistroRequest;
+use App\Mail\BienvenidoCliente;
 use App\Models\Cliente;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegistroController extends Controller
 {
@@ -37,6 +39,8 @@ class RegistroController extends Controller
         $cliente->direccion = $request->direccion;
         $cliente->usuario_id = $usuario->id;
         $cliente->save();
+
+        Mail::to($request->email)->send(new BienvenidoCliente($request->nombre));
 
         return redirect()->route('login')->with('success', 'Usuario registrado correctamente !Ya puedes inicar sesión¡');
     }

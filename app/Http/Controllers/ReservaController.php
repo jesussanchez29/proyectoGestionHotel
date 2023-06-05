@@ -7,6 +7,7 @@ use App\Models\EstadoReserva;
 use App\Models\Habitacion;
 use App\Models\Piso;
 use App\Models\Reserva;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +41,24 @@ class ReservaController extends Controller
         $reserva->save();
         // Nos redirige a clientes con un mensaje
         return redirect()->route('indexCliente')->with('success', 'Reserva pediente por confirmar');
+    }
+
+    public function obtenerFactura(){
+        $fecha = '2023-06-05';
+        $total = 100.00;
+
+        $data = [
+            'fecha' => $fecha,
+            'total' => $total
+        ];
+
+        $pdf = new Dompdf();
+        $html = view('factura', $data)->render();
+        $pdf->loadHtml($html);
+
+
+        $pdf->render();
+
+        return $pdf->stream('factura.pdf');
     }
 }

@@ -42,7 +42,7 @@ class Registro extends Mailable
     {
         $url = URL::route('login');
 
-        return $this->view('email')
+        return $this->view('emails.registroEmpleadoCliente')
                     ->with([
                         'email' => $this->email,
                         'password' => $this->password,

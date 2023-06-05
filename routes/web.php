@@ -99,7 +99,7 @@ Route::controller(ReservaController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('reservas', 'indexEmpleado')->name('reservas');
     Route::post('reserva/crear', 'createCliente')->name('crearReservaCliente');
-
+    Route::get('obtenerFactura', 'obtenerFactura')->name('obtenerFactura');;
 });
 
 // Route Controlador Registro
