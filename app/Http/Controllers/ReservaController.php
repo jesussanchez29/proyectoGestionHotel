@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservaController extends Controller
 {
+    public function indexEmpleado()
+    {
+        $habitaciones = Habitacion::all();
+        return view('Empleados.Reserva.index', compact('habitaciones'));
+
+    }
+
     // Funcion para crear un cliente
     public function createCliente(ReservaRequest $request) 
     {

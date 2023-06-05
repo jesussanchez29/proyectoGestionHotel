@@ -97,7 +97,9 @@ Route::controller(TipoHabitacionController::class)->group(function () {
 // Route Controlador Empleado
 Route::controller(ReservaController::class)->group(function () {
     // Route para mostrar todos los empleados
+    Route::get('reservas', 'indexEmpleado')->name('reservas');
     Route::post('reserva/crear', 'createCliente')->name('crearReservaCliente');
+
 });
 
 // Route Controlador Registro

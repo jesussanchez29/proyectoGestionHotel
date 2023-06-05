@@ -10,7 +10,7 @@ class EstadoHabitacion extends Model
     use HasFactory;
     protected $table = 'estadoHabitacion';
     protected $primaryKey="id";
-    protected $fillable=['nombre'];
+    protected $fillable=['nombre', 'clase'];
     protected $hidden=['id'];
     
     public function habitaciones()

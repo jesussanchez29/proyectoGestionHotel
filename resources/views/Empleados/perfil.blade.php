@@ -1,5 +1,5 @@
 @extends('Empleados.layouts.template')
-@section('title', 'Clientes')
+@section('title', 'Perfil')
 @section('content')
     <div class="container">
         @if (session('success'))
