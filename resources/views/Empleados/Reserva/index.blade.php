@@ -7,15 +7,24 @@
             <div class="form-group row">
                 <div class="col-md-3">
                     <label for="imagen" class="col-form-label">Selecionar Piso:</label>
-                    <select class="form-control" id="cbopiso"></select>
+                    @if (count($pisos) > 0)
+                        <select class="form-control" id="cbopiso">
+                            <option value="Todos" selected>Todos</option>
+                            @foreach ($pisos as $piso)
+                                <option value="{{ $piso->id }}">Piso {{ $piso->numero }}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <p>No hay pisos Disponibles</p>
+                    @endif
                 </div>
                 <div class="col-md-2 ml">
                     <label for="fechaLlegada" class="col-form-label">Fecha Llegada:</label>
-                    <input type="date" class="form-control" name="fechaLlegada">
+                    <input type="date" class="form-control" name="fechaLlegada" min="{{ date('Y-m-d') }}">
                 </div>
                 <div class="col-md-2">
                     <label for="fechaSalida" class="col-form-label">Fecha Salida:</label>
-                    <input type="date" class="form-control" name="fechaSalida">
+                    <input type="date" class="form-control" name="fechaSalida" min="{{ date('Y-m-d') }}">
                 </div>
             </div>
 

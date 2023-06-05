@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReservaRequest;
 use App\Models\EstadoReserva;
 use App\Models\Habitacion;
+use App\Models\Piso;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class ReservaController extends Controller
     public function indexEmpleado()
     {
         $habitaciones = Habitacion::all();
-        return view('Empleados.Reserva.index', compact('habitaciones'));
+        $pisos = Piso::all();
+        return view('Empleados.Reserva.index', compact('habitaciones', 'pisos'));
 
     }
 
