@@ -15,6 +15,8 @@ use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoHabitacionController;
+use App\Http\Controllers\UsuarioController;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Route;
 
 // Route Controlador Cliente
@@ -167,4 +169,11 @@ Route::controller(CaracteristicaHabitacionController::class)->group(function () 
     Route::post('caracteristicaHabitacion/crear', 'create')->name('crearCaracteristicaHabitacion');
     Route::post('caracteristicaHabitacion/editar/{id}', 'update')->name('editarCaracteristicaHabitacion');
     Route::post('caracteristicaHabitacion/eliminar/{id}', 'destroy')->name('eliminarCaracteristicaHabitacion');
+});
+
+// Route Controlador Empleado
+Route::controller(UsuarioController::class)->group(function () {
+    // Route para mostrar todos los empleados
+    Route::get('perfilEmpleado', 'indexEmpleado')->name('perfilEmpleado');
+    Route::post('perfil/editar', 'update')->name('editarperfil');
 });
