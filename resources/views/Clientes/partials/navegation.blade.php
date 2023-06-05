@@ -4,7 +4,17 @@
         <!-- Logo -->
         <div class="uk-width-auto imagen">
             <div class="impx-logo">
-                <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                @auth
+                    @if (Auth::user()->empleado)
+                        <a href="{{ route('clientes') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                    @else
+                        <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                    @endif
+
+                @endauth
+                @guest
+                    <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                @endguest
             </div>
         </div>
         <!-- Logo fin -->
