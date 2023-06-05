@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
+class ComposerStaticInit6678ea92df55b2995e1e128672b68ede
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -523,16 +523,22 @@ class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\CambiarContrasenaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CambiarContrasenaController.php',
+        'App\\Http\\Controllers\\CaracteristicaHabitacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/CaracteristicaHabitacionController.php',
         'App\\Http\\Controllers\\ClienteController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClienteController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DepartamentoController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepartamentoController.php',
         'App\\Http\\Controllers\\EmpleadoController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmpleadoController.php',
+        'App\\Http\\Controllers\\EstadoHabitacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadoHabitacionController.php',
+        'App\\Http\\Controllers\\HabitacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/HabitacionController.php',
         'App\\Http\\Controllers\\HotelController' => __DIR__ . '/../..' . '/app/Http/Controllers/HotelController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
+        'App\\Http\\Controllers\\PisoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PisoController.php',
         'App\\Http\\Controllers\\RegistroController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegistroController.php',
+        'App\\Http\\Controllers\\ResenaController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResenaController.php',
         'App\\Http\\Controllers\\ReservaController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReservaController.php',
         'App\\Http\\Controllers\\ServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicioController.php',
         'App\\Http\\Controllers\\TipoHabitacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/TipoHabitacionController.php',
+        'App\\Http\\Controllers\\UsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuarioController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -544,14 +550,22 @@ class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\CambiarContrasenaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CambiarContrasenaRequest.php',
+        'App\\Http\\Requests\\CaracteristicaHabitacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CaracteristicaHabitacionRequest.php',
         'App\\Http\\Requests\\ClienteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ClienteRequest.php',
+        'App\\Http\\Requests\\ContactoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ContactoRequest.php',
         'App\\Http\\Requests\\DepartamentoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DepartamentoRequest.php',
         'App\\Http\\Requests\\EmpleadoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EmpleadoRequest.php',
+        'App\\Http\\Requests\\EstadoHabitacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EstadoHabitacionRequest.php',
+        'App\\Http\\Requests\\HabitacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/HabitacionRequest.php',
         'App\\Http\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LoginRequest.php',
+        'App\\Http\\Requests\\PisoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PisoRequest.php',
         'App\\Http\\Requests\\RegistroRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RegistroRequest.php',
+        'App\\Http\\Requests\\ResenaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ResenaRequest.php',
         'App\\Http\\Requests\\ReservaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ReservaRequest.php',
         'App\\Http\\Requests\\ServicioRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ServicioRequest.php',
         'App\\Http\\Requests\\TipoHabitacionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/TipoHabitacionRequest.php',
+        'App\\Mail\\ContactoMailable' => __DIR__ . '/../..' . '/app/Mail/ContactoMailable.php',
+        'App\\Mail\\Registro' => __DIR__ . '/../..' . '/app/Mail/Registro.php',
         'App\\Models\\CaracteristicaTipoHabitacion' => __DIR__ . '/../..' . '/app/Models/CaracteristicaTipoHabitacion.php',
         'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
         'App\\Models\\Departamento' => __DIR__ . '/../..' . '/app/Models/Departamento.php',
@@ -561,6 +575,7 @@ class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
         'App\\Models\\Habitacion' => __DIR__ . '/../..' . '/app/Models/Habitacion.php',
         'App\\Models\\Hotel' => __DIR__ . '/../..' . '/app/Models/Hotel.php',
         'App\\Models\\Piso' => __DIR__ . '/../..' . '/app/Models/Piso.php',
+        'App\\Models\\Resena' => __DIR__ . '/../..' . '/app/Models/Resena.php',
         'App\\Models\\Reserva' => __DIR__ . '/../..' . '/app/Models/Reserva.php',
         'App\\Models\\Servicio' => __DIR__ . '/../..' . '/app/Models/Servicio.php',
         'App\\Models\\TipoHabitacion' => __DIR__ . '/../..' . '/app/Models/TipoHabitacion.php',
@@ -692,6 +707,7 @@ class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
         'Database\\Factories\\TipoHabitacionFactory' => __DIR__ . '/../..' . '/database/factories/TipoHabitacionFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Factories\\UsuarioFactory' => __DIR__ . '/../..' . '/database/factories/UsuarioFactory.php',
+        'Database\\Seeders\\CaracteristicaHabitacionSeeder' => __DIR__ . '/../..' . '/database/seeders/CaracteristicaHabitacionSeeder.php',
         'Database\\Seeders\\CaracteristicaTipoHabitacionSeeder' => __DIR__ . '/../..' . '/database/seeders/CaracteristicaTipoHabitacionSeeder.php',
         'Database\\Seeders\\ClienteSeeder' => __DIR__ . '/../..' . '/database/seeders/ClienteSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
@@ -6374,10 +6390,10 @@ class ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc13b93ba612ddfb44e9f5ff21b22ff45::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6678ea92df55b2995e1e128672b68ede::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6678ea92df55b2995e1e128672b68ede::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6678ea92df55b2995e1e128672b68ede::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6678ea92df55b2995e1e128672b68ede::$classMap;
 
         }, null, ClassLoader::class);
     }
