@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('hotel', Hotel::first()); // Reemplaza "TuModelo" por el nombre de tu modelo o clase que interactúa con la base de datos
+        if (Schema::hasTable('hotel')) {
+
+            View::share('hotel', Hotel::first()); // Reemplaza "TuModelo" por el nombre de tu modelo o clase que interactúa con la base de datos
+        }
     }
 }

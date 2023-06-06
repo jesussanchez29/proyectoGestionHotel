@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcompananteController;
 use App\Http\Controllers\CambiarContrasenaController;
 use App\Http\Controllers\CaracteristicaHabitacionController;
 use App\Http\Controllers\ClienteController;
@@ -99,6 +100,11 @@ Route::controller(ReservaController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('reservas', 'indexEmpleado')->name('reservas');
     Route::post('reserva/crear', 'createCliente')->name('crearReservaCliente');
+    Route::post('reserva/crearEmpleado', 'createEmpleado')->name('crearReservaEmpleado');
+    Route::get('reserva/VercrearEmpleado/{id}', 'viewCreateEmpleado')->name('verCrearReservaEmpleado');
+    Route::post('reserva/crearEmpleado', 'createEmpleado')->name('crearReservaEmpleado');
+    Route::get('reserva/ver/{id}', 'view')->name('verReserva');
+    Route::get('reserva/obtenerClienteActualizados', 'obtenerClienteActualizados')->name('obtenerClienteActualizados');
     Route::get('obtenerFactura', 'obtenerFactura')->name('obtenerFactura');;
 });
 
@@ -153,6 +159,7 @@ Route::controller(HabitacionController::class)->group(function () {
     Route::post('habitacion/crear', 'create')->name('crearHabitacion');
     Route::post('habitacion/editar/{id}', 'update')->name('editarHabitacion');
     Route::post('habitacion/eliminar/{id}', 'destroy')->name('eliminarHabitacion');
+    Route::get('habitacion/obtenerDisponibles', 'obtenerHabitacionesDisponibles')->name('obtenerHabitacionesDisponibles');
 });
 
 // Route Controlador Empleado
@@ -178,4 +185,10 @@ Route::controller(UsuarioController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('perfilEmpleado', 'indexEmpleado')->name('perfilEmpleado');
     Route::post('perfil/editar', 'update')->name('editarperfil');
+});
+
+// Route Controlador Empleado
+Route::controller(AcompananteController::class)->group(function () {
+    Route::post('acompanante/crear', 'create')->name('crearAcompanante');
+    Route::post('acompanante/editar/{id}', 'update')->name('editarAcompanante');
 });

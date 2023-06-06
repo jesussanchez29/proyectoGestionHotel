@@ -55,10 +55,10 @@ class ClienteController extends Controller
             DB::rollback();
         }
 
-        Mail::to($request->email)->send(new Registro($request->email, $password));
+        //Mail::to($request->email)->send(new Registro($request->email, $password));
 
         // Nos redirige a clientes con un mensaje
-        return redirect()->route('clientes')->with('success', 'Cliente registrado correctamente');
+        return back()->with('success', 'Cliente registrado correctamente');
     }
 
     // Funcion para modificar un cliente

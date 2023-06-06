@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservaRequest;
+use App\Models\Acompanante;
+use App\Models\CaracteristicaTipoHabitacion;
+use App\Models\Cliente;
+use App\Models\EstadoHabitacion;
 use App\Models\EstadoReserva;
 use App\Models\Habitacion;
 use App\Models\Piso;
@@ -41,6 +45,61 @@ class ReservaController extends Controller
         $reserva->save();
         // Nos redirige a clientes con un mensaje
         return redirect()->route('indexCliente')->with('success', 'Reserva pediente por confirmar');
+    }
+
+     // Funcion para crear un cliente
+     public function createEmpleado(Request $request) 
+     {
+         if (!Auth::check()) {
+             return redirect()->route('login')->withErrors('Debes iniciar sesión para realizar una reserva');
+         }
+ 
+         $reserva = new Reserva();
+         // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+         $reserva->fechaLLegada = $request->input('fechaLlegada');
+         $reserva->fechaSalida = $request->input('fechaSalida');
+         $reserva->abonado =  $request->input('abonado');;
+         $reserva->usuario_id = 1;
+         $reserva->habitacion_id = $request->habitacion;
+         $reserva->empleado_id = Auth::user()->empleado->id;
+         $estadoPediente = EstadoReserva::where('nombre', 'Confirmada')->first();
+         $reserva->estadoReserva_id = $estadoPediente->id;
+         $reserva->save();
+
+         $fechaActual = date('Y-m-d');
+         if($fechaActual == $request->input('fechaLlegada')) {
+            $habitacion = Habitacion::find($request->habitacion);
+            $estadoOcupado = EstadoHabitacion::where('nombre', 'Ocupada')->first();
+            $habitacion->estadoHabitacion_id = $estadoOcupado->id;
+            $habitacion->save();
+         }
+
+         // Nos redirige a clientes con un mensaje
+         return back()->with('success', 'Reserva confirmada');
+     }
+
+    public function viewCreateEmpleado($id)
+    {
+        $reservaHabitacion = Habitacion::findOrFail($id);
+        $buscarTipo = $reservaHabitacion->tipoHabitacion_id;
+        $caracteristicasHabitacion = CaracteristicaTipoHabitacion::where('tipoHabitacion_id', $buscarTipo)->get();
+        $clientes = Cliente::all();
+        $estadoOcupado = EstadoHabitacion::where('nombre', 'Ocupada')->first();
+        $acompañantes = Acompanante::where('reserva_id', );
+        return view('Empleados.Reserva.create', compact('reservaHabitacion', 'caracteristicasHabitacion', 'clientes', 'estadoOcupado'));
+    }
+
+    public function obtenerClienteActualizados()
+    {
+        $clientes = Cliente::all();
+        return response()->json($clientes);
+    }
+    
+
+    public function view($id)
+    {
+        $reservaHabitacion = Habitacion::findOrFail($id);
+        return view('Empleados.Reserva.ver', compact('reservaHabitacion'));
     }
 
     public function obtenerFactura(){

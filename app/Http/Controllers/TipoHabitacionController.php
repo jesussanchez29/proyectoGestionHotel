@@ -113,33 +113,33 @@ class TipoHabitacionController extends Controller
 
         return response()->json($pisosDisponibles);
     }
+    
     public function verificarDisponibilidad(Request $request)
-{
-    // Obtener los datos enviados por la petición AJAX
-    $fechaLlegada = $request->input('fechaLlegada');
-    $fechaSalida = $request->input('fechaSalida');
-    $tipoHabitacion = $request->input('tipoHabitacion');
+    {
+        // Obtener los datos enviados por la petición AJAX
+        $fechaLlegada = $request->input('fechaLlegada');
+        $fechaSalida = $request->input('fechaSalida');
+        $tipoHabitacion = $request->input('tipoHabitacion');
 
-    // Realizar la lógica para verificar la disponibilidad de pisos en función de los datos recibidos
+        // Realizar la lógica para verificar la disponibilidad de pisos en función de los datos recibidos
 
-    // Obtener los pisos disponibles
-    $pisosDisponibles = Piso::where('tipo_habitacion_id', $tipoHabitacion)
-        ->whereDoesntHave('reservas', function ($query) use ($fechaLlegada, $fechaSalida) {
-            $query->where(function ($subQuery) use ($fechaLlegada, $fechaSalida) {
-                $subQuery->whereBetween('fecha_llegada', [$fechaLlegada, $fechaSalida])
-                    ->orWhereBetween('fecha_salida', [$fechaLlegada, $fechaSalida])
-                    ->orWhere(function ($innerSubQuery) use ($fechaLlegada, $fechaSalida) {
-                        $innerSubQuery->where('fecha_llegada', '<', $fechaLlegada)
-                            ->where('fecha_salida', '>', $fechaSalida);
-                    });
-            });
-        })
-        ->get();
+        // Obtener los pisos disponibles
+        $pisosDisponibles = Piso::where('tipo_habitacion_id', $tipoHabitacion)
+            ->whereDoesntHave('reservas', function ($query) use ($fechaLlegada, $fechaSalida) {
+                $query->where(function ($subQuery) use ($fechaLlegada, $fechaSalida) {
+                    $subQuery->whereBetween('fecha_llegada', [$fechaLlegada, $fechaSalida])
+                        ->orWhereBetween('fecha_salida', [$fechaLlegada, $fechaSalida])
+                        ->orWhere(function ($innerSubQuery) use ($fechaLlegada, $fechaSalida) {
+                            $innerSubQuery->where('fecha_llegada', '<', $fechaLlegada)
+                                ->where('fecha_salida', '>', $fechaSalida);
+                        });
+                });
+            })
+            ->get();
 
-    // Devolver la respuesta en formato JSON
-    return response()->json([
-        'pisosDisponibles' => $pisosDisponibles
-    ]);
-}
-
+        // Devolver la respuesta en formato JSON
+        return response()->json([
+            'pisosDisponibles' => $pisosDisponibles
+        ]);
+    }
 }

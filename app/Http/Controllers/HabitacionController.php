@@ -69,4 +69,35 @@ class HabitacionController extends Controller
         // Nos piso a tipoHabitaciones con un mensaje
         return redirect()->route('habitaciones')->with('success', 'Habitacion eliminado correctamente');
     }
+
+    public function obtenerHabitacionesDisponibles(Request $request)
+    {
+        $fechaLlegada = $request->fechaLlegada;
+        $fechaSalida = $request->fechaSalida;
+
+        $habitacionesDisponibles = Habitacion::where('estadoHabitacion_id', function ($query) {
+            $query->select('id')
+                ->from('estadohabitacion')
+                ->where('nombre', 'Disponible');
+        })
+            ->whereDoesntHave('reservas', function ($query) use ($fechaLlegada, $fechaSalida) {
+                $query->where(function ($query) use ($fechaLlegada, $fechaSalida) {
+                    $query->where(function ($query) use ($fechaLlegada, $fechaSalida) {
+                        $query->where('fechaLlegada', '>=', $fechaLlegada)
+                            ->where('fechaLlegada', '<', $fechaSalida);
+                    })
+                        ->orWhere(function ($query) use ($fechaLlegada, $fechaSalida) {
+                            $query->where('fechaSalida', '>', $fechaLlegada)
+                                ->where('fechaSalida', '<=', $fechaSalida);
+                        })
+                        ->orWhere(function ($query) use ($fechaLlegada, $fechaSalida) {
+                            $query->where('fechaLlegada', '<=', $fechaLlegada)
+                                ->where('fechaSalida', '>=', $fechaSalida);
+                        });
+                });
+            })
+            ->get();
+
+        return response()->json($habitacionesDisponibles);
+    }
 }
