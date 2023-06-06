@@ -105,7 +105,9 @@ Route::controller(ReservaController::class)->group(function () {
     Route::post('reserva/crearEmpleado', 'createEmpleado')->name('crearReservaEmpleado');
     Route::get('reserva/ver/{id}', 'view')->name('verReserva');
     Route::get('reserva/obtenerClienteActualizados', 'obtenerClienteActualizados')->name('obtenerClienteActualizados');
-    Route::get('obtenerFactura', 'obtenerFactura')->name('obtenerFactura');;
+    Route::get('obtenerFactura', 'obtenerFactura')->name('obtenerFactura');
+    Route::get('reportes', 'reportes')->name('reportesReserva');
+    Route::post('reportes/obtener', 'obtenerReporte')->name('obtenerReporte');
 });
 
 // Route Controlador Registro

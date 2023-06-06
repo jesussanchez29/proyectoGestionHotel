@@ -20,11 +20,11 @@
                 </div>
                 <div class="col-md-2 ml">
                     <label for="fechaLlegada" class="col-form-label">Fecha Llegada:</label>
-                    <input type="date" class="form-control" id="fechaLlegada" name="fechaLlegada" min="{{ date('Y-m-d') }}">
+                    <input type="date" class="form-control datepicker" id="fechaLlegada" name="fechaLlegada" min="{{ date('Y-m-d') }}">
                 </div>
                 <div class="col-md-2">
                     <label for="fechaSalida" class="col-form-label">Fecha Salida:</label>
-                    <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" min="{{ date('Y-m-d') }}">
+                    <input type="date" class="form-control datepicker" id="fechaSalida" name="fechaSalida" min="{{ date('Y-m-d') }}">
                 </div>
             </div>
 
@@ -86,6 +86,34 @@
                 } else {
                     $('.habitacion-card[data-piso-id="' + selectedPiso + '"]').show(); // Mostrar solo las habitaciones del piso seleccionado
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').on('change', function() {
+                var fechaLlegada = $('#fechaLlegada').val();
+                var fechaSalida = $('#fechaSalida').val();
+    
+                // Realizar la llamada AJAX a la función obtenerHabitacionesDisponibles
+                $.ajax({
+                    url: '{{ route("obtenerHabitacionesDisponibles") }}',
+                    method: 'GET',
+                    data: {
+                        fechaLlegada: fechaLlegada,
+                        fechaSalida: fechaSalida
+                    },
+                    success: function(response) {
+                        // Actualizar el contenido de las habitaciones disponibles en la vista
+                        $('.habitacion-card').hide(); // Ocultar todas las habitaciones
+                        $.each(response, function(index, habitacion) {
+                            $('.habitacion-card[data-piso-id="' + habitacion.piso_id + '"]').show(); // Mostrar solo las habitaciones disponibles
+                        });
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
             });
         });
     </script>

@@ -26,4 +26,9 @@ class Reserva extends Model
     {
         return $this->belongsTo(Habitacion::class);
     }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
 }

@@ -72,31 +72,32 @@ class HabitacionController extends Controller
 
     public function obtenerHabitacionesDisponibles(Request $request)
     {
-        $fechaLlegada = $request->fechaLlegada;
-        $fechaSalida = $request->fechaSalida;
+        $fechaInicio = $request->fechaLlegada;
+        $fechaFin = $request->fechaSalida;
 
-        $habitacionesDisponibles = Habitacion::where('estadoHabitacion_id', function ($query) {
-            $query->select('id')
-                ->from('estadohabitacion')
-                ->where('nombre', 'Disponible');
-        })
-            ->whereDoesntHave('reservas', function ($query) use ($fechaLlegada, $fechaSalida) {
-                $query->where(function ($query) use ($fechaLlegada, $fechaSalida) {
-                    $query->where(function ($query) use ($fechaLlegada, $fechaSalida) {
-                        $query->where('fechaLlegada', '>=', $fechaLlegada)
-                            ->where('fechaLlegada', '<', $fechaSalida);
+        $habitacionesDisponibles = Habitacion::whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
+            $query->select('habitacion_id')
+                ->from('reservas')
+                ->where(function ($query) use ($fechaInicio, $fechaFin) {
+                    $query->where(function ($query) use ($fechaInicio, $fechaFin) {
+                        $query->where('fechaLlegada', '<=', $fechaFin)
+                            ->where('fechaSalida', '>=', $fechaInicio);
                     })
-                        ->orWhere(function ($query) use ($fechaLlegada, $fechaSalida) {
-                            $query->where('fechaSalida', '>', $fechaLlegada)
-                                ->where('fechaSalida', '<=', $fechaSalida);
+                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                            $query->where('fechaLlegada', '>=', $fechaInicio)
+                                ->where('fechaSalida', '<=', $fechaFin);
                         })
-                        ->orWhere(function ($query) use ($fechaLlegada, $fechaSalida) {
-                            $query->where('fechaLlegada', '<=', $fechaLlegada)
-                                ->where('fechaSalida', '>=', $fechaSalida);
+                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                            $query->where('fechaLlegada', '<=', $fechaInicio)
+                                ->where('fechaSalida', '>=', $fechaInicio);
+                        })
+                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                            $query->where('fechaLlegada', '<=', $fechaFin)
+                                ->where('fechaSalida', '>=', $fechaFin);
                         });
                 });
-            })
-            ->get();
+        })->get();
+
 
         return response()->json($habitacionesDisponibles);
     }

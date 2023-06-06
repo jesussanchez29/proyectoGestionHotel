@@ -16,12 +16,14 @@
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->empleado->nombre }}</span>
                 <img class="img-profile rounded-circle" src="{{ Auth::user()->imagenPerfil }}">
             </a>
-            <!--Barra Usuario perfil opciones -->
+            <!--Barra Usuario opciones -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <!-- Perfil -->
                 <a class="dropdown-item" href="{{ route('perfilEmpleado') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Perfil
                 </a>
+                <!--Cerrar Sesion -->
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -31,3 +33,4 @@
         </li>
     </ul>
 </nav>
+<!-- Fin Barra de navegacion -->

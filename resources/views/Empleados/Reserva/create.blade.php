@@ -133,7 +133,6 @@
                         </form>
                     </div>
                 </div>
-                @if($reservaHabitacion->reservas->id)
                 <div class="col-6">
                     <h5 class="card-title font-weight-bold text-primary">Detalle Acompañantes</h5>
                     <div class="form-group mb-2">
@@ -145,7 +144,7 @@
                                     value="0">
                             </div>
                             <div class="col-md-4">
-                                <label for="exampleFormControlSelect1">Nº niños(Menores de < 12 años):</label>
+                                <label for="exampleFormControlSelect1">Nº niños:</label>
                                         <input type="number" class="form-control" id="numNinos" min="0"
                                             value="0">
                             </div>
@@ -175,7 +174,6 @@
                         </table>
                     </div>
                 </div>
-            @endif
             </div>
         </div>
     </div>
