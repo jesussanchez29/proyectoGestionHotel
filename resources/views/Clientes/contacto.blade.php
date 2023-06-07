@@ -1,5 +1,4 @@
 @extends('Clientes.layouts.template')
-@section('content')
 
 @section('header')
     @include('Clientes.layouts.header')
@@ -32,6 +31,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -53,12 +53,14 @@
 
                         <ul class="list-unstyled pl-md-5 mb-5">
                             <li class="d-flex text-black mb-2">
-                                <span class="mr-3"><span class="mdi mdi-phone"></span>
-                                </span></span>Telefono: {{ $hotel->telefono }}
+                                <span class="mr-3"><i class="fa fa-phone"></i></span>
+                             Telefono: {{ $hotel->telefono }}
                             </li>
-                            <li class="d-flex text-black mb-2"><span class="mr-3"><span class="icon-phone"></span></span>
+                            <li class="d-flex text-black mb-2">
+                                <span class="mr-3"><i class="fa fa-envelope"></i></span>
                                 Email: {{ $hotel->email }}</li>
-                            <li class="d-flex text-black"><span class="mr-3"><span class="icon-envelope-o"></span></span>
+                            <li class="d-flex text-black">
+                                <span class="mr-3"><span class="fa fa-map-marker"></span></span>
                                 Direccion: {{ $hotel->direccion }}, {{ $hotel->ciudad }} </li>
                         </ul>
                     </div>
@@ -110,7 +112,6 @@
 
 @endsection
 
-@section('contacto')
 @section('contacto')
     <div class="pre-footer-contact uk-padding bg-img2 uk-position-relative">
         <div class="impx-overlay dark"></div>

@@ -29,8 +29,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Gestion Recepcion:</h6>
                 <a class="collapse-item" href="{{ route('reservas') }}">Recepcion</a>
-                <a class="collapse-item" href="{{ route('tipoHabitaciones') }}">Entradas</a>
-                <a class="collapse-item" href="{{ route('pisos') }}">Salidas</a>
+                <a class="collapse-item" href="{{ route('obtenerEntradasReserva') }}">Entradas</a>
+                <a class="collapse-item" href="{{ route('obtenerSalidasReserva') }}">Salidas</a>
             </div>
         </div>
     </li>

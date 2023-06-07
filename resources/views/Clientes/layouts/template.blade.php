@@ -52,11 +52,11 @@
     </script>
     <script src="{{ asset('js/jquery.gmap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.parallax.min.js') }}"></script>
-    <script src="{{ asset('js/tiny-date-picker.min.js') }}"></script>
     <script src="{{ asset('js/date-config.js') }}"></script>
     <script src="{{ asset('js/rating-config.js') }}"></script>
     <script src="{{ asset('js/template-config.js') }}"></script>
     <script src="{{ asset('js/jquery.barrating.js') }}"></script>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 </html>

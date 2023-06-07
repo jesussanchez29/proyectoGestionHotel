@@ -74,8 +74,9 @@ class HabitacionController extends Controller
     {
         $fechaInicio = $request->fechaLlegada;
         $fechaFin = $request->fechaSalida;
+        $piso = $request->piso;
 
-        $habitacionesDisponibles = Habitacion::whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
+        $query = Habitacion::whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
             $query->select('habitacion_id')
                 ->from('reservas')
                 ->where(function ($query) use ($fechaInicio, $fechaFin) {
@@ -96,8 +97,13 @@ class HabitacionController extends Controller
                                 ->where('fechaSalida', '>=', $fechaFin);
                         });
                 });
-        })->get();
-
+        });
+        
+        if ($piso != "Todos") {
+            $query->where('piso_id', $piso);
+        }
+    
+        $habitacionesDisponibles = $query->get();
 
         return response()->json($habitacionesDisponibles);
     }

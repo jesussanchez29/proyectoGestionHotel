@@ -108,6 +108,9 @@ Route::controller(ReservaController::class)->group(function () {
     Route::get('obtenerFactura', 'obtenerFactura')->name('obtenerFactura');
     Route::get('reportes', 'reportes')->name('reportesReserva');
     Route::post('reportes/obtener', 'obtenerReporte')->name('obtenerReporte');
+    Route::get('reserva/entradas', 'obtenerEntradasReserva')->name('obtenerEntradasReserva');
+    Route::get('reserva/salidas', 'obtenerSalidasReserva')->name('obtenerSalidasReserva');
+    Route::get('reserva/historial', 'historialReservas')->name('historialReservas');
 });
 
 // Route Controlador Registro
@@ -187,6 +190,7 @@ Route::controller(UsuarioController::class)->group(function () {
     // Route para mostrar todos los empleados
     Route::get('perfilEmpleado', 'indexEmpleado')->name('perfilEmpleado');
     Route::post('perfil/editar', 'update')->name('editarperfil');
+    Route::get('perfilCliente', 'indexCliente')->name('perfilCliente');
 });
 
 // Route Controlador Empleado

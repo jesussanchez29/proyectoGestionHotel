@@ -16,7 +16,6 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- Tablas de datos CSS -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href={{ asset('css/cards.css') }}>
     <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
     <title>@yield('title')</title>
 </head>

@@ -11,6 +11,7 @@ use App\Models\EstadoReserva;
 use App\Models\Habitacion;
 use App\Models\Piso;
 use App\Models\Reserva;
+use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -147,5 +148,29 @@ class ReservaController extends Controller
         $pdf->render();
 
         return $pdf->stream('factura.pdf');
+    }
+
+    public function obtenerEntradasReserva()
+    {
+        $habitaciones = Habitacion::join('reservas', 'habitaciones.id', '=', 'reservas.habitacion_id')
+            ->whereDate('reservas.fechaLlegada', Carbon::today())
+            ->get();
+                $pisos = Piso::all();
+        return view('Empleados.Reserva.entradas', compact('habitaciones', 'pisos'));
+    }
+
+    public function obtenerSalidasReserva()
+    {
+        $habitaciones = Habitacion::join('reservas', 'habitaciones.id', '=', 'reservas.habitacion_id')
+            ->whereDate('reservas.fechaSalida', Carbon::today())
+            ->get();
+                $pisos = Piso::all();
+        return view('Empleados.Reserva.salidas', compact('habitaciones', 'pisos'));
+    }
+
+    public function historialReservas()
+    {
+        $reservas = Reserva::where('usuario_id', Auth::user()->id)->get();
+        return view('Clientes.historialReservas', compact('reservas'));
     }
 }

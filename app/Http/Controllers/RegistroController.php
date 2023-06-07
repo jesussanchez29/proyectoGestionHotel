@@ -40,7 +40,7 @@ class RegistroController extends Controller
         $cliente->usuario_id = $usuario->id;
         $cliente->save();
 
-        Mail::to($request->email)->send(new BienvenidoCliente($request->nombre));
+        //Mail::to($request->email)->send(new BienvenidoCliente($request->nombre));
 
         return redirect()->route('login')->with('success', 'Usuario registrado correctamente !Ya puedes inicar sesión¡');
     }

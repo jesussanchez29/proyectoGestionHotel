@@ -47,6 +47,20 @@
                                 </div>
                             </a>
                         </li>
+                        @auth
+                            @if (Auth::user()->cliente)
+                                <li><a href="{{ route('perfilCliente') }}" class="uk-navbar-nav-subtitle">
+                                        <div>Perfil<div class="uk-navbar-subtitle">Modifica tu perfil</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><a href="{{ route('historialReservas') }}" class="uk-navbar-nav-subtitle">
+                                    <div>Historial Reservas<div class="uk-navbar-subtitle">Mira tus reservas</div>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+                        @endauth
                     </ul>
                     <!-- Navigation Items End -->
                 </div>
