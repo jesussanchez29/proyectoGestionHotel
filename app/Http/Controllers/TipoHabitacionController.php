@@ -6,6 +6,7 @@ use App\Http\Requests\TipoHabitacionRequest;
 use App\Models\CaracteristicaTipoHabitacion;
 use App\Models\Habitacion;
 use App\Models\Hotel;
+use App\Models\Piso;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -98,18 +99,23 @@ class TipoHabitacionController extends Controller
     }
 
     public function getPisosDisponibles(Request $request)
-    {
+    { 
         $tipoHabitacionId = $request->input('habitacion');
+        $fechaEntrada = $request->input('fechaEntrada');
+        $fechaSalida = $request->input('fechaSalida');
 
-        $pisosDisponibles = Habitacion::select('pisos.id as pisoId', 'pisos.numero')
+        $pisosDisponibles = Piso::select('pisos.id as pisoId' , 'pisos.numero')
+            ->join('habitaciones', 'pisos.id', '=', 'habitaciones.piso_id')
             ->join('tipoHabitacion', 'habitaciones.tipoHabitacion_id', '=', 'tipoHabitacion.id')
-            ->join('estadohabitacion', 'habitaciones.estadoHabitacion_id', '=', 'estadohabitacion.id')
-            ->join('pisos', 'pisos.id', '=', 'habitaciones.piso_id')
+            ->leftJoin('reservas', function ($join) use ($fechaEntrada, $fechaSalida) {
+                $join->on('habitaciones.id', '=', 'reservas.habitacion_id')
+                    ->where('reservas.fechaLLegada', '<=', $fechaSalida)
+                    ->where('reservas.fechaSalida', '>=', $fechaEntrada);
+            })
             ->where('tipoHabitacion.id', $tipoHabitacionId)
-            ->where('estadohabitacion.nombre', 'Disponible')
+            ->whereNull('reservas.habitacion_id')
             ->distinct()
-            ->get(['pisos.id', 'pisos.numero']);
-
+            ->get();
 
         return response()->json($pisosDisponibles);
     }

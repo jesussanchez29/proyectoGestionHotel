@@ -37,6 +37,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-2">
+                                <label for="inputEmail4">Fecha Entrada:</label>
+                                <input type="date" class="form-control" name="fechaLlegada" id="txtfechaentrada">
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                <label for="inputPassword4">Fecha Salida:</label>
+                                <input type="date" class="form-control" name="fechaSalida" id="txtfechasalida">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-2">
+                                <label for="inputEmail4">Precio:</label>
+                                <input type="text" class="form-control" id="txtprecio" disabled="disabled">
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                <label for="inputPassword4">Adelanto:</label>
+                                <input type="text" class="form-control" name="abonado" id="txtadelanto" value="0">
+                            </div>
+                        </div>
                         <div style="display: none" id="formularioRegistro">
                             <div class="row">
                                 <div class="col-md-6">

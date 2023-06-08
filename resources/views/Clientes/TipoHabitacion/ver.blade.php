@@ -181,7 +181,7 @@
                                                 <button class="uk-button impx-button aqua">Publicar</button>
                                             </div>
                                         @else
-                                        <p class="vacio">Debes ser cliente para poder poner una reseña</p>
+                                            <p class="vacio">Debes ser cliente para poder poner una reseña</p>
                                 @endif
                             @endauth
 
@@ -202,8 +202,9 @@
                     <div class="bg-color-aqua uk-padding impx-padding-medium uk-margin-medium-bottom uk-box-shadow-medium">
 
                         <div class="impx-hp-booking-form side-form uk-margin-bottom uk-margin-remove-top ">
-                            <h6 class="uk-heading-line uk-text-center uk-light uk-text-uppercase"><span>Booking
-                                    Form</span>
+                            <h6 class="uk-heading-line uk-text-center uk-margin-small-bottom impx-text-white">
+                                <span>FORMULARIO RESERVA</span>
+                            </h6>
                             </h6>
                             <form method="POST" action="{{ route('crearReservaCliente') }}">
                                 @csrf
@@ -213,7 +214,8 @@
                                             <label class="uk-form-label impx-text-white">Fecha Llegada</label>
                                             <span class="uk-form-icon" data-uk-icon=""></span>
                                             <input class="uk-input uk-border-rounded" type="date"
-                                                placeholder="m/dd/yyyy" name="fechaLlegada">
+                                                placeholder="m/dd/yyyy" name="fechaLlegada" id="fechaLlegada"
+                                                min="{{ date('Y-m-d') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -223,14 +225,16 @@
                                             <label class="uk-form-label impx-text-white">Fecha Salida</label>
                                             <span class="uk-form-icon" data-uk-icon=""></span>
                                             <input class="uk-input uk-border-rounded" type="date"
-                                                placeholder="m/dd/yyyy" name="fechaSalida">
+                                                placeholder="m/dd/yyyy" name="fechaSalida" id="fechaSalida"
+                                                min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls">
                                         <div class="uk-inline">
-                                            <label class="uk-form-label">Tipo Habitacion</label>
+                                            <label class="uk-form-label impx-text-white" for="form-rooms-select">Tipo
+                                                Habitacion</label>
                                             <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
                                             @if (count($tipoHabitaciones) > 0)
                                                 <select class="uk-select uk-border-rounded" id="form-rooms-select"
@@ -249,19 +253,21 @@
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls uk-position-relative">
-                                        <label class="uk-form-label" for="form-guest-select">Acompañantes</label>
+                                        <label class="uk-form-label impx-text-white"
+                                            for="form-guest-select">Acompañantes</label>
                                         <span class="uk-form-icon select-icon" data-uk-icon="icon: users"></span>
-                                        <select class="uk-select uk-border-rounded" id="form-guest-select">
-                                            <option value="">Selecciona habitación</option>
+                                        <select class="uk-select uk-border-rounded" id="form-guest-select" disabled>
+                                            <option value="">Selecciona fechas y tipo</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls uk-position-relative">
-                                        <label class="uk-form-label" for="form-rooms-select">Rooms</label>
+                                        <label class="uk-form-label  impx-text-white">Piso</label>
                                         <span class="uk-form-icon" data-uk-icon="icon: home"></span>
-                                        <select class="uk-select uk-border-rounded" id="piso" name="piso_id">
-                                            <option value="">Selecciona habitación</option>
+                                        <select class="uk-select uk-border-rounded" id="piso" name="piso_id"
+                                            disabled>
+                                            <option value="">Selecciona fechas y tipo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -273,6 +279,7 @@
                         </div>
                         <!-- booking form -->
                     </div>
+                    @include('Clientes.scripts.habitaciones')
                     <!-- SIDEBAR END -->
 
                     <!-- related rooms -->
