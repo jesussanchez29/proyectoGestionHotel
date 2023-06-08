@@ -111,6 +111,7 @@ Route::controller(ReservaController::class)->group(function () {
     Route::get('reserva/entradas', 'obtenerEntradasReserva')->name('obtenerEntradasReserva');
     Route::get('reserva/salidas', 'obtenerSalidasReserva')->name('obtenerSalidasReserva');
     Route::get('reserva/historial', 'historialReservas')->name('historialReservas');
+    Route::get('reserva/calendario', 'calendarioReservas')->name('calendarioReservas');
 });
 
 // Route Controlador Registro

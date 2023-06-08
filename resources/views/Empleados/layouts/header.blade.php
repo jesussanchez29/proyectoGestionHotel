@@ -18,6 +18,12 @@
             <span>Inicio</span></a>
     </li>
 
+    <!-- Departamentos -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('calendarioReservas') }}">
+            <i class="fas fa-fw fa-layer-group"></i>
+            <span>Reservas</span></a>
+    </li>
     <!-- Recepcion -->
     <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
@@ -70,12 +76,12 @@
         </div>
     </li>
 
- <!-- Departamentos -->
- <li class="nav-item active">
-    <a class="nav-link" href="{{ route('reportesReserva') }}">
-        <i class="fas fa-fw fa-file-alt"></i>
-        <span>Reportes</span></a>
-</li>
+    <!-- Departamentos -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('reportesReserva') }}">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Reportes</span></a>
+    </li>
 
     <!-- Departamentos -->
     <li class="nav-item active">

@@ -10,6 +10,7 @@ use App\Models\EstadoHabitacion;
 use App\Models\EstadoReserva;
 use App\Models\Habitacion;
 use App\Models\Piso;
+use App\Models\Resena;
 use App\Models\Reserva;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
@@ -172,5 +173,22 @@ class ReservaController extends Controller
     {
         $reservas = Reserva::where('usuario_id', Auth::user()->id)->get();
         return view('Clientes.historialReservas', compact('reservas'));
+    }
+
+    public function calendarioReservas()
+    {
+        $reservasHabitaciones = Reserva::all();
+        $clientes = Cliente::all();
+
+        $reservas = [];
+        foreach($reservasHabitaciones as $reserva) {
+            $reservas[] = [
+                'title' => 'Habitacion '.$reserva->habitacion->numero ,
+                'start' => $reserva->fechaLLegada,
+                'end' => $reserva->fechaSalida,
+            ];
+        }
+
+        return view('Empleados.Reserva.calendario', compact('reservas', 'clientes'));
     }
 }

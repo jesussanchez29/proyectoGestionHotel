@@ -17,6 +17,7 @@
     <!-- Tablas de datos CSS -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href={{ asset('css/personalizado.css') }}>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.0/main.css">
     <title>@yield('title')</title>
 </head>
 
@@ -52,6 +53,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales-all.js"></script>
 
 </body>
 </html>
