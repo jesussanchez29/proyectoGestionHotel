@@ -102,9 +102,7 @@ video {
         box-sizing: border-box;
     }
 }
-svg:not(:root) {
-    overflow: hidden;
-}
+
 img:not([src]) {
     visibility: hidden;
 }

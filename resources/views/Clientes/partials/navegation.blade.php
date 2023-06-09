@@ -6,14 +6,14 @@
             <div class="impx-logo">
                 @auth
                     @if (Auth::user()->empleado)
-                        <a href="{{ route('clientes') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                        <a href="{{ route('clientes') }}"><img src="{{ asset($hotel->logo) }}" class="" alt="Logo"></a>
                     @else
-                        <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                        <a href="{{ route('indexCliente') }}"><img src="{{ asset($hotel->logo) }}" class="" alt="Logo"></a>
                     @endif
 
                 @endauth
                 @guest
-                    <a href="{{ route('indexCliente') }}"><img src="{{ $hotel->logo }}" class="" alt="Logo"></a>
+                    <a href="{{ route('indexCliente') }}"><img src="{{ asset($hotel->logo) }}" alt="Logo"></a>
                 @endguest
             </div>
         </div>

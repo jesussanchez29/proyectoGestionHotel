@@ -30,10 +30,10 @@
                 <div class="uk-width-2-3@xl uk-width-2-3@l uk-width-2-3@m uk-width-1-1@s uk-margin-small-top">
                     <div class="uk-position-relative uk-visible-toggle">
                         <!-- Rooms List -->
-                        @if (count($servicios) > 0)
+                        @if (count($serviciosPaginados) > 0)
                             <ul class="uk-child-width-1-2@xl uk-child-width-1-2@l uk-child-width-1-2@m uk-child-width-1-2@s data-uk-grid uk-grid-match uk-margin-large-bottom"
                                 data-uk-grid>
-                                @foreach ($servicios as $servicio)
+                                @foreach ($serviciosPaginados as $servicio)
                                     <li>
                                         <!-- room item #1 -->
                                         <div class="uk-card uk-card-default uk-card-medium">
@@ -45,14 +45,17 @@
                                                 <h4 class="uk-card-title uk-margin-remove-bottom">
                                                     {{ $servicio->nombre }}</h4>
                                                 <span class="uk-label bg-color-aqua">POR
-                                                    {{ $servicio->precio }}/NOCHE</span>
+                                                    {{ $servicio->precio }}€</span>
                                                 <ul class="uk-list room-fac">
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Puntualidad ante todo</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Puntualidad ante
+                                                        todo</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Servicio de calidad</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Servicio de
+                                                        calidad</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Quedarás totalmente sastifecho</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span> Quedarás
+                                                        totalmente sastifecho</li>
                                                 </ul>
 
                                                 <div
@@ -71,11 +74,10 @@
                                     </li><!-- room item #1 end -->
                                 @endforeach
                             </ul>
+                            {!! $serviciosPaginados->links('vendor.pagination.bootstrap-5') !!}
                         @endif
                         <!-- rooms list end -->
-
                     </div>
-
 
                 </div>
                 <!-- main content end -->
@@ -86,47 +88,55 @@
                     <!-- booking form -->
                     <div class="bg-color-aqua uk-padding impx-padding-medium">
                         <div class="impx-hp-booking-form side-form uk-margin-bottom uk-margin-remove-top">
-                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase"><span>Reserva
-                                    de servicio</span></h6>
+                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase"><span>OBTENER
+                                    SERVICIO</span></h6>
                             @auth
-
-                                <form class="hora-disponible-form" method="POST">
-                                    @csrf
-                                <div class="uk-margin">
-                                    <div class="uk-form-controls">
-                                        <div class="uk-inline">
-                                            <label class="uk-form-label impx-text-white">Fecha</label>
-                                            <span class="uk-form-icon" data-uk-icon=""></span>
-                                            <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy" name="fecha" id="fecha">
+                                @if (Auth::user()->tieneReservaActual())
+                                    <form class="hora-disponible-form" method="POST">
+                                        @csrf
+                                        <div class="uk-margin">
+                                            <div class="uk-form-controls">
+                                                <div class="uk-inline">
+                                                    <label class="uk-form-label impx-text-white">Fecha</label>
+                                                    <span class="uk-form-icon" data-uk-icon=""></span>
+                                                    <input class="uk-input uk-border-rounded" type="date"
+                                                        placeholder="m/dd/yyyy" name="fecha" id="fecha">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="uk-margin">
-                                    <div class="uk-form-controls uk-position-relative">
-                                        <label class="uk-form-label impx-text-white" for="form-servicios-select">Tipo Servicio</label>
-                                        <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
-                                        @if (count($servicios) > 0)
-                                            <select class="uk-select uk-border-rounded" id="form-servicios-select" name="servicio">
-                                                @foreach ($servicios as $servicio)
-                                                    <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        @else
-                                            <p class="vacio">Sin Servicios disponibles</p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="uk-form-label empty-label">&nbsp;</label>
-                                    <select class="uk-select uk-border-rounded" id="form-horas-select" >
-                                        <option value="">Selecciona una hora</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="uk-form-label empty-label">&nbsp;</label>
-                                    <button class="uk-button uk-width-1-1">¡Reservar!</button>
-                                </div>
-                            </form>
+                                        <div class="uk-margin">
+                                            <div class="uk-form-controls uk-position-relative">
+                                                <label class="uk-form-label impx-text-white" for="form-servicios-select">Tipo
+                                                    Servicio</label>
+                                                <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
+                                                @if (count($servicios) > 0)
+                                                    <select class="uk-select uk-border-rounded" id="form-servicios-select"
+                                                        name="servicio">
+                                                        @foreach ($servicios as $servicio)
+                                                            <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    <p class="vacio">Sin Servicios disponibles</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="uk-form-label impx-text-white" for="form-servicios-select">Selecciona
+                                                una hora</label>
+                                            <div class="uk-grid-small uk-child-width-1-5@s uk-text-center uk-grid-match"
+                                                data-uk-grid  id="horas-disponibles-container">
+    
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="uk-form-label empty-label">&nbsp;</label>
+                                            <button class="uk-button uk-width-1-1">¡Reservar!</button>
+                                        </div>
+                                    </form>
+                                @else
+                                    <p>Obten una reserva para poder obtener un servicio</p>
+                                @endif
                             @endauth
                             @guest
                                 <p>Obten una reserva para poder obtener un servicio</p>
@@ -134,7 +144,6 @@
                         </div>
                     </div>
                     <!-- booking form -->
-
                     <!-- features -->
                     <div class="bg-color-white uk-padding  impx-padding-medium uk-box-shadow-small">
                         <h4 class="uk-heading-line uk-margin-medium-bottom"><span>Nuestras características clave</span>
@@ -231,42 +240,66 @@
 
         </div>
     </div>
-@endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Manejar el evento de cambio en el campo de fecha
-        $('#fecha').change(function() {
-            obtenerHorasDisponibles();
-        });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @auth
+        @if (Auth::user()->tieneReservaActual())
+            <script>
+                // Obtener las fechas de inicio y fin de la reserva actual del usuario
+                var fechaInicio = "{{ Auth::user()->reservaActual()->fechaLLegada }}";
+                var fechaFin = "{{ Auth::user()->reservaActual()->fechaSalida }}";
 
-        // Manejar el evento de cambio en el campo de tipo de servicio
-        $('#form-servicios-select').change(function() {
-            obtenerHorasDisponibles();
-        });
+                // Establecer los atributos min y max del campo de fecha utilizando jQuery
+                $("#fecha").attr("min", fechaInicio);
+                $("#fecha").attr("max", fechaFin);
 
-        function obtenerHorasDisponibles() {
-            var fecha = $('#fecha').val();
-            var servicio = $('#form-servicios-select').val();
+                $(document).ready(function() {
+                    // Evento para detectar cambios en la fecha o el tipo de servicio
+                    $('#fecha, #form-servicios-select').change(function() {
+                        // Obtener los valores seleccionados
+                        var fecha = $('#fecha').val();
+                        var servicioId = $('#form-servicios-select').val();
 
-            // Realizar una solicitud AJAX para obtener las horas disponibles
-            $.ajax({
-                url: "{{ route('horas.disponibles') }}",
-                method: "POST",
-                data: {
-                    fecha: fecha,
-                    servicio: servicio
-                },
-                success: function(response) {
-                    // Actualizar el select de horas con las opciones disponibles
-                    $('#form-horas-select').html(response);
-                    $('#form-horas-select').prop('disabled', false);
-                },
-                error: function() {
-                    // Manejar el error de la solicitud AJAX
-                    console.log('Error al obtener las horas disponibles');
-                }
-            });
+                        // Realizar la petición AJAX para obtener las horas disponibles
+                        $.ajax({
+                            url: '{{ route('obtenerHorasDisponibles') }}',
+                            method: 'GET',
+                            data: {
+                                fecha: fecha,
+                                servicio: servicioId
+                            },
+                            success: function(response) {
+                                $('#horas-disponibles-container').empty();
+
+                                // Agregar las horas disponibles al contenedor
+                                response.forEach(function(hora) {
+                                    var cardHtml = '<div class="uk-width-1-5@s">' +
+                                        '<div class="uk-card uk-card-default uk-card-small uk-card-body custom-card">' +
+                                        hora +
+                                        '</div>' +
+                                        '</div>';
+                                    $('#horas-disponibles-container').append(cardHtml);
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        });
+                    });
+                });
+            </script>
+        @endif
+    @endauth
+
+    <style>
+        .custom-card {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            padding: 10px;
+            transition: background-color 0.3s ease;
         }
-    });
-</script>
+
+        .custom-card:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+@endsection

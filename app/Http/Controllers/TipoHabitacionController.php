@@ -23,9 +23,10 @@ class TipoHabitacionController extends Controller
     // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
     public function indexCliente()
     {
-        $tipoHabitaciones = TipoHabitacion::paginate(4);
+        $tipoHabitacionesPaginadas = TipoHabitacion::paginate(4);
+        $tipoHabitaciones = TipoHabitacion::all();
         $hotel = Hotel::first();
-        return view('Clientes.TipoHabitacion.index', compact('tipoHabitaciones', 'hotel'));
+        return view('Clientes.TipoHabitacion.index', compact('tipoHabitaciones', 'hotel', 'tipoHabitacionesPaginadas'));
     }
 
 

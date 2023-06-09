@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServicioRequest;
 use App\Models\Hotel;
 use App\Models\Servicio;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ServicioController extends Controller
@@ -20,9 +22,9 @@ class ServicioController extends Controller
     // Funcion para enviar los departamentos a la vista departamentos
     public function indexCliente()
     {
-        $servicios = Servicio::paginate(4);
-        $hotel = Hotel::first();
-        return view('Clientes.Servicio.index', compact('servicios', 'hotel'));
+        $serviciosPaginados = Servicio::paginate(4);
+        $servicios = Servicio::all();
+        return view('Clientes.Servicio.index', compact('serviciosPaginados', 'servicios'));
     }
 
     // Funcion para crear un departamento
@@ -89,16 +91,40 @@ class ServicioController extends Controller
 
     public function obtenerHorasDisponibles(Request $request)
     {
-        dd($request->all());
         $fecha = $request->input('fecha');
-        $tipoServicioId = $request->input('tipoServicio');
+        $servicioId = $request->input('servicio');
 
-        $servicio = Servicio::findOrFail($tipoServicioId);
+        // Obtiene la hora de apertura y cierre del servicio
+        $servicio = Servicio::find($servicioId);
+        $horaApertura = Carbon::createFromFormat('H:i', $servicio->horaInicio);
+        $horaCierre = Carbon::createFromFormat('H:i', $servicio->horaFin);
 
-        $horasDisponibles = $servicio->obtenerHorasDisponibles($fecha);
+        // Obtiene la duración del servicio
+        $duracion = $servicio->duracion;
 
-        return response()->json([
-            'horasDisponibles' => $horasDisponibles
-        ]);
+        // Realiza la consulta para obtener las horas ocupadas
+
+        $horasOcupadas = DB::table('reservaServicio')
+            ->join('reservas', 'reservaServicio.reserva_id', '=', 'reservas.id')
+            ->where('reservaServicio.fecha', $fecha)
+            ->pluck('reservaservicio.hora')
+            ->toArray();
+
+        // Realiza la consulta para obtener las horas disponibles
+        $horasDisponibles = [];
+
+        // Itera desde la hora de apertura hasta la hora de cierre, agregando la duración
+        $horaActual = $horaApertura->copy();
+        while ($horaActual->addMinutes($duracion)->lte($horaCierre)) {
+            $hora = $horaActual->format('H:i');
+
+            // Verifica si la hora está ocupada, y si no lo está, la agrega a las horas disponibles
+            if (!in_array($hora, $horasOcupadas)) {
+                $horasDisponibles[] = $hora;
+            }
+        }
+
+        // Devuelve las horas disponibles como respuesta JSON
+        return response()->json($horasDisponibles);
     }
 }

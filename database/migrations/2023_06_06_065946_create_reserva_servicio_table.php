@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('reserva_id');
             $table->unsignedBigInteger('servicio_id');
+            $table->date('fecha');
+            $table->time('hora');
             $table->foreign('reserva_id')->references('id')->on('reservas')->onDelete('cascade');
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
             $table->timestamps();

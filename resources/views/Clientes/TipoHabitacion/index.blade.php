@@ -48,10 +48,10 @@
                 <div class="uk-width-2-3@xl uk-width-2-3@l uk-width-2-3@m uk-width-1-1@s uk-margin-small-top">
                     <div class="uk-position-relative uk-visible-toggle">
                         <!-- Rooms List -->
-                        @if (count($tipoHabitaciones) > 0)
+                        @if (count($tipoHabitacionesPaginadas) > 0)
                             <ul class="uk-child-width-1-2@xl uk-child-width-1-2@l uk-child-width-1-2@m uk-child-width-1-2@s data-uk-grid uk-grid-match uk-margin-large-bottom"
                                 data-uk-grid>
-                                @foreach ($tipoHabitaciones as $tipoHabitacion)
+                                @foreach ($tipoHabitacionesPaginadas as $tipoHabitacion)
                                     <li>
                                         <!-- room item #1 -->
                                         <div class="uk-card uk-card-default uk-card-medium">
@@ -63,17 +63,17 @@
                                                 <h4 class="uk-card-title uk-margin-remove-bottom">
                                                     {{ $tipoHabitacion->nombre }}</h4>
                                                 <span class="uk-label bg-color-aqua">POR
-                                                    {{ $tipoHabitacion->precio }}/NOCHE</span>
+                                                    {{ $tipoHabitacion->precio }}€/NOCHE</span>
                                                 <ul class="uk-list room-fac">
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Beatus in
-                                                        maximarum timore</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Vistas impresionantes</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Oculis
-                                                        Compensabatur</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Tranquilidad y privacidad</li>
                                                     <li><span class="impx-text-aqua"
-                                                            data-uk-icon="icon: check; ratio: 1;"></span> Dolorisnos
-                                                        veriusque nihil</li>
+                                                            data-uk-icon="icon: check; ratio: 1;"></span>
+                                                        Comodidad excepcional</li>
                                                 </ul>
 
                                                 <div
@@ -87,9 +87,9 @@
                                     </li><!-- room item #1 end -->
                                 @endforeach
                             </ul>
-                        @endif
+                            {!! $tipoHabitacionesPaginadas->links('vendor.pagination.bootstrap-5') !!}
+                            @endif
                         <!-- rooms list end -->
-
                     </div>
 
 
@@ -97,14 +97,13 @@
                 <!-- main content end -->
 
                 <!-- sidebar -->
-                <div class="uk-width-1-3@xl uk-width-1-3@l uk-width-1-3@m uk-width-1-1@s
-uk-margin-small-top">
-
+                <div class="uk-width-1-3@xl uk-width-1-3@l uk-width-1-3@m uk-width-1-1@s uk-margin-small-top">
                     <!-- booking form -->
                     <div class="bg-color-aqua uk-padding impx-padding-medium">
                         <div class="impx-hp-booking-form side-form uk-margin-bottom uk-margin-remove-top">
-                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase"><span>Formulario
-                                    Reserva</span></h6>
+                            <h6 class="uk-heading-line uk-text-center impx-text-white uk-text-uppercase">
+                                <span>FORMULARIO RESERVA</span>
+                            </h6>
                             <form method="POST" action="{{ route('crearReservaCliente') }}">
                                 @csrf
                                 <div class="uk-margin">
@@ -113,7 +112,7 @@ uk-margin-small-top">
                                             <label class="uk-form-label impx-text-white">Fecha Llegada</label>
                                             <span class="uk-form-icon" data-uk-icon=""></span>
                                             <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy"
-                                                name="fechaLlegada">
+                                                name="fechaLlegada" id="fechaLlegada" min="{{ date('Y-m-d') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -123,14 +122,16 @@ uk-margin-small-top">
                                             <label class="uk-form-label impx-text-white">Fecha Salida</label>
                                             <span class="uk-form-icon" data-uk-icon=""></span>
                                             <input class="uk-input uk-border-rounded" type="date" placeholder="m/dd/yyyy"
-                                                name="fechaSalida">
+                                                name="fechaSalida" id="fechaSalida"
+                                                min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls">
                                         <div class="uk-inline">
-                                            <label class="uk-form-label">Tipo Habitacion</label>
+                                            <label class="uk-form-label impx-text-white" for="form-rooms-select">Tipo
+                                                Habitacion</label>
                                             <span class="uk-form-icon select-icon" data-uk-icon="icon: album"></span>
                                             @if (count($tipoHabitaciones) > 0)
                                                 <select class="uk-select uk-border-rounded" id="form-rooms-select"
@@ -149,19 +150,21 @@ uk-margin-small-top">
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls uk-position-relative">
-                                        <label class="uk-form-label" for="form-guest-select">Acompañantes</label>
+                                        <label class="uk-form-label impx-text-white"
+                                            for="form-guest-select">Acompañantes</label>
                                         <span class="uk-form-icon select-icon" data-uk-icon="icon: users"></span>
-                                        <select class="uk-select uk-border-rounded" id="form-guest-select">
-                                            <option value="">Selecciona habitación</option>
+                                        <select class="uk-select uk-border-rounded" id="form-guest-select" disabled>
+                                            <option value="">Selecciona fechas y tipo</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <div class="uk-form-controls uk-position-relative">
-                                        <label class="uk-form-label" for="form-rooms-select">Rooms</label>
+                                        <label class="uk-form-label  impx-text-white">Piso</label>
                                         <span class="uk-form-icon" data-uk-icon="icon: home"></span>
-                                        <select class="uk-select uk-border-rounded" id="piso" name="piso_id">
-                                            <option value="">Selecciona habitación</option>
+                                        <select class="uk-select uk-border-rounded" id="piso" name="piso_id"
+                                            disabled>
+                                            <option value="">Selecciona fechas y tipo</option>
                                         </select>
                                     </div>
                                 </div>

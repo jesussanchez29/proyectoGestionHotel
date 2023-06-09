@@ -78,7 +78,7 @@ Route::controller(ServicioController::class)->group(function () {
     Route::post('servicio/editar/{id}', 'update')->name('editarServicio');
     // Route para eliminar un departamento
     Route::post('servicio/eliminar/{id}', 'destroy')->name('eliminarServicio');
-    Route::post('/obtener-horas-disponibles', 'obtenerHorasDisponibles')->name('horas.disponibles');
+    Route::get('servicio/obtenerHorasDisponibles', 'obtenerHorasDisponibles')->name('obtenerHorasDisponibles');
 });
 
 // Route Controlador Empleado

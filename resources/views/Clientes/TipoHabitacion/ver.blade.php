@@ -2,6 +2,7 @@
 @section('header')
     @include('Clientes.layouts.header')
 @endsection
+
 @section('slider')
     <div class="impx-page-heading uk-position-relative room-detail">
         <div class="impx-overlay dark"></div>
@@ -314,24 +315,18 @@
                                                 </div>
                                                 <div
                                                     class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary impx-overlay aqua-darkest">
-                                                    <p class="impx-text-white">Lorem ipsum dolor sit amet, consectetur
-                                                        adipiscing
-                                                        elit. Si verbum sequimur, primum longius verbum praepositum quam
-                                                        bonum</p>
-                                                    <ul class="uk-list room-fac impx-text-white">
-                                                        <li><span class="impx-text-white"
-                                                                data-uk-icon="icon: check; ratio: 1;"></span> Beatus in
-                                                            maximarum
-                                                            timore</li>
-                                                        <li><span class="impx-text-white"
-                                                                data-uk-icon="icon: check; ratio: 1;"></span> Oculis
-                                                            Compensabatur
-                                                        </li>
-                                                        <li><span class="impx-text-white"
+                                                    <p class="impx-text-white">{{ $tipoHabitacion->descripcion }}</h4>
+                                                    </p>
+                                                    <ul class="uk-list room-fac">
+                                                        <li><span class="impx-text-aqua"
                                                                 data-uk-icon="icon: check; ratio: 1;"></span>
-                                                            Dolorisnos
-                                                            veriusque
-                                                            nihil</li>
+                                                            Vistas impresionantes</li>
+                                                        <li><span class="impx-text-aqua"
+                                                                data-uk-icon="icon: check; ratio: 1;"></span>
+                                                            Tranquilidad y privacidad</li>
+                                                        <li><span class="impx-text-aqua"
+                                                                data-uk-icon="icon: check; ratio: 1;"></span>
+                                                            Comodidad excepcional</li>
                                                     </ul>
                                                 </div>
                                             </div>

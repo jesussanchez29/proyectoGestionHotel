@@ -13,18 +13,8 @@ class Servicio extends Model
     protected $fillable=['nombre', 'descripcion', 'imagen', 'horaInicio', 'horaFin', 'duracion', 'precio', 'disponiblidad'];
     protected $hidden=['id'];
 
-    public function obtenerHorasDisponibles($fecha)
+    public function reserva()
     {
-        
-        $horasDisponibles = [];
-
-        $inicio = Carbon::createFromFormat('Y-m-d H:i', $fecha . ' ' . $this->horaInicio);
-        $fin = Carbon::createFromFormat('Y-m-d H:i', $fecha . ' ' . $this->horaFin);
-
-        while ($inicio->addMinutes($this->duracion)->lte($fin)) {
-            $horasDisponibles[] = $inicio->format('H:i');
-        }
-
-        return $horasDisponibles;
+        return $this->belongsToMany(Reserva::class);
     }
 }

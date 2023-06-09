@@ -20,10 +20,9 @@
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/tiny-date-picker.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dist/icons/material-design-icons/mdi.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/icons/material-design-icons/css/mdi.min.css') }}" />
 
 </head>
 
@@ -48,8 +47,6 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/uikit.min.js') }}"></script>
     <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBGb3xrNtz335X4G2KfoOXb-XuIyHAzlVo">
-    </script>
     <script src="{{ asset('js/jquery.gmap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.parallax.min.js') }}"></script>
     <script src="{{ asset('js/date-config.js') }}"></script>
