@@ -80,45 +80,47 @@
                                 @if (count($resenas) > 0)
                                     <ul class="uk-comment-list">
                                         @foreach ($resenas as $resena)
-                                            <li>
-                                                <article class="uk-comment">
-                                                    <header class="uk-comment-header uk-position-relative">
-                                                        <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
-                                                            <div class="uk-width-auto">
-                                                                <img class="uk-comment-avatar"
-                                                                    src="{{ asset('images/perfilDefecto.png') }}"
-                                                                    width="80" height="80" alt="">
+                                            @if ($resena->estado == 1)
+                                                <li>
+                                                    <article class="uk-comment">
+                                                        <header class="uk-comment-header uk-position-relative">
+                                                            <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
+                                                                <div class="uk-width-auto">
+                                                                    <img class="uk-comment-avatar"
+                                                                        src="{{ asset('images/perfilDefecto.png') }}"
+                                                                        width="80" height="80" alt="">
+                                                                </div>
+                                                                <div class="uk-width-expand">
+                                                                    <h4 class="uk-comment-title uk-margin-remove"><a
+                                                                            class="uk-link-reset"
+                                                                            href="#">{{ $resena->usuario->cliente->nombre }}
+                                                                            {{ $resena->usuario->cliente->apellidos }}</a>
+                                                                    </h4>
+                                                                    <ul
+                                                                        class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top uk-margin-small-bottom">
+                                                                        <li>
+                                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                                @if ($i <= $resena->puntuacion)
+                                                                                    <img style="margin-right:2px"
+                                                                                        src="{{ asset('images/estrella.png') }}"
+                                                                                        alt="">
+                                                                                @else
+                                                                                    <img style="margin-right:2px"
+                                                                                        src="{{ asset('images/estrellaBlanca.png') }}"
+                                                                                        alt="">
+                                                                                @endif
+                                                                            @endfor
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                            <div class="uk-width-expand">
-                                                                <h4 class="uk-comment-title uk-margin-remove"><a
-                                                                        class="uk-link-reset"
-                                                                        href="#">{{ $resena->usuario->cliente->nombre }}
-                                                                        {{ $resena->usuario->cliente->apellidos }}</a>
-                                                                </h4>
-                                                                <ul
-                                                                    class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top uk-margin-small-bottom">
-                                                                    <li>
-                                                                        @for ($i = 1; $i <= 5; $i++)
-                                                                            @if ($i <= $resena->puntuacion)
-                                                                                <img style="margin-right:2px"
-                                                                                    src="{{ asset('images/estrella.png') }}"
-                                                                                    alt="">
-                                                                            @else
-                                                                                <img style="margin-right:2px"
-                                                                                    src="{{ asset('images/estrellaBlanca.png') }}"
-                                                                                    alt="">
-                                                                            @endif
-                                                                        @endfor
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                        </header>
+                                                        <div class="uk-comment-body">
+                                                            <p>{{ $resena->comentario }}</p>
                                                         </div>
-                                                    </header>
-                                                    <div class="uk-comment-body">
-                                                        <p>{{ $resena->comentario }}</p>
-                                                    </div>
-                                                </article>
-                                            </li>
+                                                    </article>
+                                                </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 @endif

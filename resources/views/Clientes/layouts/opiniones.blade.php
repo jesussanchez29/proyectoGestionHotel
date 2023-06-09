@@ -9,7 +9,10 @@
 
                 <div class="impx-intro uk-text-right uk-light uk-position-relative">
                     <h2 class="uk-margin-small-bottom">Opiniones Clientes</h2>
-                    <p class="impx-text-large uk-margin-remove-top uk-margin-medium-bottom">Descubre las opiniones de nuestros clientes y conoce su experiencia en nuestro hotel. Sus testimonios reflejan la calidad de nuestro servicio y la satisfacción que brindamos. ¡No te pierdas la oportunidad de leer las impresiones de quienes nos han visitado!</p>
+                    <p class="impx-text-large uk-margin-remove-top uk-margin-medium-bottom">Descubre las opiniones de
+                        nuestros clientes y conoce su experiencia en nuestro hotel. Sus testimonios reflejan la calidad
+                        de nuestro servicio y la satisfacción que brindamos. ¡No te pierdas la oportunidad de leer las
+                        impresiones de quienes nos han visitado!</p>
                 </div>
 
                 <!-- Testimonials List -->
@@ -19,43 +22,46 @@
                             @if (count($resenas) > 0)
                                 <ul class="uk-slider-items uk-child-width-1-1" data-uk-grid>
                                     @foreach ($resenas as $resena)
-                                        <li class="uk-padding uk-padding-remove-vertical">
-                                            <!-- Testimonial List Item 1 -->
-                                            <div class="impx-testimonial-item impx-contrast">
-                                                <div class="impx-testi-container">
-                                                    <div class="impx-testi-text">
-                                                        <blockquote>
-                                                            <p>{{ $resena->comentario }}</p>
-                                                        </blockquote>
-                                                    </div>
-                                                    <div class="uk-text-center">
+                                        @if ($resena->estado == 1)
+                                            <li class="uk-padding uk-padding-remove-vertical">
+                                                <!-- Testimonial List Item 1 -->
+                                                <div class="impx-testimonial-item impx-contrast">
+                                                    <div class="impx-testi-container">
+                                                        <div class="impx-testi-text">
+                                                            <blockquote>
+                                                                <p>{{ $resena->comentario }}</p>
+                                                            </blockquote>
+                                                        </div>
+                                                        <div class="uk-text-center">
 
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $resena->puntuacion)
-                                                                <img style="margin-right:2px"
-                                                                    src="{{ asset('images/estrella.png') }}"
-                                                                    alt="">
-                                                            @else
-                                                                <img style="margin-right:2px"
-                                                                    src="{{ asset('images/estrellaBlanca.png') }}"
-                                                                    alt="">
-                                                            @endif
-                                                        @endfor
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $resena->puntuacion)
+                                                                    <img style="margin-right:2px"
+                                                                        src="{{ asset('images/estrella.png') }}"
+                                                                        alt="">
+                                                                @else
+                                                                    <img style="margin-right:2px"
+                                                                        src="{{ asset('images/estrellaBlanca.png') }}"
+                                                                        alt="">
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                        <div class="uk-text-center">
+                                                            <div class="impx-testi-name">
+                                                                <p>{{ $resena->usuario->cliente->nombre }}
+                                                                    {{ $resena->usuario->cliente->apellidos }}</p>
+                                                            </div>
+                                                            <div class="impx-company-name">
+                                                                <p class="bg-color-gold">Cliente</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="uk-text-center">
-                                                        <div class="impx-testi-name">
-                                                            <p>{{ $resena->usuario->cliente->nombre }}
-                                                                {{ $resena->usuario->cliente->apellidos }}</p>
-                                                        </div>
-                                                        <div class="impx-company-name">
-                                                            <p class="bg-color-gold">Cliente</p>
-                                                        </div>
+                                                    <div class="impx-testi-image"><img
+                                                            src="{{ $resena->usuario->imagenPerfil }}" alt="People 1" />
                                                     </div>
                                                 </div>
-                                                <div class="impx-testi-image"><img
-                                                        src="{{ $resena->usuario->imagenPerfil }}" alt="People 1" /></div>
-                                            </div>
-                                        </li><!-- Testimonial List Item 1 End -->
+                                            </li><!-- Testimonial List Item 1 End -->
+                                        @endif
                                     @endforeach
 
                                 </ul>

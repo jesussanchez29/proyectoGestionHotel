@@ -25,6 +25,23 @@
 @section('content')
     <div class="uk-padding uk-padding-remove-horizontal">
         <div class="uk-container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <ul>
+                        @foreach ($errors->all() as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div data-uk-grid>
                 <!-- main content -->
                 <div class="uk-width-2-3@xl uk-width-2-3@l uk-width-2-3@m uk-width-1-1@s uk-margin-small-top">
@@ -92,13 +109,16 @@
                                     SERVICIO</span></h6>
                             @auth
                                 @if (Auth::user()->tieneReservaActual())
-                                    <form class="hora-disponible-form" method="POST">
+                                    <form class="hora-disponible-form" method="POST"
+                                        action="{{ route('registrarReservaServicio') }}">
                                         @csrf
                                         <div class="uk-margin">
                                             <div class="uk-form-controls">
                                                 <div class="uk-inline">
                                                     <label class="uk-form-label impx-text-white">Fecha</label>
                                                     <span class="uk-form-icon" data-uk-icon=""></span>
+                                                    <input type="hidden" name="reserva"
+                                                        value="{{ Auth::user()->reservaActual()->id }}">
                                                     <input class="uk-input uk-border-rounded" type="date"
                                                         placeholder="m/dd/yyyy" name="fecha" id="fecha">
                                                 </div>
@@ -113,7 +133,8 @@
                                                     <select class="uk-select uk-border-rounded" id="form-servicios-select"
                                                         name="servicio">
                                                         @foreach ($servicios as $servicio)
-                                                            <option value="{{ $servicio->id }}">{{ $servicio->nombre }}</option>
+                                                            <option value="{{ $servicio->id }}">{{ $servicio->nombre }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 @else
@@ -124,14 +145,14 @@
                                         <div>
                                             <label class="uk-form-label impx-text-white" for="form-servicios-select">Selecciona
                                                 una hora</label>
-                                            <div class="uk-grid-small uk-child-width-1-5@s uk-text-center uk-grid-match"
-                                                data-uk-grid  id="horas-disponibles-container">
-    
+                                            <div id="noDisponibilidad"></div>
+                                            <div class="hours-grid" id="horas-disponibles-container">
                                             </div>
+                                            <input type="hidden" name="hora" value="">
                                         </div>
                                         <div>
                                             <label class="uk-form-label empty-label">&nbsp;</label>
-                                            <button class="uk-button uk-width-1-1">¡Reservar!</button>
+                                            <button type="submit" class="uk-button uk-width-1-1" id="reservaServicio">¡Reservar!</button>
                                         </div>
                                     </form>
                                 @else
@@ -240,66 +261,39 @@
 
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @auth
         @if (Auth::user()->tieneReservaActual())
-            <script>
-                // Obtener las fechas de inicio y fin de la reserva actual del usuario
-                var fechaInicio = "{{ Auth::user()->reservaActual()->fechaLLegada }}";
-                var fechaFin = "{{ Auth::user()->reservaActual()->fechaSalida }}";
-
-                // Establecer los atributos min y max del campo de fecha utilizando jQuery
-                $("#fecha").attr("min", fechaInicio);
-                $("#fecha").attr("max", fechaFin);
-
-                $(document).ready(function() {
-                    // Evento para detectar cambios en la fecha o el tipo de servicio
-                    $('#fecha, #form-servicios-select').change(function() {
-                        // Obtener los valores seleccionados
-                        var fecha = $('#fecha').val();
-                        var servicioId = $('#form-servicios-select').val();
-
-                        // Realizar la petición AJAX para obtener las horas disponibles
-                        $.ajax({
-                            url: '{{ route('obtenerHorasDisponibles') }}',
-                            method: 'GET',
-                            data: {
-                                fecha: fecha,
-                                servicio: servicioId
-                            },
-                            success: function(response) {
-                                $('#horas-disponibles-container').empty();
-
-                                // Agregar las horas disponibles al contenedor
-                                response.forEach(function(hora) {
-                                    var cardHtml = '<div class="uk-width-1-5@s">' +
-                                        '<div class="uk-card uk-card-default uk-card-small uk-card-body custom-card">' +
-                                        hora +
-                                        '</div>' +
-                                        '</div>';
-                                    $('#horas-disponibles-container').append(cardHtml);
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                console.log(error);
-                            }
-                        });
-                    });
-                });
-            </script>
+            @include('Clientes.scripts.servicio')
         @endif
     @endauth
 
     <style>
-        .custom-card {
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            padding: 10px;
-            transition: background-color 0.3s ease;
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
         }
 
-        .custom-card:hover {
-            background-color: #e0e0e0;
+        .hour-card {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            transition: background-color 0.3s;
+
         }
+
+        .hour-card:hover {
+            background-color: #c8eaf7;
+        }
+        .hour-card.selected {
+    background-color: #AED6F1; /* Cambia el color de fondo a azul claro */
+    /* Otros estilos adicionales si los necesitas */
+}
+
+
+
     </style>
+
+    
 @endsection

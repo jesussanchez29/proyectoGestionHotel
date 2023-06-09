@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('horaInicio');
             $table->string('horaFin');
             $table->string('duracion');
+            $table->string('capacidad');
             $table->decimal('precio');
             $table->boolean('disponibilidad');
             $table->timestamps();

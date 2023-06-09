@@ -10,7 +10,7 @@ class Servicio extends Model
 {
     use HasFactory;
     protected $primaryKey="id";
-    protected $fillable=['nombre', 'descripcion', 'imagen', 'horaInicio', 'horaFin', 'duracion', 'precio', 'disponiblidad'];
+    protected $fillable=['nombre', 'descripcion', 'imagen', 'horaInicio', 'horaFin', 'duracion', 'capacidad', 'precio', 'disponiblidad'];
     protected $hidden=['id'];
 
     public function reserva()

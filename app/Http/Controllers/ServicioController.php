@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServicioRequest;
 use App\Models\Hotel;
+use App\Models\ReservaServicio;
 use App\Models\Servicio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -101,14 +102,17 @@ class ServicioController extends Controller
 
         // Obtiene la duración del servicio
         $duracion = $servicio->duracion;
-
+        $capacidad = $servicio->capacidad;
         // Realiza la consulta para obtener las horas ocupadas
 
         $horasOcupadas = DB::table('reservaServicio')
             ->join('reservas', 'reservaServicio.reserva_id', '=', 'reservas.id')
             ->where('reservaServicio.fecha', $fecha)
-            ->pluck('reservaservicio.hora')
+            ->groupBy('reservaServicio.fecha', 'reservaServicio.hora')
+            ->select('reservaServicio.hora', DB::raw('count(*) as cantidad'))
+            ->pluck('cantidad', 'reservaServicio.hora')
             ->toArray();
+
 
         // Realiza la consulta para obtener las horas disponibles
         $horasDisponibles = [];
@@ -118,13 +122,40 @@ class ServicioController extends Controller
         while ($horaActual->addMinutes($duracion)->lte($horaCierre)) {
             $hora = $horaActual->format('H:i');
 
-            // Verifica si la hora está ocupada, y si no lo está, la agrega a las horas disponibles
-            if (!in_array($hora, $horasOcupadas)) {
-                $horasDisponibles[] = $hora;
-            }
+       if (!array_key_exists($hora, $horasOcupadas) && (!isset($horasOcupadas[$hora]) || $horasOcupadas[$hora] < $capacidad)) {
+    $horasDisponibles[] = $hora;
+}
+
         }
 
         // Devuelve las horas disponibles como respuesta JSON
         return response()->json($horasDisponibles);
     }
+
+
+public function registrarReservaServicio(Request $request)
+{
+    // Validar los datos enviados por el formulario
+    $request->validate([
+        'reserva' => 'required',
+        'fecha' => 'required|date',
+        'servicio' => 'required|exists:servicios,id',
+        'hora' => 'required'
+        // Agrega aquí las reglas de validación para los demás campos del formulario
+    ]);
+
+    // Crear una nueva instancia del modelo ReservaServicio y asignar los valores del formulario
+    $reservaServicio = new ReservaServicio();
+    $reservaServicio->reserva_id = $request->input('reserva');
+    $reservaServicio->servicio_id = $request->input('servicio');
+    $reservaServicio->fecha = $request->input('fecha');
+    $reservaServicio->hora = $request->input('hora');
+
+    // Guardar la reserva del servicio en la base de datos
+    $reservaServicio->save();
+
+    // Redireccionar a la página de éxito o realizar las acciones necesarias después de guardar la reserva del servicio
+    return back()->with('success', 'Reserva del servicio realizada exitosamente');
+}
+
 }
