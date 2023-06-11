@@ -38,7 +38,7 @@
                                     <h4 class="card-title mb-3">{{ $departamento->nombre }}</h4>
                                     <p class="card-text">{{ $departamento->descripcion }}</p>
                                     <div style="text-align: center">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="">Ver Empleados</button>
+                                        <a class="btn btn-primary" href="{{ route('verEmpleadoDepartamento', $departamento->id) }}">Ver Empleados</a>
                                         <br>
                                         <br>
                                         <button class="btn btn-warning" style="margin-right:20px" data-toggle="modal" data-target="#myModalEdit{{ $departamento->id }}">Editar</button>

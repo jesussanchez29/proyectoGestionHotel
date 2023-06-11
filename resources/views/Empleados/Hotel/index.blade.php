@@ -25,7 +25,6 @@
                 <div class="container-fluid">
                     <h1 style="text-align: center">Configuración Hotel</h1>
                     <div class="row">
-
                         <div class="col-md-6 ml-auto">
                             <label for="imagen" class="col-form-label">Imagen Portada:</label>
                             <input type="file" class="form-control-file" name="imagen" accept="image/*">

@@ -120,7 +120,7 @@
                                                     <input type="hidden" name="reserva"
                                                         value="{{ Auth::user()->reservaActual()->id }}">
                                                     <input class="uk-input uk-border-rounded" type="date"
-                                                        placeholder="m/dd/yyyy" name="fecha" id="fecha">
+                                                        placeholder="m/dd/yyyy" name="fecha" id="fecha"  min="{{ date('Y-m-d') }}">
                                                 </div>
                                             </div>
                                         </div>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
+    // Funcion para enviar la plantilla perfil
     public function indexEmpleado()
     {
         if (!Auth::user() || Auth::user()->cliente) {
@@ -22,6 +23,7 @@ class UsuarioController extends Controller
         }
     }
 
+    // Funcion para enviar enviar la plantilla perfil 
     public function indexCliente()
     {
         if (!Auth::user() || Auth::user()->empleado) {
@@ -31,16 +33,19 @@ class UsuarioController extends Controller
         }
     }
 
+    // Funcion para actualizar un usuario
     public function update(Request $request)
     {
-        // Obtiene el empleado a partir del id
+        // Obtiene el usuario a partir del id
         $usuario = Usuario::findOrFail(Auth::user()->id);
+        // Validacion
         $request->validate([
             'imagenPerfil' => 'nullable|image',
             'password' => ['nullable', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_\/!@#$%^&*()\-])[A-Za-z\d\-_\/!@#$%^&*()]+$/'],
             'repassword' => $request->filled('password') ? 'required|same:password' : '',
         ]);
 
+        // Obtenemos los datos
         if ($request->hasFile('imagenPerfil')) {
             $file = $request->file('imagenPerfil')->store('public/perfil');
             $url = Storage::url($file);
@@ -49,11 +54,15 @@ class UsuarioController extends Controller
 
         if ($request->filled('password'))
             $usuario->password = Hash::make($request->input('password'));
+        //Actualizamos el usuario
         $usuario->save();
 
+        // Si el usuario es un cliente
         if (Auth::user()->cliente) {
+            // Obtiene el cliente a partir del id
             $cliente = Cliente::findOrFail(Auth::user()->cliente->id);
 
+            // Validacion
             $request->validate([
                 'nombre' => 'required',
                 'apellidos' => 'required',
@@ -62,19 +71,21 @@ class UsuarioController extends Controller
                 'direccion' => 'required'
             ]);
 
-            // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+            // Asignamos los datos
             $cliente->nombre = $request->input('nombre');
             $cliente->apellidos = $request->input('apellidos');
             $cliente->fechaNacimiento = $request->input('fechaNacimiento');
             $cliente->telefono = $request->input('telefono');
             $cliente->direccion = $request->input('direccion');
+            // Actualizamos el cliente
             $cliente->save();
-            // Nos redirige a empleados con un mensaje
+            // Nos redirige a perfilCliente con un mensaje
             return redirect()->route('perfilCliente')->with('success', 'Perfil modificado correctamente');
-
         } else {
+            // Obtiene al empleado a partir del id
             $empleado = Empleado::findOrFail(Auth::user()->empleado->id);
 
+            // Validacion
             $request->validate([
                 'nombre' => 'required',
                 'apellidos' => 'required',
@@ -84,16 +95,26 @@ class UsuarioController extends Controller
                 'direccion' => 'required'
             ]);
 
-            // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+            // Asignamos los datos
             $empleado->nombre = $request->input('nombre');
             $empleado->apellidos = $request->input('apellidos');
             $empleado->fechaNacimiento = $request->input('fechaNacimiento');
             $empleado->dni = $request->input('dni');
             $empleado->telefono = $request->input('telefono');
             $empleado->direccion = $request->input('direccion');
+            // Actualizamos el empleado
             $empleado->save();
-            // Nos redirige a empleados con un mensaje
+            // Nos redirige a perfilEmpleado con un mensaje
             return redirect()->route('perfilEmpleado')->with('success', 'Perfil modificado correctamente');
         }
+    }
+
+    // Funcion para cerrar la sesion de un usuario
+    public function logout()
+    {
+        // Cierra la sesion
+        Auth::logout();
+        // Nos dirige a la vista index
+        return redirect()->route('indexCliente');
     }
 }

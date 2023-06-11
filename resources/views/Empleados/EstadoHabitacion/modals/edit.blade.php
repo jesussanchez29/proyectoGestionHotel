@@ -18,6 +18,12 @@
                             <input type="text" class="form-control" name="nombre" value="{{ $estado->nombre }}">
                         </div>
                     </div>
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <label for="numero" class="col-form-label">Clase:</label>
+                            <input type="text" class="form-control" name="clase" value="{{ $estado->clase }}">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

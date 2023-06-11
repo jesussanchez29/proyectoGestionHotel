@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    // Funcion para ir a la vista login en caso de que el usuario este logeado se dirige al index
+    // Funcion para ir a la vista login
     public function index()
     {
         return view('Clientes.login');
     }
 
-    //Funcion para que una vez logeado nos rediriga al index
+    // Funcion para que una vez logeado nos rediriga a la vista que corresponda
     public function login(LoginRequest $request)
     {
         // Obtenemos los datos del formulario
@@ -33,30 +33,28 @@ class LoginController extends Controller
         //Guardamos la sesion con las credenciales
         Auth::login($validacion);
 
+        // Si la sesion es un cliente
         if($validacion->cliente)
         {
+            // Nos redirige al indexCliente
             return redirect()->route('indexCliente');
+        // Si es empleado
         } elseif($validacion->empleado) {
+            // Nos redirige al indexEmpleado
             return redirect()->route('clientes');
         }
-       
     }
 
     // Funcion para validar si los datos de inicio de sesion son correctos
     public function validarCredenciales($credenciales)
     {
+        // Otenemos email del usuario
         $usuario = Usuario::where('email', $credenciales['email'])->first();
+        //Si las contraseñas coinciden
         if ($usuario && Hash::check($credenciales['password'], $usuario->password)) {
             return $usuario;
         }
+        // Si no coinciden
         return false;
-    }
-
-    public function logout()
-    {
-        // Cierra la sesion
-        Auth::logout();
-        // Nos dirige a la vista index
-        return redirect()->route('indexCliente');
     }
 }

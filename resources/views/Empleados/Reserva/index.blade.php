@@ -55,10 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex bg-{{ $habitacion->estado->clase }} align-items-center justify-content-between rounded-0" id="estado">
-                                    <a class="small text-white stretched-link text-uppercase font-weight-bold select-habitacion"
-                                        @if ($habitacion->estado->nombre == 'Ocupada') href="{{ route('verReserva', $habitacion->id) }}"
-                                    @elseif($habitacion->estado->nombre == 'Disponible')
-                                        href="{{ route('verCrearReservaEmpleado', $habitacion->id) }}" @endif>
+                                    <a class="small text-white stretched-link text-uppercase font-weight-bold select-habitacion" >
                                         {{ $habitacion->estado->nombre }}
                                     </a>
                                     <div class="small text-white">

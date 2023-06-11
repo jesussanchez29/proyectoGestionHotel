@@ -8,37 +8,44 @@ use App\Models\Habitacion;
 use App\Models\Piso;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HabitacionController extends Controller
 {
-    // Funcion para enviar los tipos de habitaciones a la vista tipos de habitaciones
+    // Funcion para enviar las habitaciones a la vista de habitaciones
     public function indexEmpleado()
     {
-        $habitaciones = Habitacion::all();
-        $pisos = Piso::all();
-        $estados = EstadoHabitacion::all();
-        $tipoHabitaciones = TipoHabitacion::all();
-        return view('Empleados.Habitacion.index', compact('habitaciones', 'pisos', 'estados', 'tipoHabitaciones'));
+        if (!Auth::user() || Auth::user()->cliente) {
+            return redirect()->route('indexCliente');
+        } elseif (Auth::user()->empleado) {
+            $estados = EstadoHabitacion::all();
+            $habitaciones = Habitacion::all();
+            $pisos = Piso::all();
+            $estados = EstadoHabitacion::all();
+            $tipoHabitaciones = TipoHabitacion::all();
+            return view('Empleados.Habitacion.index', compact('habitaciones', 'pisos', 'estados', 'tipoHabitaciones'));
+        }
     }
 
-    //Funcion para crear un tipo de habitacion
+    //Funcion para crear una habitacion
     public function create(HabitacionRequest $request)
     {
         $habitacion = new Habitacion();
-        // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+        // Guardamos los datos
         $habitacion->numero = $request->input('numero');
         $habitacion->estadoHabitacion_id = $request->input('estadoHabitacion');
         $habitacion->piso_id = $request->input('piso');
         $habitacion->tipoHabitacion_id = $request->input('tipoHabitacion');
+        // Creamos a la habitacion
         $habitacion->save();
-        // Nos redirige a tipoHabitaciones con un mensaje
+        // Nos redirige a habitaciones con un mensaje
         return redirect()->route('habitaciones')->with('success', 'Habitacion registrado correctamente');
     }
 
-    //Funcion para modificar un tipo de habitacion
+    // Funcion para modificar una habitacion
     public function update(Request $request, $id)
     {
-        //Obtiene el un tipo de habitacion a partir del id
+        // Obtiene la habitacion a partir del id
         $habitacion = Habitacion::findOrFail($id);
 
         // Validacion para la actualizacion
@@ -49,33 +56,36 @@ class HabitacionController extends Controller
             'tipoHabitacion' => 'required'
         ]);
 
+        // Guardamos los datos
         $habitacion->numero = $request->input('numero');
         $habitacion->estadoHabitacion_id = $request->input('estadoHabitacion');
         $habitacion->piso_id = $request->input('piso');
         $habitacion->tipoHabitacion_id = $request->input('tipoHabitacion');
+        // Actualizamos a la habitacion
         $habitacion->save();
-        $habitacion->save();
-        // Nos redirige a tipoHabitaciones con un mensaje
+        // Nos redirige a habitaciones con un mensaje
         return redirect()->route('habitaciones')->with('success', 'Habitacion modificado correctamente');
     }
 
-    //Funcion para eliminar un tipo de habitacion
+    // Funcion para eliminar una habitacion
     public function destroy($id)
     {
-        //Obtiene el tipo de habitacion a partir del id
+        // Obtiene la habitacion a partir del id
         $habitacion = Habitacion::find($id);
-        //Elimina al tipo de habitacion
+        //Elimina la habitacion
         $habitacion->delete();
-        // Nos piso a tipoHabitaciones con un mensaje
+        // Nos redirige a habitaciones con un mensaje
         return redirect()->route('habitaciones')->with('success', 'Habitacion eliminado correctamente');
     }
 
+    // Funcion para obtener las habitaciones disponibles comprobando las fechas
     public function obtenerHabitacionesDisponibles(Request $request)
     {
         $fechaInicio = $request->fechaLlegada;
         $fechaFin = $request->fechaSalida;
-        $piso = $request->piso;
+        $tipoHabitacion = $request->tipoHabitacion;
 
+        // Obtiene las habitaciones disponibles que no tienen una reserva sociada dentro del rango de fechas selecionadas
         $query = Habitacion::whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
             $query->select('habitacion_id')
                 ->from('reservas')
@@ -98,13 +108,13 @@ class HabitacionController extends Controller
                         });
                 });
         });
-        
-        if ($piso != "Todos") {
-            $query->where('piso_id', $piso);
-        }
-    
+
+        // Obtiene las habitaciones del tipo d ehabitacion selecionado
+        $query->where('tipoHabitacion_id', $tipoHabitacion);
+
         $habitacionesDisponibles = $query->get();
 
+        //Devuelve las habitaciones
         return response()->json($habitacionesDisponibles);
     }
 }

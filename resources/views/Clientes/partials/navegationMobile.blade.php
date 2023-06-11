@@ -7,9 +7,14 @@
             <li class="uk-parent">
                 <a href="{{ route('tipoHabitacionesClientes') }}" class="uk-navbar-nav-subtitle">Habitaciones</a>
             </li>
-            <li><a href="contact.html">Servicios</a></li>
-            <li><a href="contact.html">Reservar Habitación</a></li>
-            <li><a href="contact.html">Contacto</a></li>
+            <li><a href="{{ route('serviciosCliente') }}">Servicios</a></li>
+            <li><a href="{{ route('contacto') }}">Contacto</a></li>
+            @auth
+            @if (Auth::user()->cliente)
+            <li><a href="{{ route('perfilCliente') }}">Perfil</a></li>
+            <li><a href="{{ route('reservasCliente') }}">Historial Reservas</a></li>
+            @endif
+        @endauth
         </ul>
     </div>
 </div>

@@ -1,11 +1,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Obtener las fechas de inicio y fin de la reserva actual del usuario
-    var fechaInicio = "{{ Auth::user()->reservaActual()->fechaLLegada }}";
     var fechaFin = "{{ Auth::user()->reservaActual()->fechaSalida }}";
 
     // Establecer los atributos min y max del campo de fecha utilizando jQuery
-    $("#fecha").attr("min", fechaInicio);
     $("#fecha").attr("max", fechaFin);
 
     $(document).ready(function() {

@@ -3,14 +3,12 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class Registro extends Mailable
+class RegistroEmpleadoCliente extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +29,7 @@ class Registro extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Registro',
+            subject: 'Registro Estela del Horizonte',
         );
     }
 
@@ -47,9 +45,7 @@ class Registro extends Mailable
                         'email' => $this->email,
                         'password' => $this->password,
                         'url' => $url
-                    ])
-                    ->withSubject('Registro Hotel Estelar del Horizonte');
-                    ;
+                    ]);
     }
 
     /**

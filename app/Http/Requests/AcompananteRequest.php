@@ -23,23 +23,33 @@ class AcompananteRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Obtener la fecha actual
-        $fechaActual = Carbon::now();
-
-        // Obtener la fecha de nacimiento del acompañante (asumiendo que tienes un campo "fechaNacimiento" en el formulario)
-        $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $this->input('fechaNacimiento'));
-
-        // Calcular la edad del acompañante
-        $edad = $fechaNacimiento->diffInYears($fechaActual);
         return [
             'nombre' => 'required',
             'apellidos' => 'required',
-            'fechaNacimiento' => 'required',
-            'tipoIdentificacion' => $edad >= 18 ? 'required' : '',
-            'identificacion' => [
-                $edad >= 18 ? 'required' : '',
-            ],
-            'telefono' => 'nullable|regex:"[0-9]{9}"',
+            'fechaNacimiento' => 'required|date',
+            'tipoIdentificacion' => function ($attribute, $value, $fail) {
+                $fechaNacimiento = $this->input('fechaNacimiento');
+                if (!empty($fechaNacimiento)) {
+                    $fechaActual = Carbon::now();
+                    $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $fechaNacimiento);
+                    $edad = $fechaNacimiento->diffInYears($fechaActual);
+                    if ($edad >= 18 && empty($value)) {
+                        $fail('El campo tipoIdentificacion es requerido para acompañantes mayores de 18 años.');
+                    }
+                }
+            },
+            'identificacion' => function ($attribute, $value, $fail) {
+                $fechaNacimiento = $this->input('fechaNacimiento');
+                if (!empty($fechaNacimiento)) {
+                    $fechaActual = Carbon::now();
+                    $fechaNacimiento = Carbon::createFromFormat('Y-m-d', $fechaNacimiento);
+                    $edad = $fechaNacimiento->diffInYears($fechaActual);
+                    if ($edad >= 18 && empty($value)) {
+                        $fail('El campo identificacion es requerido para acompañantes mayores de 18 años.');
+                    }
+                }
+            },
+            'telefono' => 'nullable|regex:/[0-9]{9}/',
         ];
     }
 }

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Bienvenido a nuestro hotel</title>
+    <meta charset="utf-8">
+    <title>Bienvenido a nuestro sitio web</title>
 </head>
-
 <body>
-    <h1>Bienvenido(a) a nuestro hotel, {{ $nombre }}</h1>
-    <p>Gracias por registrarte en nuestro sitio web. Estamos encantados de tenerte como cliente.</p>
-    <p>En nuestro hotel, nos esforzamos por brindar el mejor servicio y asegurarnos de que tu estadía sea cómoda y
-        agradable.</p>
-    <p>Te invitamos a hacer una reserva en nuestro hotel para asegurar tu alojamiento. Nuestro amable personal está
-        listo para atenderte y brindarte una experiencia inolvidable.</p>
-    <p>Visita nuestro sitio web o contáctanos directamente para obtener más información sobre nuestras habitaciones,
-        tarifas y disponibilidad.</p>
-    <p>Esperamos que disfrutes de tu estancia en nuestro hotel y que tengas una experiencia inolvidable.</p>
-    <p>¡Bienvenido(a) de nuevo y gracias por elegirnos!</p>
-    <p>Saludos cordiales,</p>
-    <p>El equipo del Hotel</p>
+    <h2>Bienvenido a nuestro sitio web</h2>
+    <p>¡Gracias por registrarte en nuestro sitio web!</p>
+    <p>A continuación encontrarás los detalles de tu cuenta:</p>
+    <ul>
+        <li><strong>Correo electrónico:</strong> {{ $email }}</li>
+        <li><strong>Contraseña:</strong> {{ $password }}</li>
+    </ul>
+    <p>Por favor, guarda esta información en un lugar seguro. Puedes utilizar estos datos para iniciar sesión en nuestro sitio web.</p>
+    <p>Para acceder a tu cuenta, por favor haz clic en el siguiente enlace:</p>
+    <p><a href="{{ $url }}">Iniciar sesión</a></p>
+    <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+    <p>¡Esperamos que disfrutes de tu experiencia en nuestro sitio!</p>
+    <p>Saludos,</p>
+    <p>El equipo de nuestro sitio web</p>
 </body>
-
 </html>

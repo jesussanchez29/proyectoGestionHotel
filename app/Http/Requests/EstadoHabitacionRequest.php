@@ -22,7 +22,8 @@ class EstadoHabitacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required', 'unique:estadohabitacion,nombre,'
+            'nombre' => 'required', 'unique:estadohabitacion,nombre,',
+            'clase' => 'required'
         ];
     }
 }

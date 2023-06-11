@@ -21,26 +21,17 @@
     <!-- Departamentos -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('calendarioReservas') }}">
-            <i class="fas fa-fw fa-layer-group"></i>
+            <i class="fa fa-hotel"></i>
             <span>Reservas</span></a>
     </li>
-    <!-- Recepcion -->
-    <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class=" fas fa-tasks"></i>
-            <span>Gestion</span>
-        </a>
-        <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gestion Recepcion:</h6>
-                <a class="collapse-item" href="{{ route('reservas') }}">Recepcion</a>
-                <a class="collapse-item" href="{{ route('obtenerEntradasReserva') }}">Entradas</a>
-                <a class="collapse-item" href="{{ route('obtenerSalidasReserva') }}">Salidas</a>
-            </div>
-        </div>
-    </li>
 
+      <!-- Gestion -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('reservas') }}">
+            <i class=" fas fa-tasks"></i>
+            <span>Gestion</span></a>
+    </li>
+    
     <!-- Mantenimientos-->
     <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
@@ -59,6 +50,7 @@
             </div>
         </div>
     </li>
+
 
     <!-- Usuarios -->
     <li class="nav-item active">

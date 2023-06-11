@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClienteRequest;
 use App\Mail\Registro;
+use App\Mail\RegistroEmpleadoCliente;
 use App\Models\Cliente;
 use App\Models\Usuario;
 use App\Rules\TipoIdentificacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -15,31 +17,36 @@ use Illuminate\Support\Str;
 
 class ClienteController extends Controller
 {
-    // Funcion para enviar los clientes paginados a la vista clientes
+    // Funcion para enviar los clientes a la vista clientes
     public function indexEmpleado()
     {
-        $clientes = Cliente::join('usuarios', 'clientes.usuario_id', '=', 'usuarios.id')->get();
-        return view('Empleados.Cliente.index', compact('clientes'));
+        if (!Auth::user() || Auth::user()->cliente) {
+            return redirect()->route('indexCliente');
+        } elseif (Auth::user()->empleado) {
+            $clientes = Cliente::all();
+            return view('Empleados.Cliente.index', compact('clientes'));
+        }
     }
 
-    // Funcion para crear un cliente
+    // Funcion para crear un usuario y un cliente
     public function create(ClienteRequest $request)
     {
         DB::beginTransaction();
 
         try {
+            // Guardamos los datos
             $password = Str::random(12);
-            //Creamos al usuario
             $usuario = new Usuario();
             $usuario->imagenPerfil = "images/perfilDefecto.png";
             $usuario->email = $request->email;
             $usuario->password = Hash::make($password);
             $usuario->estado = true;
             $usuario->primerInicioSesion = true;
+            //Creamos al usuario
             $usuario->save();
 
             $cliente = new Cliente();
-            // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+            // Guardamos los datos
             $cliente->nombre = $request->input('nombre');
             $cliente->apellidos = $request->input('apellidos');
             $cliente->fechaNacimiento = $request->input('fechaNacimiento');
@@ -48,6 +55,7 @@ class ClienteController extends Controller
             $cliente->telefono = $request->input('telefono');
             $cliente->direccion = $request->input('direccion');
             $cliente->usuario_id = $usuario->id;
+            //Creamos al cliente
             $cliente->save();
 
             DB::commit();
@@ -55,7 +63,8 @@ class ClienteController extends Controller
             DB::rollback();
         }
 
-        //Mail::to($request->email)->send(new Registro($request->email, $password));
+        // Enviamos al cliente registrado un correo con sus credenciales
+        Mail::to($request->email)->send(new RegistroEmpleadoCliente($request->email, $password));
 
         // Nos redirige a clientes con un mensaje
         return back()->with('success', 'Cliente registrado correctamente');
@@ -78,7 +87,7 @@ class ClienteController extends Controller
             'direccion' => 'required'
         ]);
 
-        // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+        // Guardamos los datos
         $cliente->nombre = $request->input('nombre');
         $cliente->apellidos = $request->input('apellidos');
         $cliente->fechaNacimiento = $request->input('fechaNacimiento');
@@ -86,6 +95,7 @@ class ClienteController extends Controller
         $cliente->identificacion = $request->input('identificacion');
         $cliente->telefono = $request->input('telefono');
         $cliente->direccion = $request->input('direccion');
+        // Actualizamos al cliente
         $cliente->save();
         // Nos redirige a clientes con un mensaje
         return redirect()->route('clientes')->with('success', 'Cliente modificado correctamente');

@@ -17,7 +17,7 @@ class Reserva extends Model
         return $this->belongsToMany(Servicio::class, 'reservaServicio', 'reserva_id', 'servicio_id');
     }
 
-    public function acompanantes()
+    public function acompanante()
     {
         return $this->hasMany(Acompanante::class, 'reserva_id');
     }

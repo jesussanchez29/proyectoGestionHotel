@@ -10,12 +10,13 @@ use App\Models\Resena;
 use App\Models\Servicio;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
-    // Funcion para enviar los departamentos a la vista departamentos
+    // Funcion para enviar todos los datos a la pagina principal
     public function indexCliente()
     {
         $hotel = Hotel::first();
@@ -32,18 +33,25 @@ class HotelController extends Controller
         return view('Clientes.index', compact('hotel', 'servicios', 'tipoHabitaciones', 'pisos', 'resenas'));
     }
 
+    // Funcion para enviar los datos a la vista hotel
     public function indexEmpleado()
     {
-        $hotel = Hotel::first();
-        return view('Empleados.Hotel.index', compact('hotel'));
+        if (!Auth::user() || Auth::user()->cliente) {
+            return redirect()->route('indexCliente');
+        } elseif (Auth::user()->empleado) {
+            $hotel = Hotel::first();
+            return view('Empleados.Hotel.index', compact('hotel'));
+        }
     }
 
+    // Funcion para crear o actualizar los datos del hotel
     public function updateOrCreate(Request $request)
     {
-        $hotel = Hotel::first(); // obtiene el primer registro de la tabla Hotel
+        $hotel = Hotel::first();
 
-        // Verifica si el registro existe
+        // Si los datos del hotel existen
         if ($hotel) {
+            // Validacion
             $request->validate([
                 'imagen' => 'nullable|image',
                 'logo' => 'nullable|image',
@@ -55,6 +63,7 @@ class HotelController extends Controller
                 'ciudad' => 'required',
             ]);
 
+            // Guuardamo los datos
             if ($request->has('imagen')) {
                 $file = $request->file('imagen')->store('public/hotel');
                 $url = Storage::url($file);
@@ -71,8 +80,10 @@ class HotelController extends Controller
             $hotel->email = $request->input('email');
             $hotel->direccion = $request->input('direccion');
             $hotel->ciudad = $request->input('ciudad');
+            // Actualizamos los datos
             $hotel->save();
         } else {
+            // Validacion
             $request->validate([
                 'imagen' => 'required|image',
                 'logo' => 'required|image',
@@ -85,7 +96,7 @@ class HotelController extends Controller
             ]);
 
             $hotel = new Hotel();
-            // Obtenemos los datos del formulario y lo igualamos a los campos de la base de datos
+            // Guuardamo los datos
             $file = $request->file('imagen')->store('public/hotel');
             $url = Storage::url($file);
             $hotel->imagen = substr($url, 1);
@@ -98,31 +109,30 @@ class HotelController extends Controller
             $hotel->email = $request->input('email');
             $hotel->direccion = $request->input('direccion');
             $hotel->ciudad = $request->input('ciudad');
+            // Creamos la informacion del hotel
             $hotel->save();
         }
-        // Nos redirige a habitaciones con un mensaje
+        // Nos redirige a configuracion con un mensaje
         return redirect()->route('configuracion')->with('success', 'Cambios actualizado correctamente');
     }
 
+    // Funcion para crear la vista contacto
     public function contacto()
     {
-        $hotel = Hotel::first();
-        return view('Clientes.contacto', compact('hotel'));
+        return view('Clientes.contacto');
     }
 
-
+    // Funcion para enviar mensaje de consulta al hotel
     public function enviarMensajeContacto(ContactoRequest $request)
     {
         $nombre = $request->input('nombre');
         $email = $request->input('email');
         $mensaje = $request->input('mensaje');
 
-        // Envía el correo utilizando la plantilla de correo electrónico        Mail::to($request->email)->send(new Registro($request->email, $password));
-
+        // Envía el correo utilizando la plantilla de correo electrónico
         Mail::to('infoestelahorizonte@gmail.com')->send(new ContactoMailable($nombre, $email, $mensaje));
 
-
-        // Redirecciona o muestra un mensaje de éxito
-        return redirect()->back()->with('success', '¡El formulario se ha enviado con éxito!');
+        // Nos redirige a configuracion con un mensaje
+        return back()->with('success', '¡El formulario se ha enviado con éxito!');
     }
 }

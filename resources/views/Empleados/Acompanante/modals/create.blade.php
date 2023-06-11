@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar Acompañantes</h5>
+                <h5 class="modal-title">Registrar Acompañante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span>
                 </button>
@@ -15,6 +15,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
+                                <input type="hidden" value="{{ $reserva->id }}" id="txtidhabitacion" name="reserva" />
                                 <label for="nombre" class="col-form-label">Nombre:</label>
                                 <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}">
                             </div>

@@ -54,8 +54,8 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li><a href="{{ route('historialReservas') }}" class="uk-navbar-nav-subtitle">
-                                    <div>Historial Reservas<div class="uk-navbar-subtitle">Mira tus reservas</div>
+                                <li><a href="{{ route('reservasCliente') }}" class="uk-navbar-nav-subtitle">
+                                    <div>Historial de Reservas<div class="uk-navbar-subtitle">Ver reservas</div>
                                     </div>
                                 </a>
                             </li>

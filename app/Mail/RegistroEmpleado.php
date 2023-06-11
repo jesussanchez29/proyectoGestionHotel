@@ -6,23 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
-class ContactoMailable extends Mailable
+class RegistroEmpleado extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $nombre;
-    public $email;
-    public $mensaje;
+    public $email, $password;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($nombre, $email, $mensaje)
+    public function __construct($email, $password)
     {
-        $this->nombre = $nombre;
         $this->email = $email;
-        $this->mensaje = $mensaje;
+        $this->password = $password;
     }
 
     /**
@@ -31,15 +29,25 @@ class ContactoMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Formulario de contacto',
+            subject: 'Registro',
         );
     }
 
- 
+    /**
+     * Get the message content definition.
+     */
     public function build()
     {
-        return $this->view('emails.correoContacto');
+        $url = URL::route('login');
+
+        return $this->view('emails.registroEmpleado')
+            ->with([
+                'email' => $this->email,
+                'password' => $this->password,
+                'url' => $url
+            ]);
     }
+
     /**
      * Get the attachments for the message.
      *

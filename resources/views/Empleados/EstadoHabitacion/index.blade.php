@@ -32,6 +32,7 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Clase</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                             @foreach ($estados as $estado)
                                 <tr>
                                     <td>{{ $estado->nombre }}</td>
+                                    <td>{{ $estado->clase }}</td>
                                     <td>
                                         <input type='image' data-toggle="modal" src="{{ asset('images/editar.png') }}"
                                             data-target="#myModalEdit{{ $estado->id }}">
