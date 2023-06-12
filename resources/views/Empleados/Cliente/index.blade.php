@@ -55,10 +55,30 @@
                                         <td style="color: #00FF00">Activo</td>
                                     @endif
                                     <td>
-                                        <input type='image' data-toggle="modal" src="{{ asset('images/editar.png') }}"
-                                            data-target="#myModalEdit{{ $cliente->id }}">
-                                        <input type='image' data-toggle="modal" src="{{ asset('images/eliminar.png') }}"
-                                            data-target="#myModalDelete{{ $cliente->usuario->id }}">
+                                        <div style="display: flex; align-items: center; justify-content: center;">
+
+                                            @if ($cliente->usuario->estado == 0)
+                                                <form action="{{ route('cambiarEstadoUsuario', $cliente->usuario->id) }}" method="POST"
+                                                    style="margin-top:5px; margin-right: 2px;">
+                                                    @csrf
+                                                    <input type="image" src="{{ asset('images/desbloquear.png') }}"
+                                                        alt="Desbloquear">
+                                                </form>
+                                            @else
+                                            <form action="{{ route('cambiarEstadoUsuario', $cliente->usuario->id) }}" method="POST"
+                                                style="margin-top:5px; margin-right: 2px;">
+                                                    @csrf
+                                                    <input type="image" src="{{ asset('images/bloquear.png') }}"
+                                                        alt="Bloquear">
+                                                </form>
+                                            @endif
+                                            <input type='image' data-toggle="modal"
+                                                src="{{ asset('images/editar.png') }}"
+                                                data-target="#myModalEdit{{ $cliente->id }}">
+                                            <input type='image' data-toggle="modal"
+                                                src="{{ asset('images/eliminar.png') }}"
+                                                data-target="#myModalDelete{{ $cliente->usuario->id }}">
+                                        </div>
                                     </td>
                                 </tr>
                                 <!-- Modal modificar cliente -->

@@ -11,13 +11,6 @@
     <!-- Linea divisoria -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Inicio -->
-    <li class="nav-item active">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Inicio</span></a>
-    </li>
-
     <!-- Departamentos -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('calendarioReservas') }}">

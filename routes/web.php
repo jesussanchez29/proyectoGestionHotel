@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AcompananteController;
-use App\Http\Controllers\CambiarContrasenaController;
 use App\Http\Controllers\CaracteristicaHabitacionController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartamentoController;
@@ -149,14 +148,6 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('login', 'login');
 });
 
-// Route Controlador Cambiar Contraseña
-Route::controller(CambiarContrasenaController::class)->group(function () {
-    // Route para ir a la ruta login
-    Route::get('cambiarContrasena', 'index')->name('cambiarContrasena');
-    // Route para validar las credenciales
-    Route::post('cambiarContrasena/{id}', 'cambiarContrasena');
-});
-
 // Route Controlador Rsena
 Route::controller(ResenaController::class)->group(function () {
     // Route para mostrar la vista reseñas
@@ -227,8 +218,18 @@ Route::controller(UsuarioController::class)->group(function () {
     Route::get('perfilCliente', 'indexCliente')->name('perfilCliente');
     // Route para actualizar un usuario
     Route::post('perfil/editar', 'update')->name('editarperfil');
+    // Route para cambiar el estado un usuario
+    Route::post('cambiarEstado/{id}', 'cambiarEstado')->name('cambiarEstadoUsuario');
     // Route para cerrar la seion
     Route::get('logout', 'logout')->name('logout');
+    // Route para mostrar la vista de olvidar contraseña
+    Route::get('olvidarContrasena', 'olvidarContrasena')->name('olvidarContrasena');
+    // Route para mostrar la vista de olvidar contraseña
+    Route::post('correoOlvidarContrasena', 'correoOlvidarContrasena')->name('correoOlvidarContrasena');
+    // Route para mostrar la vista de cambio contraseña
+    Route::get('cambioContrasena/{id}', 'cambioContrasena')->name('cambioContrasena');
+    // Route para cambiar la contraseña de un usuario
+    Route::post('cambiarContrasena', 'cambiarContrasena')->name('cambiarContrasena');
 });
 
 // Route Controlador Acompanante

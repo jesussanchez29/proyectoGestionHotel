@@ -47,7 +47,7 @@
                     <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
                     <label class="custom-control-label" for="customCheck1">Recuérdame</label>
                 </div>
-                <a href="">¡He olvidado mi contraseña!</a>
+                <a href="{{ route('olvidarContrasena') }}">¡He olvidado mi contraseña!</a>
             </div>
         </div>
         <div class="form-group">

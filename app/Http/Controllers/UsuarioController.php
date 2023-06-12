@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OlvidarContrasena;
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Usuario;
@@ -9,6 +10,8 @@ use App\Rules\TipoIdentificacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
@@ -109,6 +112,23 @@ class UsuarioController extends Controller
         }
     }
 
+    //Funcion para cambiar el estado de un usuario
+    public function cambiarEstado($id) {
+        // Obtiene el usuario a partir del id
+        $usuario = Usuario::findOrFail($id);
+        // Si su estado es desactivo
+        if($usuario->estado == 0) {
+            $usuario->estado = 1;
+        // Si su estado es activo
+        } else {
+            $usuario->estado = 0;
+        }
+        //Actualizamos el usuario
+        $usuario->save();
+        // Nos dirige a la vista anterior
+        return back()->with('success', 'Estado actualizado correctamente');
+    }
+
     // Funcion para cerrar la sesion de un usuario
     public function logout()
     {
@@ -116,5 +136,47 @@ class UsuarioController extends Controller
         Auth::logout();
         // Nos dirige a la vista index
         return redirect()->route('indexCliente');
+    }
+
+    public function olvidarContrasena()
+    {
+        return view('olvidarContrasena');
+    }
+
+    public function correoOlvidarContrasena(Request $request)
+    {
+        $email = $request->email;
+        $usuario = Usuario::where('email', $email)->first();
+
+        if(!$usuario) {
+            return back()->withErrors(['invalid_email' => 'El email no esta registrado'])->withInput();
+        } else {
+            $enlance = route('cambioContrasena', ['id' => $usuario->id]);
+            Mail::to($request->email)->send(new OlvidarContrasena($enlance));
+            return redirect()->route('login')->with('success', 'Revisa tu correo para el cambio de contraseña');
+        }
+    }
+
+    public function cambioContrasena($id)
+    {
+        return view('cambiarContrasena', ['id' => $id]);
+    }
+
+    public function cambiarContrasena(Request $request) {
+        $id = $request->usuarioId;
+        // Validacion
+        $request->validate([
+            'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_\/!@#$%^&*()\-])[A-Za-z\d\-_\/!@#$%^&*()]+$/'],
+            'repassword' => 'required|same:password',        
+        ]);
+
+        $usuario = Usuario::findOrFail($id);
+
+        $usuario->password = Hash::make($request->input('password'));
+        $usuario->primerInicioSesion = false;
+        //Actualizamos el usuario
+        $usuario->save();
+        // Nos redirige a perfilCliente con un mensaje
+        return redirect()->route('login')->with('success', 'Contraseña actualizada, ¡Inicia sesion!');
     }
 }

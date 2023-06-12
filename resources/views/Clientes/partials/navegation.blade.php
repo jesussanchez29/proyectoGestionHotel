@@ -6,9 +6,11 @@
             <div class="impx-logo">
                 @auth
                     @if (Auth::user()->empleado)
-                        <a href="{{ route('clientes') }}"><img src="{{ asset($hotel->logo) }}" class="" alt="Logo"></a>
+                        <a href="{{ route('clientes') }}"><img src="{{ asset($hotel->logo) }}" class=""
+                                alt="Logo"></a>
                     @else
-                        <a href="{{ route('indexCliente') }}"><img src="{{ asset($hotel->logo) }}" class="" alt="Logo"></a>
+                        <a href="{{ route('indexCliente') }}"><img src="{{ asset($hotel->logo) }}" class=""
+                                alt="Logo"></a>
                     @endif
 
                 @endauth
@@ -54,11 +56,13 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li><a href="{{ route('reservasCliente') }}" class="uk-navbar-nav-subtitle">
-                                    <div>Historial de Reservas<div class="uk-navbar-subtitle">Ver reservas</div>
-                                    </div>
-                                </a>
-                            </li>
+                                @if (Auth::user()->reservas->count() > 0)
+                                    <li><a href="{{ route('reservasCliente') }}" class="uk-navbar-nav-subtitle">
+                                            <div>Historial de Reservas<div class="uk-navbar-subtitle">Ver reservas</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
                         @endauth
                     </ul>

@@ -14,7 +14,7 @@ class RegistroController extends Controller
     // Funcion para mostrar la vista d eregistro
     public function index()
     {
-        return view('Clientes.registro');
+        return view('registro');
     }
 
     // FUncion para registrar un ciente

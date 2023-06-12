@@ -18,19 +18,6 @@
                         <p>No hay pisos Disponibles</p>
                     @endif
                 </div>
-                <div class="col-md-2 ml">
-                    <label for="fechaLlegada" class="col-form-label">Fecha Llegada:</label>
-                    <input type="date" class="form-control" id="fechaLlegada" name="fechaLlegada"
-                        min="{{ date('Y-m-d') }}">
-                </div>
-                <div class="col-md-2">
-                    <label for="fechaSalida" class="col-form-label">Fecha Salida:</label>
-                    <input type="date" class="form-control" id="fechaSalida" name="fechaSalida"
-                        min="{{ date('Y-m-d') }}">
-                </div>
-                <div class="col-md-2 align-self-end">
-                    <button type="button" class="btn btn-dark" id="limpiarBtn">Limpiar Campos</button>
-                </div>
             </div>
             <hr />
             @if (count($habitaciones) > 0)
@@ -71,18 +58,7 @@
             @endif
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Funcion para limpiar los campos
-        document.getElementById('limpiarBtn').addEventListener('click', function() {
-            // Limpiamos campos
-            document.getElementById('fechaLlegada').value = '';
-            document.getElementById('fechaSalida').value = '';
-            document.getElementById('cbopiso').value = 'Todos';
-            // Mostramos todas las habitaciones
-            location.reload();
-
-        });
 
         // Funcion que al selecionar el piso muestra todos las habitaciones de ese piso
         $('#cbopiso').on('change', function() {
@@ -99,59 +75,5 @@
                 $('.habitacion-card[data-piso-id="' + selectedPiso + '"]').show();
             }
         });
-
-        // Funcion para cuando se selecione unas fechas muestra las habitaciones disponibles de ese rango de fechas
-        $(document).ready(function() {
-            $('#fechaLlegada, #fechaSalida, #cbopiso').change(function() {
-                // Llamar a la función que realiza la solicitud AJAX
-                realizarSolicitudAjax();
-            });
-        });
-
-        // Funcion que ahce todo el proceso d emostrar las habitaciones disponibles
-        function realizarSolicitudAjax() {
-            // Obtenemos valores
-            var fechaLlegada = $('#fechaLlegada').val();
-            var fechaSalida = $('#fechaSalida').val();
-            var pisoSeleccionado = $('#cbopiso').val();
-
-            // Realizar la solicitud AJAX utilizando jQuery
-            $.ajax({
-                url: "{{ route('obtenerHabitacionesDisponibles') }}",
-                method: 'GET',
-                data: {
-                    fechaLlegada: fechaLlegada,
-                    fechaSalida: fechaSalida,
-                    piso: pisoSeleccionado
-                },
-                // Si todo hay ido correcto
-                success: function(response) {
-                    // Ocultamos todas las habitaciones
-                    $('.habitacion-card').find('#estado');
-
-                    // Iterar sobre los datos recibidos y mostrar solo las habitaciones disponibles
-                    response.forEach(function(habitacion) {
-                        var habitacionNumero = habitacion.numero;
-                        $('.habitacion-card[data-habitacion-num="' + habitacionNumero + '"]').find(
-                            '#estado').removeClass(function(index, className) {
-                                return (className.match(/(^|\s)(bg-)\S+/g) || []).join(' ');
-                        }).addClass('bg-success');
-                        $('.habitacion-card[data-habitacion-num="' + habitacionNumero + '"]').find(
-                            '#border').removeClass(function(index, className) {
-                                return (className.match(/(^|\s)(border-)\S+/g) || []).join(' ');
-                        }).addClass('border-success');
-                        $('.habitacion-card[data-habitacion-num="' + habitacionNumero + '"]').find(
-                            '#fatexto').removeClass(function(index, className) {
-                                return (className.match(/(^|\s)(text-)\S+/g) || []).join(' ');
-                        }).addClass('text-success');
-                        $('.habitacion-card[data-habitacion-num="' + habitacionNumero + '"]').find(
-                            '#texto').removeClass(function(index, className) {
-                                return (className.match(/(^|\s)(text-)\S+/g) || []).join(' ');
-                        }).addClass('text-success');
-                    });
-                },
-                error: function(xhr, status, error) {}
-            });
-        }
     </script>
 @endsection

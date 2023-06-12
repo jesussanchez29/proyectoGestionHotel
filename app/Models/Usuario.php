@@ -52,4 +52,5 @@ class Usuario extends Authenticatable
             ->where('fechaSalida', '>=', now()) // Fecha de fin mayor o igual a la fecha actual
             ->first(); // Obtener solo la primera reserva actual
     }
+
 }

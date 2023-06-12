@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Models\Cliente;
-use App\Models\Empleado;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +12,7 @@ class LoginController extends Controller
     // Funcion para ir a la vista login
     public function index()
     {
-        return view('Clientes.login');
+        return view('login');
     }
 
     // Funcion para que una vez logeado nos rediriga a la vista que corresponda
@@ -34,14 +32,21 @@ class LoginController extends Controller
         Auth::login($validacion);
 
         // Si la sesion es un cliente
-        if($validacion->cliente)
-        {
-            // Nos redirige al indexCliente
-            return redirect()->route('indexCliente');
-        // Si es empleado
-        } elseif($validacion->empleado) {
-            // Nos redirige al indexEmpleado
-            return redirect()->route('clientes');
+        if ($validacion->estado == 0) {
+            return back()->withErrors(['invalid_user' => 'El usuario esta desactivado, contacta con eladministrador'])->withInput();
+        } else {
+            if ($validacion->primerInicioSesion == 1) {
+                return redirect()->route('cambioContrasena', $validacion->id);
+            } else {
+                if ($validacion->cliente) {
+                    // Nos redirige al indexCliente
+                    return redirect()->route('indexCliente');
+                    // Si es empleado
+                } elseif ($validacion->empleado) {
+                    // Nos redirige al indexEmpleado
+                    return redirect()->route('calendarioReservas');
+                }
+            }
         }
     }
 

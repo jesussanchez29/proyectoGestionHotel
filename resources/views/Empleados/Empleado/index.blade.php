@@ -50,7 +50,7 @@
                                     <td>{{ $empleado->usuario->email }}</td>
                                     <td>{{ $empleado->telefono }}</td>
                                     <td>{{ $empleado->direccion }}</td>
-                                    @if ($empleado->estado == 0)
+                                    @if ($empleado->usuario->estado == 0)
                                         <td style="color: red">Inactivo</td>
                                     @else
                                         <td style="color: #00FF00">Activo</td>
@@ -61,10 +61,29 @@
                                         <td style="color: red">Sin asignar</td>
                                     @endif
                                     <td>
-                                        <input type='image' data-toggle="modal" src="{{ asset('images/editar.png') }}"
-                                            data-target="#myModalEdit{{ $empleado->id }}">
-                                        <input type='image' data-toggle="modal" src="{{ asset('images/eliminar.png') }}"
-                                            data-target="#myModalDelete{{ $empleado->usuario->id }}">
+                                        <div style="display: flex; align-items: center; justify-content: center;">
+
+                                            @if ($empleado->usuario->estado == 0)
+                                                <form action="{{ route('cambiarEstadoUsuario', $empleado->usuario->id) }}"
+                                                    method="POST" style="margin-top:5px; margin-right: 2px;">
+                                                    @csrf
+                                                    <input type="image" src="{{ asset('images/desbloquear.png') }}"
+                                                        alt="Desbloquear">
+                                                </form>
+                                            @else
+                                                <form action="{{ route('cambiarEstadoUsuario', $empleado->usuario->id) }}"
+                                                    method="POST" style="margin-top:5px; margin-right: 2px;">
+                                                    @csrf
+                                                    <input type="image" src="{{ asset('images/bloquear.png') }}"
+                                                        alt="Bloquear">
+                                                </form>
+                                            @endif
+                                            <input type='image' data-toggle="modal"
+                                                src="{{ asset('images/editar.png') }}"
+                                                data-target="#myModalEdit{{ $empleado->id }}">
+                                            <input type='image' data-toggle="modal"
+                                                src="{{ asset('images/eliminar.png') }}"
+                                                data-target="#myModalDelete{{ $empleado->usuario->id }}">
                                     </td>
                                 </tr>
                                 <!-- Modal modificar empleado -->
