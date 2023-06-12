@@ -77,14 +77,7 @@
 
                                                 <div
                                                     class="uk-card-footer uk-padding-remove-horizontal uk-padding-remove-bottom">
-                                                    @auth
-                                                        <a class="uk-button uk-button-text impx-text-aqua">Ver
-                                                            disponibilidad&raquo;</a>
-
-                                                    @endauth
-                                                    @guest
-                                                        <p>Horario: {{ $servicio->horaInicio }} - {{ $servicio->horaFin }}</p>
-                                                    @endguest
+                                                        <p class="uk-button uk-button-text impx-text-aqua">Horario: {{ $servicio->horaInicio }} - {{ $servicio->horaFin }}</p>
                                                 </div>
                                             </div>
                                         </div>
