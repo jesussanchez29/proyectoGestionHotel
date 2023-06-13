@@ -260,8 +260,13 @@
             </div>
         </div>
     </div>
+    <div style="margin-top: 20px">
+        <form action="{{ route('cambiarEstadoReserva', $reserva->id) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Finalizar Reserva</button>
+        </form>
+    </div>
 
-    @include('Empleados.Cliente.modals.create')
     @include('Empleados.Acompanante.modals.create')
     <script>
         // Obtener el valor de la capacidad máxima

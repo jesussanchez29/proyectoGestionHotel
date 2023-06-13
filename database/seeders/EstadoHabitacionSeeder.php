@@ -16,5 +16,6 @@ class EstadoHabitacionSeeder extends Seeder
         EstadoHabitacion::create(['nombre' => 'Disponible', 'clase' => 'success']);
         EstadoHabitacion::create(['nombre' => 'Ocupada', 'clase' => 'danger']);
         EstadoHabitacion::create(['nombre' => 'Limpieza','clase' => 'info']);
+        EstadoHabitacion::create(['nombre' => 'Mantenimiento','clase' => 'warning']);
     }
 }

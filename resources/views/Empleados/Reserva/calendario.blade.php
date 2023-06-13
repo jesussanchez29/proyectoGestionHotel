@@ -22,6 +22,7 @@
             Cliente</button>
     </div>
     <div id="calendar"></div>
+    @include('Empleados.Cliente.modals.create')
 
     @include('Empleados.Reserva.modals.create', [
         'fechaLlegadaId' => 'fechaLlegada',
@@ -53,17 +54,7 @@
                         clickedDate.setDate(clickedDate.getDate() + 1); // Sumar un día adicional
                         $('#fechaLlegada').val(clickedDate.toISOString().slice(0, 10)).prop(
                             'disabled', true);
-
-                        // Obtener valores
-                        var fechaLlegada = $('#fechaLlegada').val();
-                        var fechaSalida = $('#fechaSalida').val();
-                        var tipoSeleccionado = $('#tipoHabitacion').val();
-
-                        // Verificar si ambos campos están seleccionados
-                        if (fechaSalida) {
-                            realizarSolicitudAjax();
-                        }
-
+                        $('#fechaLlegadaOculta').val(clickedDate.toISOString().slice(0, 10));
                         createModal.show();
                     }
                 },
@@ -77,36 +68,6 @@
             calendar.render();
         });
 
-        // Funcion que ahce todo el proceso d emostrar las habitaciones disponibles
-        function realizarSolicitudAjax() {
-            // Obtenemos valores
-            var fechaLlegada = $('#fechaLlegada').val();
-            var fechaSalida = $('#fechaSalida').val();
-            var tipoSelecionado = $('#tipoHabitacion').val();
-
-            // Realizar la solicitud AJAX utilizando jQuery
-            $.ajax({
-                url: "{{ route('obtenerHabitacionesDisponibles') }}",
-                method: 'GET',
-                data: {
-                    fechaLlegada: fechaLlegada,
-                    fechaSalida: fechaSalida,
-                    tipo: tipoSelecionado
-                },
-                // Si todo hay ido correcto
-                success: function(response) {
-
-                    $('#tipoHabitacion').empty();
-
-                    response.forEach(function(habitacion) {
-                        var option = $('<option>').val(habitacion.id).text(habitacion.nombre);
-                        $('#tipoHabitacion').append(option);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        }
+       
     </script>
 @endsection

@@ -22,7 +22,5 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadoHabitacionSeeder::class);
         $this->call(PisoSeeder::class);
         $this->call(HabitacionSeeder::class);
-        $this->call(EstadoReservaSeeder::class);
-
     }
 }

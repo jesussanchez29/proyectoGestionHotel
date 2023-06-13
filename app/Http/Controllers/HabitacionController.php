@@ -85,8 +85,8 @@ class HabitacionController extends Controller
         $fechaFin = $request->fechaSalida;
         $tipoHabitacion = $request->tipoHabitacion;
 
-        // Obtiene las habitaciones disponibles que no tienen una reserva sociada dentro del rango de fechas selecionadas
-        $query = Habitacion::whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
+        $habitacionesDisponibles = Habitacion::select('id as habId', 'numero')->
+        whereNotIn('id', function ($query) use ($fechaInicio, $fechaFin) {
             $query->select('habitacion_id')
                 ->from('reservas')
                 ->where(function ($query) use ($fechaInicio, $fechaFin) {
@@ -94,27 +94,34 @@ class HabitacionController extends Controller
                         $query->where('fechaLlegada', '<=', $fechaFin)
                             ->where('fechaSalida', '>=', $fechaInicio);
                     })
-                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
-                            $query->where('fechaLlegada', '>=', $fechaInicio)
-                                ->where('fechaSalida', '<=', $fechaFin);
-                        })
-                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
-                            $query->where('fechaLlegada', '<=', $fechaInicio)
-                                ->where('fechaSalida', '>=', $fechaInicio);
-                        })
-                        ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
-                            $query->where('fechaLlegada', '<=', $fechaFin)
-                                ->where('fechaSalida', '>=', $fechaFin);
-                        });
+                    ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                        $query->where('fechaLlegada', '>=', $fechaInicio)
+                            ->where('fechaSalida', '<=', $fechaFin);
+                    })
+                    ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                        $query->where('fechaLlegada', '<=', $fechaInicio)
+                            ->where('fechaSalida', '>=', $fechaInicio);
+                    })
+                    ->orWhere(function ($query) use ($fechaInicio, $fechaFin) {
+                        $query->where('fechaLlegada', '<=', $fechaFin)
+                            ->where('fechaSalida', '>=', $fechaFin);
+                    });
                 });
-        });
-
-        // Obtiene las habitaciones del tipo d ehabitacion selecionado
-        $query->where('tipoHabitacion_id', $tipoHabitacion);
-
-        $habitacionesDisponibles = $query->get();
+        })
+        ->where('tipoHabitacion_id', $tipoHabitacion)
+        ->get();
+    
 
         //Devuelve las habitaciones
         return response()->json($habitacionesDisponibles);
+    }
+
+    public function cambiarEstadoHabitacion(Request $request, $id)
+    {
+        $habitacion = Habitacion::findOrFail($id);
+        $estado = EstadoHabitacion::where('nombre', $request->estado )->first();
+        $habitacion->estadoHabitacion_id = $estado->id;
+        $habitacion->save();
+        return back()->with('success', 'Estado cambiado correctamente');
     }
 }

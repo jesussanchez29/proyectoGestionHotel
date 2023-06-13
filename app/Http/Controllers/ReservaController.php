@@ -45,11 +45,10 @@ class ReservaController extends Controller
         $reserva->fechaLLegada = $request->input('fechaLlegada');
         $reserva->fechaSalida = $request->input('fechaSalida');
         $reserva->abonado = 0;
+        $reserva->estado = true;
         $reserva->usuario_id = Auth::user()->id;
         $habitacion = Habitacion::where('piso_id', $request->input('piso_id'))->where('tipoHabitacion_id', $request->input('habitacion'))->inRandomOrder()->first();
         $reserva->habitacion_id = $habitacion->id;
-        $estadoPediente = EstadoReserva::where('nombre', 'Confirmada')->first();
-        $reserva->estadoReserva_id = $estadoPediente->id;
         // Creamos la reserva
         $reserva->save();
         // Nos redirige a indexCLientes con un mensaje
@@ -60,23 +59,24 @@ class ReservaController extends Controller
     public function createEmpleado(Request $request)
     {
         $request->validate([
-            'fechaLlegada' => 'required|date',
-            'fechaSalida' => 'required|date',
-            'abonado' => 'required',
+            'fechaLlegadaOculta' => 'required',
+            'fechaSalida' => 'required',
             'cliente' => 'required',
             'habitacion' => 'required',
         ]);
 
         $reserva = new Reserva();
         // Asignamos los datos
-        $reserva->fechaLLegada = $request->input('fechaLlegada');
+        $reserva->fechaLLegada = $request->input('fechaLlegadaOculta');
+        $fechaSalida = Carbon::createFromFormat('Y-m-d', $request->input('fechaSalida'));
+        $fechaSalida->addDay(); // Sumar un día a la fecha de salida
+        $reserva->fechaSalida = $fechaSalida->format('Y-m-d');
         $reserva->fechaSalida = $request->input('fechaSalida');
-        $reserva->abonado =  $request->input('abonado');
+        $reserva->abonado =  0;
+        $reserva->estado = true;
         $reserva->usuario_id =  $request->input('cliente');
-        $reserva->habitacion_id = $request->habitacion;
+        $reserva->habitacion_id = $request->input('habitacion');
         $reserva->empleado_id = Auth::user()->empleado->id;
-        $estadoPediente = EstadoReserva::where('nombre', 'Confirmada')->first();
-        $reserva->estadoReserva_id = $estadoPediente->id;
         // Creamos la reserva
         $reserva->save();
 
@@ -164,7 +164,7 @@ class ReservaController extends Controller
             $fechaSalida = Carbon::parse($reserva->fechaSalida);
             $totalReservas += $fechaEntrada->diffInDays($fechaSalida) * $reserva->habitacion->tipoHabitacion->precio;
         }
-        
+
 
         // Crear un array con los datos que se pasarán a la vista
         $data = [
@@ -208,7 +208,7 @@ class ReservaController extends Controller
     // Funcion para enviar las reservas al clanedario de reservas
     public function calendarioReservas()
     {
-        $reservasHabitaciones = Reserva::all();
+        $reservasHabitaciones = Reserva::where('estado', 1)->get();
         $clientes = Cliente::all();
         $tipoHabitaciones = TipoHabitacion::all();
 
@@ -218,7 +218,7 @@ class ReservaController extends Controller
                 'id' => $reserva->id,
                 'title' => 'Habitacion ' . $reserva->habitacion->numero,
                 'start' => $reserva->fechaLLegada,
-                'end' => $reserva->fechaSalida,
+                'end' => date('Y-m-d', strtotime($reserva->fechaSalida . ' +1 day')),
             ];
         }
         return view('Empleados.Reserva.calendario', compact('reservas', 'clientes', 'tipoHabitaciones'));
@@ -244,7 +244,25 @@ class ReservaController extends Controller
     // Funcion para msotrar la vista de las reservas del cliente
     public function reservaCliente()
     {
-        $reservas = Reserva::where('usuario_id', Auth::user()->id)->get();
+        $reservas = Reserva::leftJoin('acompanantes', 'reservas.id', '=', 'acompanantes.reserva_id')
+            ->select('reservas.*', 'acompanantes.*', 'acompanantes.id as idAcom')
+            ->where('reservas.usuario_id', Auth::user()->id)
+            ->get();
         return view('Clientes.Reserva.ver', compact('reservas'));
+    }
+
+    // Funcion para finalizar o cancelar una reserva
+    public function finalizarCancelarReserva($id)
+    {
+        $reserva = Reserva::find($id);
+        $reserva->estado = false;
+        $reserva->save();
+
+        $habitacion = Habitacion::find($reserva->habitacion_id);
+        $estadoHabitacion = EstadoHabitacion::where('nombre', 'Limpieza')->first();
+        $habitacion->estadoHabitacion_id = $estadoHabitacion->id; 
+        $habitacion->save();
+
+        return back()->with('success', 'Reserva finalizada correctamente');
     }
 }

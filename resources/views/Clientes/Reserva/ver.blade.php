@@ -25,7 +25,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 50px;margin-bottom:50px;">
         @if (session('success'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -70,7 +70,7 @@
                                     <div class="form-group col-md-6 mb-2">
                                         <label for="inputPassword4">Fecha Salida:</label>
                                         <input type="date" class="form-control" name="fechaSalida" id="txtfechasalida"
-                                            value="{{ $reserva->fechaSalida }}">
+                                            value="{{ $reserva->fechaSalida }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -97,9 +97,24 @@
                                                 @if (count($reservas) > 0)
                                                     @foreach ($reservas as $reserva)
                                                         <tr>
-
-
+                                                            <td>{{ $reserva->acompanante }} </td>
+                                                            <td>{{ $reserva->tipoIdentificaion }}-{{ $reserva->identificacion }}
+                                                            </td>
+                                                            <td>{{ $reserva->fechaNacimiento }}</td>
+                                                            <td>{{ $reserva->telefono }}</td>
+                                                            <td>
+                                                                <input type='image' data-toggle="modal"
+                                                                    src="{{ asset('images/editar.png') }}"
+                                                                    data-target="#myModalEdit{{ $reserva->id }}"
+                                                                    style="width: 45%">
+                                                                <input type='image' data-toggle="modal"
+                                                                    src="{{ asset('images/eliminar.png') }}"
+                                                                    data-target="#myModalDelete{{ $reserva->id }}"
+                                                                    style="width: 45%">
+                                                            </td>
                                                         </tr>
+
+                                                        
                                                     @endforeach
                                                 @else
                                                     <tr>
@@ -112,37 +127,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 @endforeach
             </div>
+        @endif
     </div>
-    @endif
-    </div>
 
-@endsection
-
-@section('contacto')
-    <div class="pre-footer-contact uk-padding bg-img2 uk-position-relative">
-        <div class="impx-overlay dark"></div>
-        <div class="uk-container">
-
-            <div data-uk-grid class="uk-padding-remove-bottom uk-position-relative">
-                <div class="uk-light uk-width-1-2@xl uk-width-1-2@l uk-width-1-2@m uk-width-1-3@s">
-                    <!-- address -->
-                    <h5 class="uk-heading-line uk-margin-remove-bottom"><span>Dirección</span></h5>
-                    <p class="impx-text-large uk-margin-top">{{ $hotel->direccion }}, {{ $hotel->ciudad }}</p>
-                </div>
-                <div class="uk-light uk-width-1-4@xl uk-width-1-4@l uk-width-1-4@m uk-width-1-3@s">
-                    <!-- phone -->
-                    <h5 class="uk-heading-line uk-margin-bottom"><span>Telefono</span></h5>
-                    <p class="impx-text-large uk-margin-remove">+34 {{ $hotel->telefono }}</p>
-                </div>
-                <div class="uk-light uk-width-1-4@xl uk-width-1-4@l uk-width-1-4@m uk-width-1-3@s">
-                    <!-- email -->
-                    <h5 class="uk-heading-line uk-margin-bottom"><span>Email</span></h5>
-                    <a href="mailt:#" class="impx-text-large">{{ $hotel->email }}</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('Clientes.Acompanante.modals.create')
 @endsection

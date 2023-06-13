@@ -130,6 +130,8 @@ Route::controller(ReservaController::class)->group(function () {
     Route::post('reserva/actualizarPago/{id}', 'actualizarPagoReserva')->name('ReservaActualizarPagoReserva');
     // Route para mostar la reservas a los clientes
     Route::get('reserva/reservaCliente', 'reservaCliente')->name('reservasCliente');
+    // Funcion para cambiar el estado de una reserva
+    Route::post('reserva/finalizarCancelarReserva/{id}', 'finalizarCancelarReserva')->name('cambiarEstadoReserva');
 });
 
 // Route Controlador Registro
@@ -184,6 +186,8 @@ Route::controller(HabitacionController::class)->group(function () {
     Route::post('habitacion/eliminar/{id}', 'destroy')->name('eliminarHabitacion');
     // Route para obtener las habitaciones disponibles
     Route::get('habitacion/obtenerDisponibles', 'obtenerHabitacionesDisponibles')->name('obtenerHabitacionesDisponibles');
+    // Route para cambiar el estado de una habitacion
+    Route::post('habitacion/cambiarEstadoHabitacion/{id}', 'cambiarEstadoHabitacion')->name('cambiarEstadoHabitacion');
 });
 
 // Route Controlador Estado Habitacion

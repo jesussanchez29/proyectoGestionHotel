@@ -16,14 +16,13 @@ return new class extends Migration
             $table->date('fechaLLegada');
             $table->date('fechaSalida');
             $table->decimal('abonado');
+            $table->boolean('estado');
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
             $table->unsignedBigInteger('habitacion_id');
             $table->foreign('habitacion_id')->references('id')->on('habitaciones')->onDelete('cascade');
             $table->unsignedBigInteger('empleado_id')->nullable();
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('set null');
-            $table->unsignedBigInteger('estadoReserva_id')->nullable();
-            $table->foreign('estadoReserva_id')->references('id')->on('EstadoReserva')->onDelete('set null');
             $table->timestamps();
         });
     }
