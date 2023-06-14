@@ -46,7 +46,6 @@ class ServicioController extends Controller
         $servicio->horaInicio = $request->input('horaInicio');
         $servicio->horaFin = $request->input('horaFin');
         $servicio->precio = $request->input('precio');
-        $servicio->disponibilidad = 1;
         //Creamos el servicio
         $servicio->save();
         // Nos redirige a servicios con un mensaje

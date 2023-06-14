@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('duracion');
             $table->string('capacidad');
             $table->decimal('precio');
-            $table->boolean('disponibilidad');
             $table->timestamps();
         });
     }

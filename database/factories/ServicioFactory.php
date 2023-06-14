@@ -25,7 +25,6 @@ class ServicioFactory extends Factory
             'horaFin' => $this->faker->time('H:i'),
             'capacidad' => $this->faker->numberBetween(0, 10),
             'precio' => $this->faker->randomFloat(2, 10, 100),
-            'disponibilidad' => $this->faker->boolean,
         ];
     }
 }
