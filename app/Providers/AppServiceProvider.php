@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+
     }
 
     /**
@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if (Schema::hasTable('hotel')) {
 
-            View::share('hotel', Hotel::first()); // Reemplaza "TuModelo" por el nombre de tu modelo o clase que interactúa con la base de datos
+            View::share('hotel', Hotel::first());
         }
     }
 }

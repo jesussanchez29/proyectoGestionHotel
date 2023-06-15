@@ -46,6 +46,8 @@ class ServicioController extends Controller
         $servicio->horaInicio = $request->input('horaInicio');
         $servicio->horaFin = $request->input('horaFin');
         $servicio->precio = $request->input('precio');
+        $servicio->duracion = $request->input('duracion');
+        $servicio->capacidad = $request->input('capacidad');
         //Creamos el servicio
         $servicio->save();
         // Nos redirige a servicios con un mensaje
@@ -66,6 +68,8 @@ class ServicioController extends Controller
             'horaInicio' => 'required',
             'horaFin' => 'required',
             'precio' => 'required',
+            'duracion' => 'required',
+            'capacidad' => 'required',
         ]);
 
         // Guardamos los datos
@@ -79,6 +83,8 @@ class ServicioController extends Controller
         $servicio->horaInicio = $request->input('horaInicio');
         $servicio->horaFin = $request->input('horaFin');
         $servicio->precio = $request->input('precio');
+        $servicio->duracion = $request->input('duracion');
+        $servicio->capacidad = $request->input('capacidad');
         // Actualizamos el servicio
         $servicio->save();
         // Nos redirige a servicios con un mensaje
