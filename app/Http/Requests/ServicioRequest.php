@@ -22,6 +22,8 @@ class ServicioRequest extends FormRequest
             'horaInicio' => 'required',
             'horaFin' => 'required',
             'precio' => 'required',
+            'duracion' => 'required',
+            'capacidad' => 'required',
         ];
     }
 }

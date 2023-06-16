@@ -87,6 +87,18 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+    $(document).ready(function() {
+  $('#fechaSalida').on('change', function() {
+    var fechaSalida = new Date($(this).val());
+    var fechaLlegada = new Date($('#fechaLlegada').val());
+
+    if (fechaSalida < fechaLlegada) {
+      $(this).val('');
+    }
+  });
+});
+
+
 
         $(document).ready(function() {
             // Asignar eventos de cambio a los campos relevantes

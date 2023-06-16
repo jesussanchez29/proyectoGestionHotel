@@ -155,7 +155,8 @@
                             <h4 class="uk-margin-medium-bottom uk-heading-bullet uk-heading-line"><span>Añadir
                                     Reseña</span></h4>
                             @auth
-                                @if (Auth::user()->cliente)
+                                @if (Auth::user()->cliente && Auth::user()->tieneReservaActual())
+                                    @if(Auth::user()->reservaActual()->habitacion->tipoHabitacion->id == $tipoHabitacionEncontrada->id)
                                     <form method="POST" action="{{ route('crearResena', $tipoHabitacionEncontrada->id) }}">
                                         @csrf
                                         <fieldset class="uk-fieldset">
@@ -183,6 +184,10 @@
                                             <div class="uk-margin">
                                                 <button class="uk-button impx-button aqua">Publicar</button>
                                             </div>
+                                        @else
+                                        <p class="vacio">No tienes una reserva de esta habitacion</p>
+
+                                        @endif
                                         @else
                                             <p class="vacio">Debes ser cliente para poder poner una reseña</p>
                                 @endif

@@ -39,6 +39,16 @@
                                 <input type="number" class="form-control" name="precio" value="{{ old('precio') }}" step="any">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4 mx-auto">
+                                <label for="duracion" class="col-form-label">Duracion:</label>
+                                <input type="number" class="form-control" name="duracion" value="{{ old('duracion') }}">
+                            </div>
+                            <div class="col-md-4 mx-auto">
+                                <label for="capacidad" class="col-form-label">Capacidad:</label>
+                                <input type="number" class="form-control" name="capacidad" value="{{ old('capacidad') }}">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

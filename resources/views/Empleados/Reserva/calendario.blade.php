@@ -55,6 +55,11 @@
                         $('#fechaLlegada').val(clickedDate.toISOString().slice(0, 10)).prop(
                             'disabled', true);
                         $('#fechaLlegadaOculta').val(clickedDate.toISOString().slice(0, 10));
+                        var fechaMinimaSalida = new Date(clickedDate);
+                        fechaMinimaSalida.setDate(fechaMinimaSalida.getDate() + 1);
+
+                        $('#fechaSalida').attr('min', fechaMinimaSalida.toISOString().slice(0, 10));
+                        $('#fechaSalida').val('');
                         createModal.show();
                     }
                 },
@@ -67,7 +72,5 @@
             });
             calendar.render();
         });
-
-       
     </script>
 @endsection
