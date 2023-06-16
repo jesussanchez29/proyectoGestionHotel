@@ -141,7 +141,7 @@ class ServicioController extends Controller
         }
 
         // Devuelve las horas disponibles
-        return response()->json($horasOcupadas);
+        return response()->json($horasDisponibles);
     }
 
     // Funcion para registrar un servicio a una reserva concreta

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('imagen');
             $table->string('horaInicio');
             $table->string('horaFin');
-            $table->string('duracion');
-            $table->string('capacidad');
+            $table->integer('duracion');
+            $table->integer('capacidad');
             $table->decimal('precio');
             $table->timestamps();
         });
