@@ -6,7 +6,7 @@
                 <div class="impx-footer-logo uk-align-center uk-text-center">
                     <!-- Footer Logo -->
                     @if (!empty($hotel->logo))
-                        <img src="{{ $hotel->logo }}" alt="" class="">
+                        <img src="{{ asset($hotel->logo) }}" alt="" class="">
                     @endif
                     <!-- Footer Note -->
                     <p class="uk-margin-bottom">PROYECTO FINAL GRADO - IES PLAYAMAR | Jesús Sánchez Torres</p>
