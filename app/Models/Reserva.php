@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Reserva extends Model
 {
     use HasFactory;
-    protected $table = 'acompanantes';
     // Nombre de la clave primaria en la tabla
     protected $primaryKey = "id";
     // Atributos del modelo
