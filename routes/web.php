@@ -132,6 +132,8 @@ Route::controller(ReservaController::class)->group(function () {
     Route::get('reserva/reservaCliente', 'reservaCliente')->name('reservasCliente');
     // Funcion para cambiar el estado de una reserva
     Route::post('reserva/finalizarCancelarReserva/{id}', 'finalizarCancelarReserva')->name('cambiarEstadoReserva');
+    // Route para ver una reserva un cliente
+    Route::get('reserva/verCliente/{id}', 'verReservaCliente')->name('verReservaCliente');
 });
 
 // Route Controlador Registro

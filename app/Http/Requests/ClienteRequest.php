@@ -7,13 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ClienteRequest extends FormRequest
 {
-    // Metodo que autoriza a validar el cliente
+    // Autoriza la validacion
     public function authorize(): bool
     {
         return true;
     }
 
-    // Metodo que valida los campos del cliente
+    // Validacion
     public function rules(): array
     {
         return [

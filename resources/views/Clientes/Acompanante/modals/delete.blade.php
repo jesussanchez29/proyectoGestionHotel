@@ -1,5 +1,5 @@
 <!-- Modal para Confirmar Borrado -->
-<div class="modal fade" id="myModalDelete{{ $reserva->idAcom }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="myModalDelete{{ $acompanante->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
                         aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="miFormulario" method="POST" action="{{ route('eliminarAcompanante', $reserva->id) }}">
+            <form id="miFormulario" method="POST" action="{{ route('eliminarAcompanante', $acompanante->id) }}">
                 @csrf
                 <div class="modal-body">
                     Vas a eliminar al acompañante ¿Estás seguro?

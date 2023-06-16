@@ -9,11 +9,13 @@ class TipoIdentificacion implements Rule
 {
     private $tipo;
 
+    //Constructor
     public function __construct($tipo)
     {
         $this->tipo = $tipo;
     }
 
+    // Validacion segun el tipo de identifacion
     public function passes($attribute, $value)
     {
         switch ($this->tipo) {
@@ -26,6 +28,7 @@ class TipoIdentificacion implements Rule
         }
     }
 
+    // Mensaje de error
     public function message()
     {
         return 'El campo :attribute no es válido para el tipo de identificación seleccionado.';

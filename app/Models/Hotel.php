@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+    // Nombre de la tabla en la base de datos
     protected $table = 'hotel';
-    protected $primaryKey="id";
-    protected $fillable=['imagen', 'nombre', 'cadena', 'logo', 'direccion', 'telefono', 'email', 'ciudad'];
-    protected $hidden=['id'];
+    // Nombre de la clave primaria en la tabla
+    protected $primaryKey = "id";
+    // Atributos del modelo
+    protected $fillable = ['imagen', 'nombre', 'cadena', 'logo', 'direccion', 'telefono', 'email', 'ciudad'];
+    // Atributos del modelo que no se mostrarán
+    protected $hidden = ['id'];
 }

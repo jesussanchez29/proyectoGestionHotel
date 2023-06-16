@@ -13,14 +13,13 @@ class RegistroCliente extends Mailable
 
     public $nombre;
 
+    // Constructor
     public function __construct($nombre)
     {
         $this->nombre = $nombre;
     }
 
-    /**
-     * Get the message envelope.
-     */
+    // Cuerpo email
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -28,23 +27,11 @@ class RegistroCliente extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
+    // Plantilla que va usar el email
     public function build()
     {
         return $this->view('emails.registroCliente')->with([
             'nombre' => $this->nombre
         ]);;
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }

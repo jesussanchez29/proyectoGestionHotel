@@ -15,9 +15,7 @@ class ContactoMailable extends Mailable
     public $email;
     public $mensaje;
 
-    /**
-     * Create a new message instance.
-     */
+    // Constructor
     public function __construct($nombre, $email, $mensaje)
     {
         $this->nombre = $nombre;
@@ -25,9 +23,7 @@ class ContactoMailable extends Mailable
         $this->mensaje = $mensaje;
     }
 
-    /**
-     * Get the message envelope.
-     */
+    // Cuerpo email
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -35,18 +31,9 @@ class ContactoMailable extends Mailable
         );
     }
 
- 
+    // Plantilla que va usar el email
     public function build()
     {
         return $this->view('emails.correoContacto');
-    }
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }

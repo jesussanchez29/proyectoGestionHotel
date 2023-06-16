@@ -7,13 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EmpleadoRequest extends FormRequest
 {
-    // Metodo que autoriza a validar el empleado
+    // Autoriza la validacion
     public function authorize(): bool
     {
         return true;
     }
 
-    // Metodo que valida los campos del empleado
+    // Validacion
     public function rules(): array
     {
         return [

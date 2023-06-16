@@ -7,12 +7,10 @@ use App\Models\Acompanante;
 use App\Models\CaracteristicaTipoHabitacion;
 use App\Models\Cliente;
 use App\Models\EstadoHabitacion;
-use App\Models\EstadoReserva;
 use App\Models\Habitacion;
 use App\Models\Piso;
 use App\Models\Reserva;
 use App\Models\ReservaServicio;
-use App\Models\Servicio;
 use App\Models\TipoHabitacion;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
@@ -52,7 +50,7 @@ class ReservaController extends Controller
         // Creamos la reserva
         $reserva->save();
         // Nos redirige a indexCLientes con un mensaje
-        return redirect()->route('indexCliente')->with('success', 'Reserva confirmada');
+        return redirect()->route('verReservaCliente', $reserva->id)->with('success', 'Reserva confirmada');
     }
 
     // Funcion para crear una reserva un empleado
@@ -185,26 +183,6 @@ class ReservaController extends Controller
         return $pdf->stream('factura.pdf');
     }
 
-    // Funcion para obtener las habitaciones que tienen que entrar
-    public function obtenerEntradasReserva()
-    {
-        $habitaciones = Habitacion::join('reservas', 'habitaciones.id', '=', 'reservas.habitacion_id')
-            ->whereDate('reservas.fechaLlegada', Carbon::today())
-            ->get();
-        $pisos = Piso::all();
-        return view('Empleados.Reserva.entradas', compact('habitaciones', 'pisos'));
-    }
-
-    // Funcion para obtener las habitaciones que tienen que salir
-    public function obtenerSalidasReserva()
-    {
-        $habitaciones = Habitacion::join('reservas', 'habitaciones.id', '=', 'reservas.habitacion_id')
-            ->whereDate('reservas.fechaSalida', Carbon::today())
-            ->get();
-        $pisos = Piso::all();
-        return view('Empleados.Reserva.salidas', compact('habitaciones', 'pisos'));
-    }
-
     // Funcion para enviar las reservas al clanedario de reservas
     public function calendarioReservas()
     {
@@ -245,10 +223,10 @@ class ReservaController extends Controller
     public function reservaCliente()
     {
         $reservas = Reserva::leftJoin('acompanantes', 'reservas.id', '=', 'acompanantes.reserva_id')
-            ->select('reservas.*', 'acompanantes.*', 'acompanantes.id as idAcom')
+            ->select('reservas.*', 'reservas.id as reserId', 'acompanantes.*', 'acompanantes.id as idAcom')
             ->where('reservas.usuario_id', Auth::user()->id)
             ->get();
-        return view('Clientes.Reserva.ver', compact('reservas'));
+        return view('Clientes.Reserva.index', compact('reservas'));
     }
 
     // Funcion para finalizar o cancelar una reserva
@@ -265,4 +243,26 @@ class ReservaController extends Controller
 
         return back()->with('success', 'Reserva finalizada correctamente');
     }
+
+     // Funcion para msotrar la vista de las reservas del cliente
+     public function verReservaCliente($id)
+     {
+        $reserva = Reserva::find($id);
+        $habitacion = Habitacion::find($reserva->habitacion_id);
+        $caracteristicasHabitacion = CaracteristicaTipoHabitacion::where('tipoHabitacion_id', $habitacion->tipoHabitacion_id)->get();
+        $servicios = ReservaServicio::where('reserva_id', $id)->get();
+
+        $fechaLlegada = Carbon::parse($reserva->fechaLlegada);
+        $puedeCancelar = false;
+        if ($fechaLlegada) {
+            $now = Carbon::now();
+            $diferenciaHoras = $fechaLlegada->diffInHours($now);
+    
+            if ($diferenciaHoras > 24) {
+                $puedeCancelar = true;
+            }
+        }
+
+        return view('Clientes.Reserva.ver', compact('reserva', 'habitacion', 'caracteristicasHabitacion', 'servicios'), ['puedeCancelar' => $puedeCancelar]);
+     }
 }

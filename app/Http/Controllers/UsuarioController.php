@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
@@ -138,11 +137,13 @@ class UsuarioController extends Controller
         return redirect()->route('indexCliente');
     }
 
+    // Funcion para mostrar la vista d eolvidar contraseña
     public function olvidarContrasena()
     {
         return view('olvidarContrasena');
     }
 
+    // Funcion que nevia un correo para cambiar la contraseña
     public function correoOlvidarContrasena(Request $request)
     {
         $email = $request->email;
@@ -162,6 +163,7 @@ class UsuarioController extends Controller
         return view('cambiarContrasena', ['id' => $id]);
     }
 
+    // Funcion para el cambio de contraseña
     public function cambiarContrasena(Request $request) {
         $id = $request->usuarioId;
         // Validacion

@@ -116,6 +116,7 @@ class HabitacionController extends Controller
         return response()->json($habitacionesDisponibles);
     }
 
+    // FUncion para cambair el estado d euna habitacion
     public function cambiarEstadoHabitacion(Request $request, $id)
     {
         $habitacion = Habitacion::findOrFail($id);

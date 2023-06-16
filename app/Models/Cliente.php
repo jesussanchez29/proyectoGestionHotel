@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
-    protected $primaryKey="id";
-    protected $fillable=['nombre', 'apellidos', 'fechaNacimiento', 'tipoIdentificacion', 'identificacion', 'telefono', 'direccion', 'usuario_id'];
-    protected $hidden=['id'];
-    
+    // Nombre de la clave primaria en la tabla
+    protected $primaryKey = "id";
+    // Atributos del modelo
+    protected $fillable = ['nombre', 'apellidos', 'fechaNacimiento', 'tipoIdentificacion', 'identificacion', 'telefono', 'direccion', 'usuario_id'];
+    // Atributos del modelo que no se mostrarán
+    protected $hidden = ['id'];
+
+    // Definición de la relación con el modelo Usuario.
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);

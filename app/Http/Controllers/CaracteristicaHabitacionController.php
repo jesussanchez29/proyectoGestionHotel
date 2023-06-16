@@ -22,6 +22,7 @@ class CaracteristicaHabitacionController extends Controller
         }
     }
 
+    // Funcion para crear una carateristica
     public function create(CaracteristicaHabitacionRequest $request)
     {
         $caracteristica = new CaracteristicaTipoHabitacion();

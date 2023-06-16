@@ -12,17 +12,13 @@ class OlvidarContrasena extends Mailable
     use Queueable, SerializesModels;
     public $enlace;
 
-    /**
-     * Create a new message instance.
-     */
+    // Constructor
     public function __construct($enlace)
     {
         $this->enlace = $enlace;
     }
 
-    /**
-     * Get the message envelope.
-     */
+    // Cuerpo email
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -30,24 +26,12 @@ class OlvidarContrasena extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
+    // Plantilla que va usar el email
     public function build()
     {
         return $this->view('emails.olvidarContrasena')
                     ->with([
                         'url' => $this->enlace,
                     ]);
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }

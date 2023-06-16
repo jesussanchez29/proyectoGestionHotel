@@ -6,13 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    # Metodo que autoriza a logearse
+    // Autoriza la validacion
     public function authorize(): bool
     {
         return true;
     }
 
-    # Metodo que valida los campos de nuestro login
+    // Validacion
     public function rules(): array
     {
         return [
@@ -21,7 +21,7 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    # Metodo para obtener el nick y contraseña del formulario
+    // Metodo para obtener el email y contraseña del formulario
     public function obtenerCrendeciales()
     {
         return [

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ReservaServicio extends Model
 {
     use HasFactory;
+    // Nombre de la tabla en la base de datos
     protected $table = 'reservaServicio';
+    // Atributos del modelo
     protected $fillable = ['reserva_id', 'servicio_id', 'fecha', 'hora'];
 
     // Relación con el modelo Servicio

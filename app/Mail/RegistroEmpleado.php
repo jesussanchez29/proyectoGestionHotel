@@ -14,18 +14,14 @@ class RegistroEmpleado extends Mailable
 
     public $email, $password;
 
-    /**
-     * Create a new message instance.
-     */
+    // Constructor
     public function __construct($email, $password)
     {
         $this->email = $email;
         $this->password = $password;
     }
 
-    /**
-     * Get the message envelope.
-     */
+    // Cuerpo email
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -33,9 +29,7 @@ class RegistroEmpleado extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
+    // Plantilla que va usar el email
     public function build()
     {
         $url = URL::route('login');
@@ -46,15 +40,5 @@ class RegistroEmpleado extends Mailable
                 'password' => $this->password,
                 'url' => $url
             ]);
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }

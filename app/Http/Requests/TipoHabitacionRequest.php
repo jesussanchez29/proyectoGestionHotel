@@ -6,13 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TipoHabitacionRequest extends FormRequest
 {
-    // Metodo que autoriza a validar el tipo de habitacion
+    // Autoriza la validacion
     public function authorize(): bool
     {
         return true;
     }
 
-    // Metodo que valida los campos del tipo de habitacion
+    // Autoriza la validacion
     public function rules(): array
     {
         return [

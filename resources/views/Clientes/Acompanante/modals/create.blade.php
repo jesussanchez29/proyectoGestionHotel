@@ -15,6 +15,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
+                                <input type="hidden" value="{{ $reserva->id }}" id="txtidReserva" name="reserva" />
                                 <label for="nombre" class="col-form-label">Nombre:</label>
                                 <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}">
                             </div>
