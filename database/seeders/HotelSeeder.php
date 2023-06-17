@@ -18,7 +18,7 @@ class HotelSeeder extends Seeder
         $hotel->logo = 'images/logo.png';
         $hotel->direccion = 'Trinidad Grund, 17';
         $hotel->telefono = '612 345 678';
-        $hotel->email = '';
+        $hotel->email = 'infoestelahorizonte@gmail.com';
         $hotel->ciudad = 'Malaga';
         $hotel->save();
     }

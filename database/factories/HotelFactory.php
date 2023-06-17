@@ -23,7 +23,7 @@ class HotelFactory extends Factory
             'logo' => 'images/logo.png',
             'direccion' => $this->faker->address,
             'telefono' => $this->faker->phoneNumber,
-            'email' => $this->faker->email,
+            'email' => 'infoestelahorizonte@gmail.com',
             'ciudad' => $this->faker->city,
         ];
     }
